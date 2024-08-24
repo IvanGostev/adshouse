@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\House;
+use App\Models\PaymentTransaction;
 use App\Models\Region;
 use Exception;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class BalanceController extends Controller
 {
     function show()
     {
-        return view('balance.show');
+        $transactions = PaymentTransaction::where('user_id', auth()->user()->id)->get();
+        return view('balance.show', compact('transactions'));
     }
 
     function handler(Request $request)

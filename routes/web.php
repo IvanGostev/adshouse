@@ -22,7 +22,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware('auth')->group(function () {
 Route::get('/', function () {
     if (auth()->user()->role == 'moderator' ) {
-        return redirect()->route('moderator.house.index');
+        return redirect()->route('moderator.country.index');
     } else if (auth()->user()->role == 'user' ) {
         return redirect()->route('user.house.index');
     } else {

@@ -21,7 +21,7 @@
                             </div>
 
 
-                            <form action="{{route('balace.')}}">
+                            <form action="{{route('balance.handler')}}">
                                 <div class="card-body">
                                     <div class="col-3">
                                         <div class="form-group">
@@ -71,12 +71,15 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>183</td>
-                                            <td>John Doe</td>
-                                            <td>11-7-2014</td>
-                                            <td>11-7-2014</td>
-                                        </tr>
+                                        @foreach($transactions as $transaction)
+                                            <tr>
+                                                <td>{{$transaction->id}}</td>
+                                                <td>{{$transaction->type}}</td>
+                                                <td>{{$transaction->status}}</td>
+                                                <td>{{$transaction->created_at}}</td>
+                                            </tr>
+                                        @endforeach
+
                                         </tbody>
                                     </table>
                                 </div>

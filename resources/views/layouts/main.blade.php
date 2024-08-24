@@ -43,18 +43,27 @@
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a href="{{route('balance.show')}}" class="nav-link" >Баланс:    <span class="fw-bold">{{auth()->user()->balance}} руб</span> </a>
+                <a href="{{route('balance.show')}}" class="nav-link">Баланс: <span class="fw-bold">{{auth()->user()->balance}} руб</span>
+                </a>
             </li>
+
+
             <li class="nav-item">
-                <a class="btn btn-outline-light fw-normal">Выйти</a>
+                <form action="{{route('logout')}}" method="post">
+                    @csrf
+                    <button type="submit"
+                            class="btn btn-outline-light fw-normal">Выйти</button>
+                </form>
+
             </li>
         </ul>
     </nav>
     <!-- /.navbar -->
     <style>
         .card {
-            background-color: #212529!important;
+            background-color: #212529 !important;
         }
+
         .dark-mode .content-wrapper {
             background-color: #343a40;
             color: #fff;
@@ -199,6 +208,8 @@
     })
 
 </script>
-
+<form hidden="hidden" id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+    @csrf
+</form>
 </body>
 </html>
