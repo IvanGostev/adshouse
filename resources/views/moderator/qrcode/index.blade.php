@@ -14,41 +14,43 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <a href="{{ route('moderator.region.create') }}" class="btn btn-block btn-outline-light">Добавить</a>
+                                <form action="{{ route('moderator.qrcode.store') }}" method="post">
+                                    @csrf
+                                    <select name="room_id" required class="form-control">
+                                        @foreach($rooms as $room)
+                                            <option value="{{$room->id}}">ID: {{$room->id}} Title: {{$room->title}}</option>
+                                        @endforeach
+                                    </select>
+                                    <br>
+                                    <button class="btn btn-block btn-light" type="submit">Add</button>
+                                </form>
                                 <br>
-                                <h3 class="card-title">Регион</h3>
+                                <h3 class="card-title">Qrcodes</h3>
                             </div>
-                            <!-- /.card-header -->
                             <div class="card-body">
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>Название</th>
-                                        <th style="width: 40px">Редактировать</th>
-                                        <th style="width: 40px">Удалить</th>
+                                        <th style="width: 150px">Qrcode</th>
+                                        <th>Url</th>
+                                        <th style="width: 40px">Delete</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($regions as $region)
+                                    @foreach($qrcodes as $qrcode)
                                         <tr>
-                                            <td>{{$region->title}}</td>
                                             <td>
-                                                <a class="btn btn-light btn-sm"
-                                                   href="{{route('moderator.region.edit', $region->id)}}">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                    Редактировать
-                                                </a>
+                                               {!! $qrcode['qrcode'] !!}
                                             </td>
-
+                                            <td>{{route('qrcode', $qrcode->id)}}</td>
                                             <td>
-                                                <form action="{{ route('moderator.region.destroy', $region->id) }}"
+                                                <form action="{{ route('user.house.destroy', $qrcode->id) }}"
                                                       method="post">
                                                     @method('delete')
                                                     @csrf
                                                     <button type="mit" class="btn btn-light btn-sm"><i
                                                             class="fas fa-trash">
-                                                        </i> Удалить
+                                                        </i> Delete
                                                     </button>
                                                 </form>
                                             </td>
@@ -60,7 +62,7 @@
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">
                                 <ul class="pagination pagination-sm m-0 float-right">
-                                    {{ $regions->links() }}
+                                    {{ $qrcodes->links() }}
                                 </ul>
                             </div>
                         </div>

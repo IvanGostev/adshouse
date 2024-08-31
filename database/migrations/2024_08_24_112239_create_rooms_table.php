@@ -20,15 +20,13 @@ return new class extends Migration
             $table->string('img')->default('images/room-placeholder.jpg');
             $table->string('title');
             $table->string('about')->nullable();
-//            $table->string('slug');
-            $table->string('status')->default('free');
+            $table->string('condition')->default('free');
+            $table->string('status')->default('moderation');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
     public function down(): void
     {
         Schema::dropIfExists('rooms');

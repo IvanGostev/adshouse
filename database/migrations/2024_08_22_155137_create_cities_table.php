@@ -2,7 +2,6 @@
 
 
 use App\Models\Country;
-use App\Models\Region;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Region::class)->nullable()->constrained();
             $table->foreignIdFor(Country::class)->nullable()->constrained();
             $table->string('title');
             $table->timestamps();

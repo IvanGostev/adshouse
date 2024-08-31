@@ -14,41 +14,50 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <a href="{{ route('moderator.street.create') }}" class="btn btn-block btn-outline-light">Добавить</a>
-                                <br>
-                                <h3 class="card-title">Улица</h3>
+                                <h3 class="card-title">Rooms</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>Название</th>
-                                        <th style="width: 40px">Редактировать</th>
-                                        <th style="width: 40px">Удалить</th>
+                                        <th>ID</th>
+                                        <th>Preview</th>
+                                        <th>Title</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+
+                                        <th style="width: 40px">Approve</th>
+                                        <th style="width: 40px">Delete</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($streets as $street)
+                                    @foreach($rooms as $room)
                                         <tr>
-                                            <td>{{$street->title}}</td>
+                                            <td>{{$room->id}}</td>
                                             <td>
-                                                <a class="btn btn-light btn-sm"
-                                                   href="{{route('moderator.street.edit', $street->id)}}">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                    Редактировать
-                                                </a>
+                                                <img src="{{asset($room->img)}}" height="200px">
                                             </td>
-
+                                            <td>{{$room->title}}</td>
+                                            <td>{{$room->type()->title}}</td>
+                                            <td>{{$room->about}}</td>
                                             <td>
-                                                <form action="{{ route('moderator.street.destroy', $street->id) }}"
+                                                <form action="{{ route('moderator.room.update', $room->id) }}"
+                                                      method="post">
+                                                    @method('patch')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-light btn-sm"> Approve
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('user.room.destroy', $room->id) }}"
                                                       method="post">
                                                     @method('delete')
                                                     @csrf
-                                                    <button type="mit" class="btn btn-light btn-sm"><i
+                                                    <button type="submit" class="btn btn-light btn-sm"><i
                                                             class="fas fa-trash">
-                                                        </i> Удалить
+                                                        </i> Delete
                                                     </button>
                                                 </form>
                                             </td>
@@ -60,7 +69,7 @@
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">
                                 <ul class="pagination pagination-sm m-0 float-right">
-                                    {{ $streets->links() }}
+                                    {{ $rooms->links() }}
                                 </ul>
                             </div>
                         </div>

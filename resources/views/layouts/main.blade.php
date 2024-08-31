@@ -30,7 +30,7 @@
 
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-        <h1>{{ config('app.name', 'Laravel') }}</h1>
+        <h1 class="fw-bolder">{{ config('app.name', 'Laravel') }}</h1>
     </div>
 
     <!-- Navbar -->
@@ -43,7 +43,7 @@
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a href="{{route('balance.show')}}" class="nav-link">Баланс: <span class="fw-bold">{{auth()->user()->balance}} руб</span>
+                <a href="{{route('balance.show')}}" class="nav-link">Balance: <span class="fw-bold">{{auth()->user()->balance}} RUB</span>
                 </a>
             </li>
 
@@ -52,7 +52,7 @@
                 <form action="{{route('logout')}}" method="post">
                     @csrf
                     <button type="submit"
-                            class="btn btn-outline-light fw-normal">Выйти</button>
+                            class="btn btn-outline-light fw-normal">Logout</button>
                 </form>
 
             </li>

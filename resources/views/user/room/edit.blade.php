@@ -22,26 +22,47 @@
                         <!-- general form elements -->
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h3 class="card-title">Редактирование комнаты</h3>
+                                <h3 class="card-title">Editing room</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{route('user.room.update', $room->id)}}" enctype="multipart/form-data" method="post">
+                            <form action="{{route('user.room.update', $room->id)}}" enctype="multipart/form-data"
+                                  method="post">
                                 @csrf
                                 @method('patch')
                                 <div class="card-body">
-                                    <div class="row mt-5">
-                                        <div class="col">
-                                            <p class="mb-0">ADS URL</p>
-                                            <input type="text" class="form-control"
-                                               disabled   required value="{{route('ads', ['room' => $room->id, 'slug' => $slug])}}">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            {!! $qrcode !!}
                                         </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>ADS URL</label>
+                                                <input type="text" class="form-control"
+                                                       disabled
+                                                       value="{{route('ads', ['room' => $room->id, 'slug' => $slug])}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Status</label>
+                                                <input type="text" class="form-control"
+                                                       disabled
+                                                       value="{{$room->status}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Condition</label>
+                                                <input type="text" class="form-control"
+                                                       disabled
+                                                       value="{{$room->condition}}">
+                                            </div>
+                                        </div>
+
                                     </div>
+                                    <br>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <!-- text input -->
                                             <div class="form-group">
-                                                <label>Название</label>
+                                                <label>Title</label>
                                                 <input type="text" name="title" class="form-control"
                                                        placeholder="Текст ..." required value="{{$room->title}}">
                                             </div>
@@ -56,18 +77,19 @@
                                                     <input type="file" class="custom-file-input" id="customFile"
                                                            name="img"
                                                            onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0])">
-                                                    <label class="custom-file-label" for="customFile">Выберите
-                                                        превью</label>
+                                                    <label class="custom-file-label" for="customFile">Choose
+                                                        preview</label>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Тип комнаты</label>
+                                                <label>Type room</label>
                                                 <select name="room_type_id" class="form-control">
                                                     @foreach($types as $type)
-                                                        <option {{$room->type_id == $type->id ? 'selected' : ''}} value="{{$type->id}}">{{$type->title}}</option>
+                                                        <option
+                                                            {{$room->type_id == $type->id ? 'selected' : ''}} value="{{$type->id}}">{{$type->title}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -78,7 +100,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label>Описание</label>
+                                                <label>Description</label>
                                                 <textarea required="" class="form-control" rows="5"
                                                           name="about">{{$room->about}}</textarea>
                                             </div>
@@ -89,7 +111,7 @@
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-light">Отправить</button>
+                                        <button type="submit" class="btn btn-light">Submit for moderation</button>
                                     </div>
                             </form>
                         </div>

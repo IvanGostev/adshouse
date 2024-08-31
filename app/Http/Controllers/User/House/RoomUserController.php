@@ -25,28 +25,34 @@ class RoomUserController extends Controller
         return view('user.room.create', compact('house', 'types'));
     }
 
-    function store(House $house ,Request $request)
+    function store(House $house, Request $request)
     {
         $data = $request->all();
         $data['house_id'] = $house->id;
-        $data['slug'] = $house->id;
+        if (isset($data['img'])) {
+            $data['img'] = '/storage/' . Storage::disk('public')->put('/images', $data['img']);
+        }
         Room::create($data);
         return redirect()->route('user.room.index', $house->id);
     }
+
     function edit(Room $room)
     {
         $types = RoomType::all();
-        // ->merge('/public/images/placeholder.png', .4)
-//        $qrcode = QrCode::size(200)->format('png')->generate('https://www.binaryboxtuts.com/');
-        $slug = 'country&' . $room->house()->country()->title . '&city' . $room->house()->city()->title . '&numberhouse' . $room->house()->number . '&apartment_number' . $room->house()->apartment_number;
-        return view('user.room.edit', compact('room', 'types'));
+        $slug = 'country:' . $room->house()->country()->title . '&city:' . $room->house()->city()->title . '&district:' . $room->house()->district . '&street:' . $room->house()->street . '&numberhouse:' . $room->house()->number . '&apartmentnumber:' . $room->house()->apartment_number;
+        $qrcode = QrCode::size(240)->style('round')->generate(route('ads', ['room' => $room->id, 'slug' => $slug]));
+
+        return view('user.room.edit', compact('room', 'types', 'slug', 'qrcode'));
     }
 
-    function update(House $room ,Request $request)
+    function update(Room $room, Request $request)
     {
         $data = $request->all();
+        if (isset($data['img'])) {
+            $data['img'] = '/storage/' . Storage::disk('public')->put('/images', $data['img']);
+        }
+        $room->status = 'moderation';
         $room->update($data);
-
-        return redirect()->route('user.room.index', $room->house_id);
+        return redirect()->route('user.room.index', $room->house()->id);
     }
 }

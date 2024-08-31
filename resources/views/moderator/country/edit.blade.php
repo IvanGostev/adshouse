@@ -21,7 +21,7 @@
                         <!-- general form elements -->
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h3 class="card-title">Редактирование страны</h3>
+                                <h3 class="card-title">Editing country</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -32,7 +32,7 @@
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
-                                            <label>Название</label>
+                                            <label>Title</label>
                                             <input type="text" value="{{$country->title}}" name="title" class="form-control" placeholder="Enter ...">
                                         </div>
                                     </div>
@@ -41,7 +41,7 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-light">Отправить</button>
+                                    <button type="submit" class="btn btn-light">Submit</button>
                                 </div>
                             </form>
                         </div>

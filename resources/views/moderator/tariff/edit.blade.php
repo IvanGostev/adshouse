@@ -67,6 +67,15 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>The amount of the client's earnings per redirect</label>
+                                                <input type="number" name="user_income_from_redirect" class="form-control"
+                                                       placeholder="Enter ..." value="0.01" step="0.001">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Описание</label>

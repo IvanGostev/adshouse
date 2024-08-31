@@ -21,7 +21,7 @@
                         <!-- general form elements -->
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h3 class="card-title">Добавление тарифа</h3>
+                                <h3 class="card-title">Adding tariff</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -33,9 +33,9 @@
                                         <div class="col-sm-6">
                                             <!-- text input -->
                                             <div class="form-group">
-                                                <label>Название</label>
+                                                <label>Title</label>
                                                 <input type="text" name="title" class="form-control"
-                                                       placeholder="Текст ..." required>
+                                                       placeholder="Enter ..." required>
                                             </div>
 
                                         </div>
@@ -43,34 +43,52 @@
                                         <div class="col-sm-6">
 
                                             <div class="form-group">
-                                                <label>Количество дней</label>
+                                                <label>Number days</label>
                                                 <input type="text" name="days" class="form-control"
-                                                       placeholder="Текст ..." min="1" value="2">
+                                                       placeholder="Enter ..." min="1" value="2">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Цена</label>
-                                                <input type="text" name="price" class="form-control"
-                                                       placeholder="Текст ..." value="100">
+                                                <label>Price</label>
+                                                <input type="number" name="price" class="form-control"
+                                                       placeholder="Enter ..." value="100">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Число комнат</label>
+                                                <label>Number rooms</label>
                                                 <input type="text" name="number_rooms" class="form-control"
-                                                       placeholder="Текст ..." value="1" min="1">
+                                                       placeholder="Enter ..." value="1" min="1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>The amount per redirect</label>
+                                                <input type="number" name="user_income_from_redirect" class="form-control"
+                                                       placeholder="Enter ..." value="0.01" step="0.001">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Type</label>
+                                              <select class="form-control">
+                                                  <option value="standard">Standard</option>
+                                                  <option value="shared">Shared</option>
+                                              </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label>Описание</label>
+                                                <label>Description</label>
                                                 <textarea required="" class="form-control" rows="5"
-                                                          placeholder="Текст ..."  name="about"></textarea>
+                                                          placeholder="Enter ..."  name="about"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +97,7 @@
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-light">Отправить</button>
+                                        <button type="submit" class="btn btn-light">Submit</button>
                                     </div>
                                 </div>
 

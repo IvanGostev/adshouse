@@ -14,42 +14,44 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <a href="{{ route('moderator.city.create') }}" class="btn btn-block btn-outline-light">Add</a>
-                                <br>
-                                <h3 class="card-title">Cities</h3>
+                                <h3 class="card-title">Applications</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>Title</th>
-                                        <th style="width: 40px">Edit</th>
-                                        <th style="width: 40px">Delete</th>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Amount</th>
+                                        <th>Information</th>
+                                        <th>Date</th>
+                                        <th style="width: 40px">Reject</th>
+                                        <th style="width: 40px">Approve</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($cities as $city)
+                                    @foreach($applications as $item)
                                         <tr>
-                                            <td>{{$city->title}}</td>
+                                            <td>{{$item->user()->name}}</td>
+                                            <td>{{$item->type}}</td>
+                                            <td>{{$item->amount}}</td>
+                                            <td>{{$item->information}}</td>
+                                            <td>{{$item->created_at}}</td>
                                             <td>
-                                                <a class="btn btn-light btn-sm"
-                                                   href="{{route('moderator.city.edit', $city->id)}}">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                    Edit
-                                                </a>
-                                            </td>
-
-                                            <td>
-                                                <form action="{{ route('moderator.city.destroy', $city->id) }}"
+                                                <form action="{{ route('moderator.balance.update', $item->id) }}"
                                                       method="post">
-                                                    @method('delete')
                                                     @csrf
-                                                    <button type="submit" class="btn btn-light btn-sm"><i
-                                                            class="fas fa-trash">
-                                                        </i> Delete
-                                                    </button>
+                                                    @method('patch')
+                                                    <button name="status" value="cancelled" type="submit" class="btn btn-danger btn-sm">Reject</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('moderator.balance.update', $item->id) }}"
+                                                      method="post">
+                                                    @csrf
+                                                    @method('patch')
+                                                    <button name="status" value="approved" type="submit" class="btn btn-success btn-sm">Approve</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -60,7 +62,7 @@
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">
                                 <ul class="pagination pagination-sm m-0 float-right">
-                                    {{ $cities->links() }}
+                                    {{ $applications->links() }}
                                 </ul>
                             </div>
                         </div>

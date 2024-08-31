@@ -22,7 +22,7 @@
                         <!-- general form elements -->
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h3 class="card-title">Добавление комнаты в дом/квартиру </h3>
+                                <h3 class="card-title">Adding room in apartment/house </h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -34,9 +34,9 @@
                                         <div class="col-sm-6">
                                             <!-- text input -->
                                             <div class="form-group">
-                                                <label>Название</label>
+                                                <label>Title</label>
                                                 <input type="text" name="title" class="form-control"
-                                                       placeholder="Текст ..." required>
+                                                       placeholder="Enter ..." required>
                                             </div>
                                             <div class="form-group">
                                                 <!-- <label for="customFile">Custom File</label> -->
@@ -49,15 +49,15 @@
                                                     <input type="file" class="custom-file-input" id="customFile"
                                                            name="img"
                                                            onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0])">
-                                                    <label class="custom-file-label" for="customFile">Выберите
-                                                        превью</label>
+                                                    <label class="custom-file-label" for="customFile">Choose
+                                                        preview</label>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Тип комнаты</label>
+                                                <label>Type room</label>
                                                 <select name="room_type_id" class="form-control">
                                                     @foreach($types as $type)
                                                         <option value="{{$type->id}}">{{$type->title}}</option>
@@ -71,9 +71,9 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label>Описание</label>
+                                                <label>Description</label>
                                                 <textarea required="" class="form-control" rows="5"
-                                                          name="about"></textarea>
+                                                          name="about" placeholder="Enter ..."></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -82,7 +82,7 @@
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-light">Отправить</button>
+                                        <button type="submit" class="btn btn-light">Submit for moderation</button>
                                     </div>
                             </form>
                         </div>

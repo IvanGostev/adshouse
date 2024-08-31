@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
             $table->text('url');
+            $table->string('img')->nullable();
             $table->foreignIdFor(Tariff::class)->constrained();
+            $table->string('status')->default('moderation');
             $table->timestamps();
         });
     }

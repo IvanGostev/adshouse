@@ -22,7 +22,7 @@
                         <!-- general form elements -->
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h3 class="card-title">Создание дома/квартиры </h3>
+                                <h3 class="card-title">Adding apartment/house</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -34,9 +34,9 @@
                                         <div class="col-sm-6">
                                             <!-- text input -->
                                             <div class="form-group">
-                                                <label>Название</label>
+                                                <label>Title</label>
                                                 <input type="text" name="title" class="form-control"
-                                                       placeholder="Текст ..." required>
+                                                       placeholder="Enter ..." required>
                                             </div>
                                             <div class="form-group">
                                                 <!-- <label for="customFile">Custom File</label> -->
@@ -49,15 +49,15 @@
                                                     <input type="file" class="custom-file-input" id="customFile"
                                                            name="img"
                                                            onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0])">
-                                                    <label class="custom-file-label" for="customFile">Выберите
-                                                        превью</label>
+                                                    <label class="custom-file-label" for="customFile">Choose
+                                                        preview</label>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Страна</label>
+                                                <label>Country</label>
                                                 <select name="country_id" class="form-control">
                                                     @foreach($countries as $country)
                                                         <option value="{{$country->id}}">{{$country->title}}</option>
@@ -65,16 +65,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>Регион/Область/Край/Республика/Штат</label>
-                                                <select name="region_id" class="form-control">
-                                                    <option value="0">Отсутствует</option>
-                                                    @foreach($regions as $region)
-                                                        <option value="{{$region->id}}">{{$region->title}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Город</label>
+                                                <label>City</label>
                                                 <select name="city_id" class="form-control">
                                                     @foreach($cities as $city)
                                                         <option value="{{$city->id}}">{{$city->title}}</option>
@@ -82,35 +73,39 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>Улица</label>
-                                                <input type="text" name="street" class="form-control"
-                                                       placeholder="Текст ...">
+                                                <label>District</label>
+                                                <input type="text" name="district" required class="form-control"
+                                                       placeholder="Enter ...">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Street</label>
+                                                <input type="text" name="street" required class="form-control"
+                                                       placeholder="Enter ...">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Номер/Название дома</label>
+                                                <label>Number/Name house</label>
                                                 <input type="text" name="number" class="form-control"
-                                                       placeholder="Текст ...">
+                                                       placeholder="Enter ..." required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Номер/Название квартиры (не обязательно, если у вас частный
-                                                    дом)</label>
+                                                <label>Number/Name apartment (not necessary if you have a private house)</label>
                                                 <input type="text" name="apartment_number" class="form-control"
-                                                       placeholder="Текст ...">
+                                                       placeholder="Enter ...">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label>Описание</label>
-                                                <textarea required="" class="form-control" rows="5"
-                                                          name="about"></textarea>
+                                                <label>Description</label>
+                                                <textarea required class="form-control" rows="5"
+                                                          name="about" placeholder="Enter..." ></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -119,7 +114,7 @@
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-light">Отправить</button>
+                                        <button type="submit" class="btn btn-light">Submit for moderation</button>
                                     </div>
                                 </div>
                             </form>

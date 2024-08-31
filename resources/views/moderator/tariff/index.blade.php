@@ -14,19 +14,19 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <a href="{{ route('moderator.tariff.create') }}" class="btn btn-block btn-outline-light">Добавить</a>
+                                <a href="{{ route('moderator.tariff.create') }}" class="btn btn-block btn-outline-light">Add</a>
                                 <br>
-                                <h3 class="card-title">Тарифы</h3>
+                                <h3 class="card-title">Tariffs</h3>
                             </div>
                             <div class="card-body">
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>Название</th>
-                                        <th>Описание</th>
-                                        <th>Цена</th>
-                                        <th style="width: 40px">Редактировать</th>
-                                        <th style="width: 40px">Удалить</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Price</th>
+                                        <th style="width: 40px">Edit</th>
+                                        <th style="width: 40px">Delete</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -40,7 +40,7 @@
                                                    href="{{route('moderator.tariff.edit', $tariff->id)}}">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
-                                                    Редактировать
+                                                    Edit
                                                 </a>
                                             </td>
 
@@ -51,7 +51,7 @@
                                                     @csrf
                                                     <button type="submit" class="btn btn-light btn-sm"><i
                                                             class="fas fa-trash">
-                                                        </i> Удалить
+                                                        </i> Delete
                                                     </button>
                                                 </form>
                                             </td>

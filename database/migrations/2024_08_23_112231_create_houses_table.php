@@ -22,13 +22,14 @@ return new class extends Migration
             $table->longText('about')->nullable();
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(Country::class)->constrained();
-            $table->foreignIdFor(Region::class)->nullable()->constrained();
             $table->foreignIdFor(City::class)->constrained();
-//            $table->foreignIdFor(Street::class)->constrained();
             $table->string('img')->nullable();
+            $table->text('district');
             $table->text('street');
             $table->string('number');
             $table->string('apartment_number')->nullable();
+
+            $table->string('status')->default('moderation');
             $table->timestamps();
         });
     }

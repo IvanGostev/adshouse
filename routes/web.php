@@ -3,16 +3,18 @@
 use App\Http\Controllers\AdsController;
 use App\Http\Controllers\Advertiser\TariffAdvertiserController;
 use App\Http\Controllers\BalanceController;
+use App\Http\Controllers\Moderator\BalanceModeratorController;
 use App\Http\Controllers\Moderator\CityModeratorController;
 use App\Http\Controllers\Moderator\CountryModeratorController;
-use App\Http\Controllers\Moderator\RegionModeratorController;
+use App\Http\Controllers\Moderator\HouseModeratorController;
+use App\Http\Controllers\Moderator\LinkModeratorController;
+use App\Http\Controllers\Moderator\QrcodeModeratorController;
+use App\Http\Controllers\Moderator\RoomModeratorController;
 use App\Http\Controllers\Moderator\RoomTypeModeratorController;
-use App\Http\Controllers\Moderator\StreetModeratorController;
 use App\Http\Controllers\Moderator\TariffModeratorController;
 use App\Http\Controllers\User\House\HouseUserController;
-
-
 use App\Http\Controllers\User\House\RoomUserController;
+use App\Http\Controllers\User\LinkUserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -46,7 +48,9 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::patch('/{room}', 'update')->name('update');
         Route::delete('/{room}', 'destroy')->name('destroy');
     });
-
+    Route::controller(LinkUserController::class)->prefix('links')->name('link.')->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
 
 });
 Route::prefix('advertiser')->name('advertiser.')->group(function () {
@@ -68,31 +72,9 @@ Route::prefix('moderator')->name('moderator.')->group(function () {
             Route::patch('/{country}', 'update')->name('update');
             Route::delete('/{country}', 'destroy')->name('destroy');
         });
-    Route::controller(RegionModeratorController::class)
-        ->prefix('regions')
-        ->name('region.')
-        ->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/create', 'create')->name('create');
-            Route::post('/', 'store')->name('store');
-            Route::get('/edit/{city}', 'edit')->name('edit');
-            Route::patch('/{city}', 'update')->name('update');
-            Route::delete('/{city}', 'destroy')->name('destroy');
-        });
     Route::controller(CityModeratorController::class)
         ->prefix('cities')
         ->name('city.')
-        ->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/create', 'create')->name('create');
-            Route::post('/', 'store')->name('store');
-            Route::get('/edit/{city}', 'edit')->name('edit');
-            Route::patch('/{city}', 'update')->name('update');
-            Route::delete('/{city}', 'destroy')->name('destroy');
-        });
-    Route::controller(StreetModeratorController::class)
-        ->prefix('streets')
-        ->name('street.')
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
@@ -120,7 +102,26 @@ Route::prefix('moderator')->name('moderator.')->group(function () {
         Route::patch('/{tariff}', 'update')->name('update');
         Route::delete('/{tariff}', 'destroy')->name('destroy');
     });
-
+    Route::controller(BalanceModeratorController::class)->prefix('balance')->name('balance.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::patch('/{application}', 'update')->name('update');
+    });
+        Route::controller(HouseModeratorController::class)->prefix('houses')->name('house.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::patch('/{house}', 'update')->name('update');
+        });
+        Route::controller(RoomModeratorController::class)->prefix('rooms')->name('room.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::patch('/{room}', 'update')->name('update');
+        });
+        Route::controller(LinkModeratorController::class)->prefix('links')->name('link.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::patch('/{room}', 'update')->name('update');
+        });
+    Route::controller(QrcodeModeratorController::class)->prefix('qrcodes')->name('qrcode.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store');
+    });
 });
 });
 
@@ -129,7 +130,8 @@ Route::controller(BalanceController::class)->prefix('balance')->name('balance.')
         Route::get('/', 'show')->name('show');
         Route::post('/', 'handler')->name('handler');
 });
-Route::controller(AdsController::class)->prefix('ads')->name('ads.')->group(function () {
-    Route::get('/{room}/{slug}', 'ads')->name('ads');
+Route::controller(AdsController::class)->prefix('ads')->group(function () {
+    Route::get('/{room}/{slug}/room', 'ads')->name('ads');
+    Route::get('/{qrcode}/qrcode', 'qrcode')->name('qrcode');
 });
 Auth::routes();

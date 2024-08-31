@@ -14,7 +14,7 @@
         <!-- SidebarSearch Form -->
         <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Поиск" aria-label="Search" style="background-color: #212529;">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" style="background-color: #212529;">
                 <div class="input-group-append" >
                     <button class="btn btn-sidebar" style="background-color: #212529;">
                         <i class="fas fa-search fa-fw"></i>
@@ -37,7 +37,15 @@
                             <a href="{{ route('user.house.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Мои квартиры/дома
+                                    My apartments/houses
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('user.link.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Links that may be in your qrcode
                                 </p>
                             </a>
                         </li>
@@ -47,7 +55,7 @@
                             <a href="{{route('advertiser.tariff.index')}}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Все тарифы
+                                    Tariffs
                                 </p>
                             </a>
                         </li>
@@ -55,7 +63,7 @@
                             <a href="{{route('advertiser.tariff.my')}}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Мои тарифы
+                                    Purchased tariffs
                                 </p>
                             </a>
                         </li>
@@ -65,15 +73,7 @@
                             <a href="{{ route('moderator.country.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Страны
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('moderator.region.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Регионы
+                                    Countries
                                 </p>
                             </a>
                         </li>
@@ -81,7 +81,7 @@
                             <a href="{{ route('moderator.city.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Города
+                                    Cities
                                 </p>
                             </a>
                         </li>
@@ -89,7 +89,7 @@
                             <a href="{{ route('moderator.room-type.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Типы комнат
+                                    Types of rooms
                                 </p>
                             </a>
                         </li>
@@ -97,18 +97,50 @@
                             <a href="{{ route('moderator.tariff.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Тарифы
+                                    Tariffs
                                 </p>
                             </a>
                         </li>
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="{{ route('moderator.street.index') }}" class="nav-link">--}}
-{{--                                <i class="nav-icon fas fa-th"></i>--}}
-{{--                                <p>--}}
-{{--                                    Улицы--}}
-{{--                                </p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
+                        <li class="nav-item">
+                            <a href="{{ route('moderator.balance.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Users Balance
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('moderator.house.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                     Houses
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('moderator.room.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Rooms
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('moderator.link.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                     Links
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('moderator.qrcode.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Qrcodes
+                                </p>
+                            </a>
+                        </li>
                         @break
                 @endswitch
 

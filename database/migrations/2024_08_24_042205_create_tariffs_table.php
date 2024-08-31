@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('about')->nullable();
             $table->smallInteger('number_rooms');
             $table->double('price');
+            $table->double('user_income_from_redirect');
             $table->bigInteger('days');
+            $table->string('type');
             $table->timestamps();
         });
     }
