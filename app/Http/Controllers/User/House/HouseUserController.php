@@ -23,17 +23,14 @@ class HouseUserController extends Controller
     {
         $houses = House::where('user_id', auth()->user()->id)->paginate(12);
         $countries = Country::all();
-        $regions = Region::all();
         $cities = City::all();
-        return view('user.house.create', compact('houses', 'countries', 'regions', 'cities'));
+        return view('user.house.create', compact('houses', 'countries', 'cities'));
     }
 
     function store(Request $request)
     {
         $data = $request->all();
-        if ($data['region_id'] == 0) {
-            unset($data['region_id']);
-        }
+
         if (isset($data['img'])) {
             $data['img'] = '/storage/' . Storage::disk('public')->put('/images', $data['img']);
         }
@@ -41,4 +38,21 @@ class HouseUserController extends Controller
         House::create($data);
         return redirect()->route('user.house.index');
     }
-}
+
+
+    function edit(House $house) {
+        $countries = Country::all();
+        $cities = City::all();
+        return view('user.house.edit', compact('house', 'cities', 'countries'));
+    }
+
+    function update(House $house, Request $request) {
+        $data = $request->all();
+        $house->status = 'moderation';
+        if (isset($data['img'])) {
+            $data['img'] = '/storage/' . Storage::disk('public')->put('/images', $data['img']);
+        }
+        $house->update($data);
+        return redirect()->route('user.house.index');
+    }
+ }

@@ -1,7 +1,6 @@
 <?php
 
-
-use App\Models\User;
+use App\Models\Room;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('withdrawal_applications', function (Blueprint $table) {
+        Schema::create('qrcodes', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained();
-            $table->double('amount');
+            $table->foreignIdFor(Room::class)->nullable()->constrained();
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('withdrawal_applications');
+        Schema::dropIfExists('qrcodes');
     }
 };
