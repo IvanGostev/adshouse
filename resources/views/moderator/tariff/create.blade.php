@@ -76,7 +76,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Type</label>
-                                              <select class="form-control">
+                                              <select class="form-control" name="type">
                                                   <option value="standard">Standard</option>
                                                   <option value="shared">Shared</option>
                                               </select>

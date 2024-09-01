@@ -129,7 +129,7 @@
                             <a href="{{ route('moderator.link.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                     Links
+                                    Advertiser links
                                 </p>
                             </a>
                         </li>

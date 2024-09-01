@@ -26,7 +26,7 @@
                                 <div class="card-header">
                                     <h3 class="card-title">{{$tariff->title}}</h3>
                                 </div>
-                                <form class="card-body" action="{{route('advertiser.tariff.bye', $tariff->id)}}" method="post">
+                                <form class="card-body" action="{{route('advertiser.tariff.bye', $tariff->id)}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="align-items-center text-center">
                                         <strong>Days: {{$tariff->days}}</strong>
