@@ -22,7 +22,6 @@ class DistrictModeratorController extends Controller
 
     public function create() : View {
         $cities = City::all();
-
         return view('moderator.district.create', compact('cities'));
     }
 

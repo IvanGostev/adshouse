@@ -74,8 +74,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>District</label>
-                                                <input type="text" name="district" required class="form-control"
-                                                       placeholder="Enter ...">
+                                                <select name="district_id" class="form-control">
+                                                    @foreach($districts as $district)
+                                                        <option value="{{$district->id}}">{{$district->title}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="form-group">
                                                 <label>Street</label>

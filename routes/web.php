@@ -6,6 +6,7 @@ use App\Http\Controllers\BalanceController;
 use App\Http\Controllers\Moderator\BalanceModeratorController;
 use App\Http\Controllers\Moderator\CityModeratorController;
 use App\Http\Controllers\Moderator\CountryModeratorController;
+use App\Http\Controllers\Moderator\DistrictModeratorController;
 use App\Http\Controllers\Moderator\HouseModeratorController;
 use App\Http\Controllers\Moderator\LinkModeratorController;
 use App\Http\Controllers\Moderator\QrcodeModeratorController;
@@ -83,6 +84,17 @@ Route::prefix('moderator')->name('moderator.')->group(function () {
             Route::patch('/{city}', 'update')->name('update');
             Route::delete('/{city}', 'destroy')->name('destroy');
         });
+    Route::controller(DistrictModeratorController::class)
+        ->prefix('districts')
+        ->name('district.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/', 'store')->name('store');
+            Route::get('/edit/{district}', 'edit')->name('edit');
+            Route::patch('/{district}', 'update')->name('update');
+            Route::delete('/{district}', 'destroy')->name('destroy');
+        });
     Route::controller(RoomTypeModeratorController::class)
         ->prefix('room-types')
         ->name('room-type.')
@@ -116,7 +128,8 @@ Route::prefix('moderator')->name('moderator.')->group(function () {
         });
         Route::controller(LinkModeratorController::class)->prefix('links')->name('link.')->group(function () {
             Route::get('/', 'index')->name('index');
-            Route::patch('/{room}', 'update')->name('update');
+            Route::patch('/{room}/approve', 'approve')->name('approve');
+            Route::patch('/{room}/refund', 'refund')->name('refund');
         });
     Route::controller(QrcodeModeratorController::class)->prefix('qrcodes')->name('qrcode.')->group(function () {
         Route::get('/', 'index')->name('index');

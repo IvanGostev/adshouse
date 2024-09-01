@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\BalanceApplication;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\House;
@@ -12,6 +13,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 
 class BalanceController extends Controller
@@ -24,17 +26,20 @@ class BalanceController extends Controller
 
     function handler(Request $request)
     {
-        $data = $request->all();
+        $data = $request->validate([
+            'type' => ['string', Rule::in(['replenish', 'withdraw'])],
+            'amount' => ['required'],
+            'information' => ['string', 'required']
+        ]);
         try {
             DB::beginTransaction();
-            if ($data['type'] == 'replenish') {
-                return back();
-            } else if ($data['amount'] <= auth()->user()->balance) {
-                $user = auth()->user();
-                $user->balance = $user->balance - $data['amount'];
-                $user->update();
-            }
-
+            BalanceApplication::create([
+                'amount' => $data['amount'],
+                'type' => $data['type'],
+                'information' => $data['information'],
+                'status' => 'moderation',
+                'user_id' => auth()->user()->id
+            ]);
             DB::commit();
         } catch (Exception $exception) {
             DB::rollback();

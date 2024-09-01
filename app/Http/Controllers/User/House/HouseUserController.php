@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User\House;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\District;
 use App\Models\House;
 use App\Models\Region;
 use Illuminate\Http\Request;
@@ -24,7 +25,8 @@ class HouseUserController extends Controller
         $houses = House::where('user_id', auth()->user()->id)->paginate(12);
         $countries = Country::all();
         $cities = City::all();
-        return view('user.house.create', compact('houses', 'countries', 'cities'));
+        $districts = District::all();
+        return view('user.house.create', compact('houses', 'countries', 'cities', 'districts'));
     }
 
     function store(Request $request)
@@ -43,7 +45,8 @@ class HouseUserController extends Controller
     function edit(House $house) {
         $countries = Country::all();
         $cities = City::all();
-        return view('user.house.edit', compact('house', 'cities', 'countries'));
+        $districts = District::all();
+        return view('user.house.edit', compact('house', 'cities', 'countries', 'districts'));
     }
 
     function update(House $house, Request $request) {

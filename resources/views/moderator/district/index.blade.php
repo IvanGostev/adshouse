@@ -14,43 +14,41 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Advertised links</h3>
+                                <a href="{{ route('moderator.district.create') }}" class="btn btn-block btn-outline-light">Add</a>
+                                <br>
+                                <h3 class="card-title">Districts</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th style="width: 50px">ID</th>
-                                        <th>Preview</th>
-                                        <th>URL</th>
-                                        <th style="width: 40px">Approve</th>
-                                        <th style="width: 150px">Refund the funds</th>
+                                        <th>Title</th>
+                                        <th style="width: 40px">Edit</th>
+                                        <th style="width: 40px">Delete</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($links as $link)
+                                    @foreach($districts as $district)
                                         <tr>
-                                            <td>{{$link->id}}</td>
+                                            <td>{{$district->title}}</td>
                                             <td>
-                                                <img src="{{asset($link->img)}}" height="200px">
+                                                <a class="btn btn-light btn-sm"
+                                                   href="{{route('moderator.district.edit', $district->id)}}">
+                                                    <i class="fas fa-pencil-alt">
+                                                    </i>
+                                                    Edit
+                                                </a>
                                             </td>
-                                            <td>{{$link->url}}</td>
+
                                             <td>
-                                                <form action="{{ route('moderator.link.approve', $link->id) }}"
+                                                <form action="{{ route('moderator.district.destroy', $district->id) }}"
                                                       method="post">
-                                                    @method('patch')
+                                                    @method('delete')
                                                     @csrf
-                                                    <button type="submit" class="btn btn-light btn-sm"> Approve
-                                                    </button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="{{ route('moderator.link.refund', $link->id) }}"
-                                                      method="post">
-                                                    @method('patch')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-light btn-sm"> Refund
+                                                    <button type="submit" class="btn btn-light btn-sm"><i
+                                                            class="fas fa-trash">
+                                                        </i> Delete
                                                     </button>
                                                 </form>
                                             </td>
@@ -62,7 +60,7 @@
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">
                                 <ul class="pagination pagination-sm m-0 float-right">
-                                    {{ $links->links() }}
+                                    {{ $districts->links() }}
                                 </ul>
                             </div>
                         </div>

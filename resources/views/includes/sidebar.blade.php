@@ -86,6 +86,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('moderator.district.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Districts
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('moderator.room-type.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
@@ -105,7 +113,7 @@
                             <a href="{{ route('moderator.balance.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Users Balance
+                                    Users balance
                                 </p>
                             </a>
                         </li>
@@ -129,7 +137,7 @@
                             <a href="{{ route('moderator.link.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Advertiser links
+                                    Advertised links
                                 </p>
                             </a>
                         </li>

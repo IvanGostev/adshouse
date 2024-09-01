@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Advertiser;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\BalanceApplication;
 use App\Models\Room;
 use App\Models\RoomUserTariff;
 use App\Models\Tariff;
@@ -46,45 +47,20 @@ class TariffAdvertiserController extends Controller
             }
             $user->balance = $user->balance - $tariff->price;
             $user->update();
+            BalanceApplication::create([
+                'amount' => $tariff->price,
+                'type' => 'purchase',
+                'information' => 'Purchase of a tariff, ' . $tariff->title,
+                'status' => 'approved',
+                'user_id' => $user->id
+            ]);
             $data['user_id'] = $user->id;
             $data['tariff_id'] = $tariff->id;
             $data['url'] = $request->url;
             if (isset($request['img'])) {
                 $data['img'] = '/storage/' . Storage::disk('public')->put('/images', $data['img']);
             }
-            $UT = UserTariff::create($data);
-            if ($tariff->type = 'standard') {
-                $rooms = Room::join('houses', 'rooms.house_id', '=', 'houses.id')
-                    ->where('rooms.status', 'free')
-                    ->where('rooms.status', 'active')
-                    ->distinct('houses.id')
-                    ->take($tariff->number_rooms)
-                    ->select('rooms.*')
-                    ->get();
-                foreach ($rooms as &$room) {
-                    RoomUserTariff::create(['user_tariff_id' => $UT->id, 'room_id' => $room->id]);
-                    $room->status = 'occupied';
-                    $room->update();
-                }
-            } else {
-                $rooms = Room::join('houses', 'rooms.house_id', '=', 'houses.id')
-                    ->where('rooms.status', 'free')
-                    ->where('rooms.status', 'active')
-                    ->distinct('houses.id')
-                    ->take($tariff->number_rooms)
-                    ->select('rooms.*')
-                    ->get();
-                foreach ($rooms as &$room) {
-                    RoomUserTariff::create(['user_tariff_id' => $UT->id, 'room_id' => $room->id]);
-                    if (RoomUserTariff::where('room_id', $room->id)->count() >= 5) {
-                        $room->status = 'occupied';
-                        $room->update();
-                    }
-                }
-            }
-
-
-
+            UserTariff::create($data);
             DB::commit();
             return redirect()->route('advertiser.tariff.my');
         } catch (Exception $exception) {

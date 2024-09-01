@@ -9,4 +9,7 @@ class UserTariff extends Model
 {
     use HasFactory;
     protected $guarded = false;
+
+
+    type
 }

@@ -2,6 +2,7 @@
 
 use App\Models\City;
 use App\Models\Country;
+use App\Models\District;
 use App\Models\Region;
 use App\Models\Street;
 use App\Models\User;
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(Country::class)->constrained();
             $table->foreignIdFor(City::class)->constrained();
+            $table->foreignIdFor(District::class)->constrained();
             $table->string('img')->nullable();
             $table->text('district');
             $table->text('street');
