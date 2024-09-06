@@ -16,7 +16,7 @@
                                 <div class="card-header">
                                     <h3 class="card-title">{{$tariff->title}}</h3>
                                 </div>
-                                <form class="card-body" action="{{route('advertiser.tariff.bye', $tariff->id)}}" method="post">
+                                <form class="card-body" method="post">
                                     @csrf
                                     <div class="align-items-center text-center">
                                         <strong>Дней: {{$tariff->days}}</strong>
@@ -33,6 +33,9 @@
                                     <div class="form-group">
                                         <label>Рекламируемая ссылку</label>
                                         <input type="url" class="form-control my-colorpicker1 colorpicker-element" value="{{$tariff->url}}" data-colorpicker-id="1" disabled data-original-title="" title="">
+                                    </div>
+                                    <div class="form-group">
+                                        <a href="{{route('advertiser.tariff.statistic', $tariff->id)}}">Статистика</a>
                                     </div>
                                 </form>
                             </div>

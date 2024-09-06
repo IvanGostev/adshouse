@@ -26,7 +26,6 @@ return new class extends Migration
             $table->foreignIdFor(City::class)->constrained();
             $table->foreignIdFor(District::class)->constrained();
             $table->string('img')->nullable();
-            $table->text('district');
             $table->text('street');
             $table->string('number');
             $table->string('apartment_number')->nullable();

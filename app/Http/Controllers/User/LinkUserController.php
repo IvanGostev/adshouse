@@ -15,7 +15,7 @@ class LinkUserController extends Controller
 {
     function index()
     {
-        $links = UserTariff::select('url')->paginate(10);
+        $links = UserTariff::where('status', 'active')->paginate(10);
         return view('user.link.index', compact('links'));
     }
  }

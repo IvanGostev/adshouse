@@ -26,7 +26,33 @@ class QrcodeModeratorController extends Controller
 
     public function store(Request $request)
     {
-        Qrcode::create(['room_id' => $request->room_id]);
+        Qrcode::create();
+        return back();
+    }
+
+    public function edit(Qrcode $qrcode)
+    {
+        $ids = Qrcode::pluck('room_id')->toArray();
+        $ids = array_filter($ids, function ($element) {
+            return $element !== null;
+        });
+        $rooms = Room::where('status', 'active')->whereNotIn('id', $ids)->get();
+        if ($qrcode->room()) {
+            $rooms[] = $qrcode->room();
+        }
+
+        return view('moderator.qrcode.edit', compact('qrcode', 'rooms'));
+    }
+
+    public function update(Qrcode $qrcode, Request $request)
+    {
+        $qrcode->update(['room_id' => $request->room_id]);
+        return redirect()->route('moderator.qrcode.index');
+    }
+
+    public function destroy(Qrcode $qrcode)
+    {
+        $qrcode->delete();
         return back();
     }
 }

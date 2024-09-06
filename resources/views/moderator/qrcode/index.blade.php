@@ -16,12 +16,6 @@
                             <div class="card-header">
                                 <form action="{{ route('moderator.qrcode.store') }}" method="post">
                                     @csrf
-                                    <select name="room_id" required class="form-control">
-                                        @foreach($rooms as $room)
-                                            <option value="{{$room->id}}">ID: {{$room->id}} Title: {{$room->title}}</option>
-                                        @endforeach
-                                    </select>
-                                    <br>
                                     <button class="btn btn-block btn-light" type="submit">Add</button>
                                 </form>
                                 <br>
@@ -33,6 +27,8 @@
                                     <tr>
                                         <th style="width: 150px">Qrcode</th>
                                         <th>Url</th>
+                                        <th style="width: 30px">Room ID</th>
+                                        <th style="width: 40px">Edit</th>
                                         <th style="width: 40px">Delete</th>
                                     </tr>
                                     </thead>
@@ -40,15 +36,23 @@
                                     @foreach($qrcodes as $qrcode)
                                         <tr>
                                             <td>
-                                               {!! $qrcode['qrcode'] !!}
+                                                {!! $qrcode['qrcode'] !!}
                                             </td>
                                             <td>{{route('qrcode', $qrcode->id)}}</td>
                                             <td>
-                                                <form action="{{ route('user.house.destroy', $qrcode->id) }}"
+                                                {{$qrcode->room_id}}
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-light"
+                                                   href="{{route('moderator.qrcode.edit', $qrcode->id)}}">Edit</a>
+                                            </td>
+
+                                            <td>
+                                                <form action="{{ route('moderator.qrcode.destroy', $qrcode->id) }}"
                                                       method="post">
                                                     @method('delete')
                                                     @csrf
-                                                    <button type="mit" class="btn btn-light btn-sm"><i
+                                                    <button type="submit" class="btn btn-light btn-sm"><i
                                                             class="fas fa-trash">
                                                         </i> Delete
                                                     </button>

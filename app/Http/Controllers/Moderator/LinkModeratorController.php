@@ -27,7 +27,7 @@ class LinkModeratorController extends Controller
             $link->update();
             if ($link->tariff()->type = 'standard') {
                 $rooms = Room::join('houses', 'rooms.house_id', '=', 'houses.id')
-                    ->where('rooms.status', 'free')
+                    ->where('rooms.condition', 'free')
                     ->where('rooms.status', 'active')
                     ->distinct('houses.id')
                     ->take($link->tariff()->number_rooms)
@@ -35,12 +35,12 @@ class LinkModeratorController extends Controller
                     ->get();
                 foreach ($rooms as &$room) {
                     RoomUserTariff::create(['user_tariff_id' => $link->id, 'room_id' => $room->id]);
-                    $room->status = 'occupied';
+                    $room->condition = 'occupied';
                     $room->update();
                 }
             } else {
                 $rooms = Room::join('houses', 'rooms.house_id', '=', 'houses.id')
-                    ->where('rooms.status', 'free')
+                    ->where('rooms.condition', 'free')
                     ->where('rooms.status', 'active')
                     ->distinct('houses.id')
                     ->take($link->tariff()->number_rooms)
@@ -49,13 +49,14 @@ class LinkModeratorController extends Controller
                 foreach ($rooms as &$room) {
                     RoomUserTariff::create(['user_tariff_id' => $link->id, 'room_id' => $room->id]);
                     if (RoomUserTariff::where('room_id', $room->id)->count() >= 5) {
-                        $room->status = 'occupied';
+                        $room->condition = 'occupied';
                         $room->update();
                     }
                 }
             }
             DB::commit();
         } catch (\Exception $exception) {
+            dd($exception->getMessage());
             DB::rollback();
         }
 

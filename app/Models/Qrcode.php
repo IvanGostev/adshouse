@@ -9,4 +9,8 @@ class Qrcode extends Model
 {
     use HasFactory;
     protected $guarded = false;
+
+    public function room() {
+        return Room::where('id', $this->room_id)->first();
+    }
 }

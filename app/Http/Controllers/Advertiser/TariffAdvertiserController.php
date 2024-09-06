@@ -10,6 +10,7 @@ use App\Models\RoomUserTariff;
 use App\Models\Tariff;
 use App\Models\Country;
 use App\Models\Region;
+use App\Models\Transition;
 use App\Models\UserTariff;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -32,9 +33,21 @@ class TariffAdvertiserController extends Controller
     {
         $tariffs = Tariff::join('user_tariffs', 'tariffs.id', '=', 'user_tariffs.tariff_id')
             ->where('user_tariffs.user_id', '=', auth()->user()->id)
-            ->select('tariffs.*', 'user_tariffs.url')
+            ->select('tariffs.*', 'user_tariffs.url', 'user_tariffs.id')
             ->get();
         return view('advertiser.tariff.my', compact('tariffs'));
+    }
+
+    public function statistics(UserTariff $UT)
+    {
+       $data = Transition::where('user_tariff_id', $UT->id)
+            ->groupBy('date')
+            ->orderBy('date', 'DESC')
+            ->get(array(
+                DB::raw('Date(created_at) as date'),
+                DB::raw('COUNT(*) as "views"')
+            ));
+        return view('advertiser.tariff.statistics', compact('data'));
     }
 
     public function bye(Request $request, Tariff $tariff): RedirectResponse

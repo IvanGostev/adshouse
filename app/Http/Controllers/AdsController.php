@@ -10,6 +10,7 @@ use App\Models\Qrcode;
 use App\Models\Region;
 use App\Models\Room;
 use App\Models\RoomUserTariff;
+use App\Models\Transition;
 use App\Models\UserTariff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -23,6 +24,7 @@ class AdsController extends Controller
 
         if ($obj) {
             $UT = UserTariff::where('id', $obj->user_tariff_id)->first();
+            Transition::create(['user_tariff_id' => $UT->id]);
             if ($UT->type = 'standard') {
                 return redirect($UT->url)->with(['room_id' => $room->id]);
             } else {

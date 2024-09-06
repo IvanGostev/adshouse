@@ -58,6 +58,7 @@ Route::prefix('advertiser')->name('advertiser.')->group(function () {
     Route::controller(TariffAdvertiserController::class)->prefix('tariffs')->name('tariff.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/my', 'my')->name('my');
+        Route::get('/{UT}/statistics', 'statistics')->name('statistic');
         Route::post('/{tariff}', 'bye')->name('bye');
     });
 });
@@ -128,12 +129,15 @@ Route::prefix('moderator')->name('moderator.')->group(function () {
         });
         Route::controller(LinkModeratorController::class)->prefix('links')->name('link.')->group(function () {
             Route::get('/', 'index')->name('index');
-            Route::patch('/{room}/approve', 'approve')->name('approve');
-            Route::patch('/{room}/refund', 'refund')->name('refund');
+            Route::patch('/{link}/approve', 'approve')->name('approve');
+            Route::patch('/{link}/refund', 'refund')->name('refund');
         });
     Route::controller(QrcodeModeratorController::class)->prefix('qrcodes')->name('qrcode.')->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/{qrcode}/edit', 'edit')->name('edit');
         Route::post('/', 'store')->name('store');
+        Route::patch('/{qrcode}/update', 'update')->name('update');
+        Route::delete('/', 'destroy')->name('destroy');
     });
 });
 });
