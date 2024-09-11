@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BalanceApplication;
 use App\Models\Room;
 use App\Models\RoomUserTariff;
+use App\Models\Transition;
 use App\Models\UserTariff;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +16,7 @@ class LinkModeratorController extends Controller
 
     function index()
     {
-        $links = UserTariff::where('status', 'moderation')->paginate(12);
+        $links = UserTariff::where('status', '!=', 'cancelled')->latest()->paginate(12);
         return view('moderator.link.index', compact('links'));
     }
 
@@ -23,12 +24,12 @@ class LinkModeratorController extends Controller
     {
         try {
             DB::beginTransaction();
-            $link->status = 'active';
+            $link->status = 'approved';
             $link->update();
             if ($link->tariff()->type = 'standard') {
                 $rooms = Room::join('houses', 'rooms.house_id', '=', 'houses.id')
                     ->where('rooms.condition', 'free')
-                    ->where('rooms.status', 'active')
+                    ->where('rooms.status', 'approved')
                     ->distinct('houses.id')
                     ->take($link->tariff()->number_rooms)
                     ->select('rooms.*')
@@ -41,7 +42,7 @@ class LinkModeratorController extends Controller
             } else {
                 $rooms = Room::join('houses', 'rooms.house_id', '=', 'houses.id')
                     ->where('rooms.condition', 'free')
-                    ->where('rooms.status', 'active')
+                    ->where('rooms.status', 'approved')
                     ->distinct('houses.id')
                     ->take($link->tariff()->number_rooms)
                     ->select('rooms.*')
@@ -84,5 +85,17 @@ class LinkModeratorController extends Controller
             DB::rollback();
         }
         return back();
+    }
+
+    public function statistic(UserTariff $link)
+    {
+        $transitionsForChartAdvertiserLink = Transition::where('user_tariff_id', $link->id)
+            ->groupBy('date')
+            ->orderBy('date', 'ASC')
+            ->get(array(
+                DB::raw('Date(created_at) as date'),
+                DB::raw('COUNT(*) as "views"')
+            ));
+        return view('moderator.link.statistics', compact('transitionsForChartAdvertiserLink'));
     }
 }

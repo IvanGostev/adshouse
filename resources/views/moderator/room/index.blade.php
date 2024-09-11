@@ -16,8 +16,104 @@
                             <div class="card-header">
                                 <h3 class="card-title">Rooms</h3>
                             </div>
-                            <!-- /.card-header -->
                             <div class="card-body">
+                                <form class="row" action="{{route('moderator.room.search')}}">
+                                    <div class="col-sm-12 col-md-2">
+                                        <div>
+                                            <div class="fw-bold fs-6">Status</div>
+                                            <div class="fht-cell">
+                                                <div class="filter-control">
+                                                    <select
+                                                        class="form-select bootstrap-table-filter-control-price "
+                                                        style="width: 100%;" dir="ltr" name="status">
+                                                        <option value="all">All</option>
+                                                        <option
+                                                            {{request()['status'] == 'approved' ? 'selected' : '' }}  value="approved">
+                                                            Approved
+                                                        </option>
+                                                        <option
+                                                            {{request()['status'] == 'moderation' ? 'selected' : '' }} value="moderation">
+                                                            Moderation
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <div>
+                                            <div class="fw-bold fs-6">City</div>
+                                            <div class="fht-cell">
+                                                <div class="filter-control">
+                                                    <select
+                                                        class="form-select bootstrap-table-filter-control-price "
+                                                        style="width: 100%;" dir="ltr" name="city_id">
+                                                        <option value="all">All</option>
+                                                        @foreach($cities as $city)
+                                                            <option
+                                                                {{request()['city_id'] == $city->id ? 'selected' : '' }} value="{{$city->id}}">{{$city->title}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <div>
+                                            <div class="fw-bold fs-6">District</div>
+                                            <div class="fht-cell">
+                                                <div class="filter-control">
+                                                    <select
+                                                        class="form-select bootstrap-table-filter-control-price "
+                                                        style="width: 100%;" dir="ltr" name="district_id">
+                                                        <option value="all">All</option>
+                                                        @foreach($districts as $district)
+                                                            <option
+                                                                {{request()['city_id'] == $district->id ? 'selected' : '' }} value="{{$district->id}}">{{$district->title}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <div>
+                                            <div class="fw-bold fs-6">Street</div>
+                                            <div class="fht-cell">
+                                                <div class="filter-control">
+                                                    <input type="text" value="{{request()['street'] ?? ''}}" name="street" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <div>
+                                            <div class="fw-bold fs-6">Email owner</div>
+                                            <div class="fht-cell">
+                                                <div class="filter-control">
+                                                    <input type="text" value="{{request()['email'] ?? ''}}" name="email" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <div>
+                                            <div class="fw-bold fs-6">Display</div>
+                                            <div class="fht-cell">
+                                                <div class="filter-control">
+                                                    <input type="number" value="{{request()['paginateNumber'] ?? 12}}" name="paginateNumber" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12  col-md-2 d-flex gap-2">
+                                        <button class="btn btn-light mt-3" tabindex="0"
+                                                aria-controls="example1" type="submit"  ><span>Search</span></button>
+                                        <a href="{{route('moderator.house.index')}}" class="btn btn-secondary mt-3" tabindex="0"
+                                           aria-controls="example1" type="submit"><span>Refresh</span></a>
+                                    </div>
+                                </form>
+                                <br>
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
@@ -26,8 +122,7 @@
                                         <th>Title</th>
                                         <th>Type</th>
                                         <th>Description</th>
-
-                                        <th style="width: 40px">Approve</th>
+                                        <th style="width: 40px">Approve/Moderation</th>
                                         <th style="width: 40px">Delete</th>
                                     </tr>
                                     </thead>
@@ -46,7 +141,7 @@
                                                       method="post">
                                                     @method('patch')
                                                     @csrf
-                                                    <button type="submit" class="btn btn-light btn-sm"> Approve
+                                                    <button type="submit" class="btn btn-light btn-sm"> {{$room->status == 'approved' ? 'Return to moderation' : 'Approve'}}
                                                     </button>
                                                 </form>
                                             </td>
@@ -69,7 +164,7 @@
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">
                                 <ul class="pagination pagination-sm m-0 float-right">
-                                    {{ $rooms->links() }}
+                                    {{ $rooms->withQueryString()->links() }}
                                 </ul>
                             </div>
                         </div>

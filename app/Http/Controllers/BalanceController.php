@@ -20,7 +20,7 @@ class BalanceController extends Controller
 {
     function show()
     {
-        $transactions = PaymentTransaction::where('user_id', auth()->user()->id)->get();
+        $transactions = BalanceApplication::where('user_id', auth()->user()->id)->get();
         return view('balance.show', compact('transactions'));
     }
 
@@ -31,6 +31,15 @@ class BalanceController extends Controller
             'amount' => ['required'],
             'information' => ['string', 'required']
         ]);
+        if ($data['type'] == 'withdraw') {
+            $user = auth()->user();
+            if ($user->balance >= $data['amount']) {
+                $user->balance = $user->balance - $data['amount'];
+            }
+            else {
+                return back();
+            }
+        }
         try {
             DB::beginTransaction();
             BalanceApplication::create([

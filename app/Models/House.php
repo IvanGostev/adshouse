@@ -21,4 +21,7 @@ class House extends Model
     public function city() {
         return City::where('id', $this->city_id)->first();
     }
+    public function district() {
+        return District::where('id', $this->district_id)->first();
+    }
 }

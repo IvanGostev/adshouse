@@ -26,6 +26,7 @@
                                         <th>URL</th>
                                         <th style="width: 40px">Approve</th>
                                         <th style="width: 150px">Refund the funds</th>
+                                        <th style="width: 150px">Statistic</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -37,6 +38,7 @@
                                             </td>
                                             <td>{{$link->url}}</td>
                                             <td>
+                                                @if($link->status != 'approved')
                                                 <form action="{{ route('moderator.link.approve', $link->id) }}"
                                                       method="post">
                                                     @method('patch')
@@ -44,8 +46,11 @@
                                                     <button type="submit" class="btn btn-light btn-sm"> Approve
                                                     </button>
                                                 </form>
+                                                    @endif
                                             </td>
+
                                             <td>
+                                                @if($link->status != 'approved')
                                                 <form action="{{ route('moderator.link.refund', $link->id) }}"
                                                       method="post">
                                                     @method('patch')
@@ -53,6 +58,10 @@
                                                     <button type="submit" class="btn btn-light btn-sm"> Refund
                                                     </button>
                                                 </form>
+                                                    @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{route('moderator.link.statistic', $link->id)}}" class="btn btn-primary">Statistic</a>
                                             </td>
                                         </tr>
                                     @endforeach

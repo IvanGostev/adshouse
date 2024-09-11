@@ -38,16 +38,16 @@ class TariffAdvertiserController extends Controller
         return view('advertiser.tariff.my', compact('tariffs'));
     }
 
-    public function statistics(UserTariff $UT)
+    public function show(UserTariff $UT)
     {
-       $data = Transition::where('user_tariff_id', $UT->id)
+       $transitionsForChartAdvertiserLink = Transition::where('user_tariff_id', $UT->id)
             ->groupBy('date')
-            ->orderBy('date', 'DESC')
+            ->orderBy('date', 'ASC')
             ->get(array(
                 DB::raw('Date(created_at) as date'),
                 DB::raw('COUNT(*) as "views"')
             ));
-        return view('advertiser.tariff.statistics', compact('data'));
+        return view('advertiser.tariff.statistics', compact('transitionsForChartAdvertiserLink'));
     }
 
     public function bye(Request $request, Tariff $tariff): RedirectResponse

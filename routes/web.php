@@ -51,6 +51,7 @@ Route::prefix('user')->name('user.')->group(function () {
     });
     Route::controller(LinkUserController::class)->prefix('links')->name('link.')->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/{link}/statistic', 'statistic')->name('statistic');
     });
 
 });
@@ -58,7 +59,7 @@ Route::prefix('advertiser')->name('advertiser.')->group(function () {
     Route::controller(TariffAdvertiserController::class)->prefix('tariffs')->name('tariff.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/my', 'my')->name('my');
-        Route::get('/{UT}/statistics', 'statistics')->name('statistic');
+        Route::get('/{UT}/statistics', 'show')->name('show');
         Route::post('/{tariff}', 'bye')->name('bye');
     });
 });
@@ -121,22 +122,27 @@ Route::prefix('moderator')->name('moderator.')->group(function () {
     });
         Route::controller(HouseModeratorController::class)->prefix('houses')->name('house.')->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::get('/search', 'search')->name('search');
             Route::patch('/{house}', 'update')->name('update');
         });
         Route::controller(RoomModeratorController::class)->prefix('rooms')->name('room.')->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::get('/search', 'search')->name('search');
             Route::patch('/{room}', 'update')->name('update');
         });
         Route::controller(LinkModeratorController::class)->prefix('links')->name('link.')->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::get('/{link}/statistic', 'statistic')->name('statistic');
             Route::patch('/{link}/approve', 'approve')->name('approve');
             Route::patch('/{link}/refund', 'refund')->name('refund');
         });
     Route::controller(QrcodeModeratorController::class)->prefix('qrcodes')->name('qrcode.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/{qrcode}/edit', 'edit')->name('edit');
+        Route::get('/{qrcode}/search', 'search')->name('search');
         Route::post('/', 'store')->name('store');
         Route::patch('/{qrcode}/update', 'update')->name('update');
+        Route::patch('/{qrcode}/free', 'free')->name('free');
         Route::delete('/', 'destroy')->name('destroy');
     });
 });

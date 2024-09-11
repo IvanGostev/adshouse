@@ -19,23 +19,22 @@
                                 <form class="card-body" method="post">
                                     @csrf
                                     <div class="align-items-center text-center">
-                                        <strong>Дней: {{$tariff->days}}</strong>
+                                        <strong>Days: {{$tariff->days}}</strong>
                                         <br>
-                                        <strong>Квартир: {{$tariff->number_rooms}} </strong>
+                                        <strong>Apartments: {{$tariff->number_rooms}} </strong>
                                         <br>
-                                        <strong>Цена: {{$tariff->price}} руб.</strong>
+                                        <strong>Price: {{$tariff->price}} AED</strong>
                                     </div>
                                     <br>
                                     <p class="text-muted">
                                         {{$tariff->about}}
                                     </p>
-
                                     <div class="form-group">
-                                        <label>Рекламируемая ссылку</label>
+                                        <label>Advertised link</label>
                                         <input type="url" class="form-control my-colorpicker1 colorpicker-element" value="{{$tariff->url}}" data-colorpicker-id="1" disabled data-original-title="" title="">
                                     </div>
                                     <div class="form-group">
-                                        <a href="{{route('advertiser.tariff.statistic', $tariff->id)}}">Статистика</a>
+                                        <a class="btn btn-light btn-block" href="{{route('advertiser.tariff.show', $tariff->id)}}">Statistic</a>
                                     </div>
                                 </form>
                             </div>

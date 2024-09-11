@@ -23,13 +23,15 @@
                                     <tr>
                                         <th style="width: 40px">ID</th>
                                         <th>URL</th>
+                                        <th>Statistic</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($links as $link)
                                         <tr>
                                             <td>{{$link->id}}</td>
-                                            <td>{{$link->url}}</td>
+                                            <td><a href="{{$link->url}}">{{$link->url}}</a></td>
+                                            <td><a href="{{route('moderator.link.statistic', $link->id)}}" class="btn btn-primary">Statistic</a>  </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

@@ -26,12 +26,13 @@ class BalanceModeratorController extends Controller
             if ($application->type == 'replenish') {
                 $user->balance = $user->balance + $application->amount;
                 $user->update();
-            } else if ($application->type == 'withdraw') {
-                $user->balance = $user->balance - $application->amount;
-                $user->update();
             }
             $application->update(['status' => 'approved']);
         } else {
+            if ($application->type == 'withdraw') {
+                $user->balance = $user->balance + $application->amount;
+                $user->update();
+            }
             $application->update(['status' => 'cancelled']);
         }
         return back();
