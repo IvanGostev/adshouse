@@ -1,27 +1,27 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/" class="brand-link" style="background-color: #212529">
-{{--                <img src="{{asset('apple-touch-icon.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"--}}
-{{--                     style="opacity: .8">--}}
+        <img src="{{asset('images/logo.png')}}" alt="ADSHOUSE" class="brand-image img-circle elevation-3"
+             style="opacity: .8">
         <span class="brand-text font-weight-bolder">{{ config('app.name', 'Laravel') }}</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar" style="background-color: #212529">
         <!-- Sidebar user panel (optional) -->
-        <br>
+        {{--        <br>--}}
 
         <!-- SidebarSearch Form -->
-        <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" style="background-color: #212529;">
-                <div class="input-group-append" >
-                    <button class="btn btn-sidebar" style="background-color: #212529;">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+        {{--        <div class="form-inline">--}}
+        {{--            <div class="input-group" data-widget="sidebar-search">--}}
+        {{--                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" style="background-color: #212529;">--}}
+        {{--                <div class="input-group-append" >--}}
+        {{--                    <button class="btn btn-sidebar" style="background-color: #212529;">--}}
+        {{--                        <i class="fas fa-search fa-fw"></i>--}}
+        {{--                    </button>--}}
+        {{--                </div>--}}
+        {{--            </div>--}}
+        {{--        </div>--}}
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -35,17 +35,15 @@
                     @case('user')
                         <li class="nav-item">
                             <a href="{{ route('user.house.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    My apartments/houses
+                                    My apartment
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('user.link.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Links that may be in your qrcode
+                                    Advertiser
                                 </p>
                             </a>
                         </li>
@@ -53,17 +51,15 @@
                     @case('advertiser')
                         <li class="nav-item">
                             <a href="{{route('advertiser.tariff.index')}}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Tariffs
+                                    Tariff
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('advertiser.tariff.my')}}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Purchased tariffs
+                                    Purchased tariff
                                 </p>
                             </a>
                         </li>
@@ -71,81 +67,83 @@
                     @case('moderator')
                         <li class="nav-item">
                             <a href="{{ route('moderator.country.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Countries
+                                    Country
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('moderator.city.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Cities
+                                    City
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('moderator.district.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Districts
+                                    Area
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('moderator.room-type.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Types of rooms
+                                    Type of room
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('moderator.tariff.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Tariffs
+                                    Tariff
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('moderator.balance.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Users balance
+                                    User balance
+                                    @if(notification('balance'))
+                                        <span class="badge badge-light right">{{notification('balance')}}</span>
+                                    @endif
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('moderator.house.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                     Houses
+                                    House
+                                    @if(notification('house'))
+                                        <span class="badge badge-light right">{{notification('house')}}</span>
+                                    @endif
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('moderator.room.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Rooms
+                                    Room
+                                    @if(notification('room'))
+                                        <span class="badge badge-light right">{{notification('room')}}</span>
+                                    @endif
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('moderator.link.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Advertised links
+                                    Advertised link
+                                    @if(notification('link'))
+                                        <span class="badge badge-light right">{{notification('link')}}</span>
+                                    @endif
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('moderator.qrcode.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Qrcodes
+                                    QR stands
                                 </p>
                             </a>
                         </li>

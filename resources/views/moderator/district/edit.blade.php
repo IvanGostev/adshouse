@@ -21,7 +21,7 @@
                         <!-- general form elements -->
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h3 class="card-title">Editing district</h3>
+                                <h3 class="card-title">Editing area</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->

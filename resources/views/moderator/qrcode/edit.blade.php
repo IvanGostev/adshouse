@@ -108,7 +108,7 @@
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
-                                            <th>Title</th>
+                                            <th>Title house</th>
                                             <th>Country</th>
                                             <th>City</th>
                                             <th>District</th>
@@ -120,7 +120,7 @@
                                         <tbody>
                                         @foreach($rooms as $room)
                                             <tr>
-                                                <td>{{$room->title}}</td>
+                                                <td>{{$room->house()->title}}</td>
                                                 <td>{{$room->house()->country()->title}}</td>
                                                 <td>{{$room->house()->city()->title}}</td>
                                                 <td>{{$room->house()->district()->title}}</td>

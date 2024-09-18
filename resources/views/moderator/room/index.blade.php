@@ -119,7 +119,8 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Preview</th>
-                                        <th>Title</th>
+                                        <th>Title house</th>
+                                        <th>Address</th>
                                         <th>Type</th>
                                         <th>Description</th>
                                         <th style="width: 40px">Approve/Moderation</th>
@@ -133,7 +134,8 @@
                                             <td>
                                                 <img src="{{asset($room->img)}}" height="200px">
                                             </td>
-                                            <td>{{$room->title}}</td>
+                                            <td>{{$room->house()->title}}</td>
+                                            <td>{{$room->house()->country()->title}}, {{$room->house()->city()->title}}, {{$room->house()->district()->title}}, {{$room->house()->street}}, {{$room->house()->number}}  {{$room->house()->apartment_number ?? ''}} </td>
                                             <td>{{$room->type()->title}}</td>
                                             <td>{{$room->about}}</td>
                                             <td>

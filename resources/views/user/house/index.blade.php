@@ -34,7 +34,6 @@
                                             <div class="col-12">
                                                 <ul class="ml-4 mb-0 fa-ul text-muted">
                                                     <li style="padding-bottom: 10px;" class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: {{$house->country()->title}}, {{$house->city()->title}}, {{$house->street}}, {{'house ' . $house->number}}, {{$house->apartment_number ? 'apart ' . $house->apartment_number : ''}} </li>
-                                                    <li class="small"><span class="fa-li"><i class="fa-solid fa-mobile-screen-button"></i></span> Phone: {{$house->user()->phone}}</li>
                                                 </ul>
                                             </div>
                                         </div>

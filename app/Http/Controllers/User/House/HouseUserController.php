@@ -3,17 +3,30 @@
 namespace App\Http\Controllers\User\House;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotificationMail;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\District;
 use App\Models\House;
-use App\Models\Region;
+use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 
 class HouseUserController extends Controller
 {
+    protected function notification() {
+        $message = "The apartment has been added for moderation";
+        $users = User::where('role', 'moderator')->get();
+        foreach($users as $user) {
+            Mail::to($user->email)->send(new NotificationMail($message));
+        }
+        Notification::create(['type' => 'house']);
+    }
+
+
     function index()
     {
         $houses = House::where('user_id', auth()->user()->id)->paginate(12);
@@ -38,6 +51,7 @@ class HouseUserController extends Controller
         }
         $data['user_id'] = auth()->user()->id;
         House::create($data);
+        $this->notification();
         return redirect()->route('user.house.index');
     }
 
@@ -56,6 +70,11 @@ class HouseUserController extends Controller
             $data['img'] = '/storage/' . Storage::disk('public')->put('/images', $data['img']);
         }
         $house->update($data);
+        $this->notification();
         return redirect()->route('user.house.index');
+    }
+    function delete(House $house) {
+        $house->delete();
+        return back();
     }
  }

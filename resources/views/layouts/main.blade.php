@@ -25,7 +25,7 @@
 
 </head>
 {{--        dark-mode--}}
-<body class="dark-mode hold-transition  sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="dark-mode hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
 
     <!-- Preloader -->

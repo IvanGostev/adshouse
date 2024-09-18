@@ -130,6 +130,7 @@
                                         <th>City</th>
                                         <th>District</th>
                                         <th>Street</th>
+                                        <th>Room number</th>
                                         <th style="width: 40px">Approve/Moderation</th>
                                         <th style="width: 40px">Delete</th>
                                     </tr>
@@ -147,6 +148,7 @@
                                             <td>{{$house->city()->title}}</td>
                                             <td>{{$house->district()->title}}</td>
                                             <td>{{$house->street}}</td>
+                                            <td>{{$house->countRooms()}}</td>
                                             <td>
                                                 <form action="{{ route('moderator.house.update', $house->id) }}"
                                                       method="post">

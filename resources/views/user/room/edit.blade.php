@@ -21,8 +21,17 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card card-dark">
-                            <div class="card-header">
-                                <h3 class="card-title">Editing room</h3>
+                            <div class="card-header" style="display: flex; justify-content:space-between;">
+                                <div>
+                                    <h3 class="card-title d-block">Editing room
+                                    </h3>
+                                </div>
+
+                                <form action="{{route('user.room.destroy', $room->id)}}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-sm btn-outline-danger right d-block" type="submit">Delete</button>
+                                </form>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -60,12 +69,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <!-- text input -->
-                                            <div class="form-group">
-                                                <label>Title</label>
-                                                <input type="text" name="title" class="form-control"
-                                                       placeholder="Текст ..." required value="{{$room->title}}">
-                                            </div>
+
                                             <div class="form-group">
                                                 <!-- <label for="customFile">Custom File</label> -->
                                                 <div style="height: 180px">
@@ -101,7 +105,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Description</label>
-                                                <textarea required="" class="form-control" rows="5"
+                                                <textarea class="form-control" rows="5"
                                                           name="about">{{$room->about}}</textarea>
                                             </div>
                                         </div>

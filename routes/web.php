@@ -39,7 +39,7 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::post('/', 'store')->name('store');
         Route::get('/{house}/edit', 'edit')->name('edit');
         Route::patch('/{house}', 'update')->name('update');
-        Route::delete('/{house}', 'destroy')->name('destroy');
+        Route::delete('/{house}', 'delete')->name('destroy');
     });
     Route::controller(RoomUserController::class)->prefix('rooms')->name('room.')->group(function () {
         Route::get('/{house}/', 'index')->name('index');
@@ -47,7 +47,7 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::post('/{house}/', 'store')->name('store');
         Route::get('/{room}/edit', 'edit')->name('edit');
         Route::patch('/{room}', 'update')->name('update');
-        Route::delete('/{room}', 'destroy')->name('destroy');
+        Route::delete('/{room}', 'delete')->name('destroy');
     });
     Route::controller(LinkUserController::class)->prefix('links')->name('link.')->group(function () {
         Route::get('/', 'index')->name('index');

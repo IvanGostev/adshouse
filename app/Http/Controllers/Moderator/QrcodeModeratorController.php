@@ -73,7 +73,7 @@ class QrcodeModeratorController extends Controller
         $ids = array_filter($ids, function ($element) {
             return $element !== null;
         });
-        $rooms = Room::where('status', 'active')->whereNotIn('id', $ids)->paginate(10);
+        $rooms = Room::where('condition', 'free')->where('status', 'approved')->whereNotIn('id', $ids)->paginate(10);
         $cities = City::all();
         $districts = District::all();
         $roomActive = Room::where('id', $qrcode->room_id)->first();

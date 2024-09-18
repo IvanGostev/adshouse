@@ -34,11 +34,6 @@
                                         <div class="col-sm-6">
                                             <!-- text input -->
                                             <div class="form-group">
-                                                <label>Title</label>
-                                                <input type="text" name="title" class="form-control"
-                                                       placeholder="Enter ..." required>
-                                            </div>
-                                            <div class="form-group">
                                                 <!-- <label for="customFile">Custom File</label> -->
                                                 <div style="height: 180px">
                                                     <img id="blah1" alt="insert an image" width="auto" height="180px"
@@ -72,7 +67,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Description</label>
-                                                <textarea required="" class="form-control" rows="5"
+                                                <textarea class="form-control" rows="5"
                                                           name="about" placeholder="Enter ..."></textarea>
                                             </div>
                                         </div>

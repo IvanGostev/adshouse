@@ -63,6 +63,7 @@ class RoomModeratorController extends Controller
             $room->update();
         }
         $room->update();
+        deleteNotification('room');
         return back();
     }
 }

@@ -4,18 +4,22 @@ namespace App\Http\Controllers\Advertiser;
 
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotificationMail;
 use App\Models\BalanceApplication;
+use App\Models\Notification;
 use App\Models\Room;
 use App\Models\RoomUserTariff;
 use App\Models\Tariff;
 use App\Models\Country;
 use App\Models\Region;
 use App\Models\Transition;
+use App\Models\User;
 use App\Models\UserTariff;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -74,6 +78,13 @@ class TariffAdvertiserController extends Controller
                 $data['img'] = '/storage/' . Storage::disk('public')->put('/images', $data['img']);
             }
             UserTariff::create($data);
+            $message = "The tariff has been purchased, check the advertiser's link";
+            $users = User::where('role', 'moderator')->get();
+            foreach($users as $user) {
+                Mail::to($user->email)->send(new NotificationMail($message));
+            }
+            Notification::create(['type' => 'link']);
+
             DB::commit();
             return redirect()->route('advertiser.tariff.my');
         } catch (Exception $exception) {

@@ -56,6 +56,7 @@ class LinkModeratorController extends Controller
                 }
             }
             DB::commit();
+            deleteNotification('link');
         } catch (\Exception $exception) {
             dd($exception->getMessage());
             DB::rollback();
@@ -81,6 +82,7 @@ class LinkModeratorController extends Controller
                 'user_id' => $user->id
             ]);
             DB::commit();
+            deleteNotification('link');
         } catch (\Exception $exception) {
             DB::rollback();
         }

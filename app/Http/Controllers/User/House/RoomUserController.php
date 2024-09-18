@@ -3,16 +3,31 @@
 namespace App\Http\Controllers\User\House;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotificationMail;
+use App\Models\Notification;
 use App\Models\Room;
 use App\Models\House;
 use App\Models\RoomType;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Prompts\Note;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 class RoomUserController extends Controller
 {
+
+    protected function notification() {
+        $message = "The room has been added for moderation";
+        $users = User::where('role', 'moderator')->get();
+        foreach($users as $user) {
+            Mail::to($user->email)->send(new NotificationMail($message));
+        }
+        Notification::create(['type' => 'room']);
+    }
+
     function index(House $house)
     {
         $rooms = Room::where('house_id', $house->id)->paginate(12);
@@ -33,13 +48,14 @@ class RoomUserController extends Controller
             $data['img'] = '/storage/' . Storage::disk('public')->put('/images', $data['img']);
         }
         Room::create($data);
+        $this->notification();
         return redirect()->route('user.room.index', $house->id);
     }
 
     function edit(Room $room)
     {
         $types = RoomType::all();
-        $slug = 'country:' . $room->house()->country()->title . '&city:' . $room->house()->city()->title . '&district:' . $room->house()->district . '&street:' . $room->house()->street . '&numberhouse:' . $room->house()->number . '&apartmentnumber:' . $room->house()->apartment_number;
+        $slug = 'country:' . $room->house()->country()->title . '&city:' . $room->house()->city()->title . '&district:' . $room->house()->district()->title . '&street:' . $room->house()->street . '&numberhouse:' . $room->house()->number . '&apartmentnumber:' . $room->house()->apartment_number;
         $qrcode = QrCode::size(240)->style('round')->generate(route('ads', ['room' => $room->id, 'slug' => $slug]));
 
         return view('user.room.edit', compact('room', 'types', 'slug', 'qrcode'));
@@ -53,6 +69,11 @@ class RoomUserController extends Controller
         }
         $room->status = 'moderation';
         $room->update($data);
+        $this->notification();
         return redirect()->route('user.room.index', $room->house()->id);
+    }
+    function delete(Room $room) {
+        $room->delete();
+        return back();
     }
 }

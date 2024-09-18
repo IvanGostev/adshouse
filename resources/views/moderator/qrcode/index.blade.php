@@ -25,10 +25,11 @@
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th style="width: 150px">Qrcode</th>
+                                        <th style="width: 50px">Qrcode</th>
                                         <th>Url</th>
                                         <th style="width: 30px">Room ID</th>
                                         <th style="width: 30px">Email</th>
+                                        <th style="width: 40px">Download</th>
                                         <th style="width: 40px">Edit</th>
                                         <th style="width: 40px">Delete</th>
                                     </tr>
@@ -45,6 +46,10 @@
                                             </td>
                                             <td>
                                                 {{$qrcode->room() ? $qrcode->room()->house()->user()->email : 'No'}}
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-outline-success"
+                                                   href="{{route('moderator.qrcode.edit', $qrcode->id)}}">Download</a>
                                             </td>
                                             <td>
                                                 <a class="btn btn-light"

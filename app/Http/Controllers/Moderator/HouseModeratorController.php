@@ -60,6 +60,7 @@ class HouseModeratorController extends Controller
             $house->update();
         }
         $house->update();
+        deleteNotification('house');
         return back();
     }
 }

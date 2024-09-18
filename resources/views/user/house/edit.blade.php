@@ -22,7 +22,7 @@
                         <!-- general form elements -->
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h3 class="card-title">Editing apartment/house</h3>
+                                <h3 class="card-title">Editing apartment</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -74,7 +74,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>District</label>
+                                                <label>Area</label>
                                                 <select name="district_id" class="form-control">
                                                     @foreach($districts as $district)
                                                         <option  {{$house->district_id == $district->id ? 'selected' : ''}} value="{{$district->id}}">{{$district->title}}</option>
@@ -108,7 +108,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Description</label>
-                                                <textarea required class="form-control" rows="5"
+                                                <textarea class="form-control" rows="5"
                                                           name="about" placeholder="Enter..." >{{$house->about}}</textarea>
                                             </div>
                                         </div>

@@ -35,6 +35,7 @@ class BalanceModeratorController extends Controller
             }
             $application->update(['status' => 'cancelled']);
         }
+        deleteNotification('balance');
         return back();
     }
 }
