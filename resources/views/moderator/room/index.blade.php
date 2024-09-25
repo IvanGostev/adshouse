@@ -152,8 +152,7 @@
                                                       method="post">
                                                     @method('delete')
                                                     @csrf
-                                                    <button type="submit" class="btn btn-light btn-sm"><i
-                                                            class="fas fa-trash">
+                                                    <button type="submit" class="btn btn-light btn-sm">
                                                         </i> Delete
                                                     </button>
                                                 </form>

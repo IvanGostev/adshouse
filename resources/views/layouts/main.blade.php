@@ -24,6 +24,12 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
 </head>
+<style>
+    .dark-mode .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .dark-mode .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+        background-color: #fff;
+        color: black;
+    }
+</style>
 {{--        dark-mode--}}
 <body class="dark-mode hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">

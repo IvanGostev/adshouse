@@ -26,12 +26,6 @@
                                     <h3 class="card-title d-block">Editing room
                                     </h3>
                                 </div>
-
-                                <form action="{{route('user.room.destroy', $room->id)}}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="btn btn-sm btn-outline-danger right d-block" type="submit">Delete</button>
-                                </form>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->

@@ -25,7 +25,7 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar sidebar-dark flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
 
                      with font-awesome or any other icon font library -->
@@ -34,14 +34,14 @@
                 @switch(auth()->user()->role)
                     @case('user')
                         <li class="nav-item">
-                            <a href="{{ route('user.house.index') }}" class="nav-link">
+                            <a href="{{ route('user.house.index') }}" class="nav-link {{request()->path() == 'user/houses' ? 'active' : ''}}">
                                 <p>
                                     My apartment
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('user.link.index') }}" class="nav-link">
+                            <a href="{{ route('user.link.index') }}" class="nav-link {{request()->path() == 'user/links' ? 'active' : ''}}">
                                 <p>
                                     Advertiser
                                 </p>
@@ -50,58 +50,58 @@
                         @break
                     @case('advertiser')
                         <li class="nav-item">
-                            <a href="{{route('advertiser.tariff.index')}}" class="nav-link">
+                            <a href="{{route('advertiser.tariff.index')}}" class="nav-link {{request()->path() == 'advertiser/tariffs' ? 'active' : ''}}">
                                 <p>
-                                    Tariff
+                                    Plans
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('advertiser.tariff.my')}}" class="nav-link">
+                            <a href="{{route('advertiser.tariff.my')}}" class="nav-link {{request()->path() == 'advertiser/tariffs/my' ? 'active' : ''}}">
                                 <p>
-                                    Purchased tariff
+                                    Current plan
                                 </p>
                             </a>
                         </li>
                         @break
                     @case('moderator')
                         <li class="nav-item">
-                            <a href="{{ route('moderator.country.index') }}" class="nav-link">
+                            <a href="{{ route('moderator.country.index') }}" class="nav-link {{request()->path() == 'moderator/countries' ? 'active' : ''}}">
                                 <p>
                                     Country
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('moderator.city.index') }}" class="nav-link">
+                            <a href="{{ route('moderator.city.index') }}" class="nav-link {{request()->path() == 'moderator/cities' ? 'active' : ''}}">
                                 <p>
                                     City
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('moderator.district.index') }}" class="nav-link">
+                            <a href="{{ route('moderator.district.index') }}" class="nav-link {{request()->path() == 'moderator/districts' ? 'active' : ''}}">
                                 <p>
                                     Area
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('moderator.room-type.index') }}" class="nav-link">
+                            <a href="{{ route('moderator.room-type.index') }}" class="nav-link {{request()->path() == 'moderator/room-types' ? 'active' : ''}}">
                                 <p>
                                     Type of room
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('moderator.tariff.index') }}" class="nav-link">
+                            <a href="{{ route('moderator.tariff.index') }}" class="nav-link {{request()->path() == 'moderator/tariffs' ? 'active' : ''}}">
                                 <p>
                                     Tariff
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('moderator.balance.index') }}" class="nav-link">
+                            <a href="{{ route('moderator.balance.index') }}" class="nav-link {{request()->path() == 'moderator/balance' ? 'active' : ''}}">
                                 <p>
                                     User balance
                                     @if(notification('balance'))
@@ -111,7 +111,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('moderator.house.index') }}" class="nav-link">
+                            <a href="{{ route('moderator.user.index') }}" class="nav-link {{request()->path() == 'moderator/users' ? 'active' : ''}} ">
+                                <p>
+                                    User
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('moderator.house.index') }}" class="nav-link {{request()->path() == 'moderator/houses' ? 'active' : ''}}">
                                 <p>
                                     House
                                     @if(notification('house'))
@@ -121,7 +128,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('moderator.room.index') }}" class="nav-link">
+                            <a href="{{ route('moderator.room.index') }}" class="nav-link {{request()->path() == 'moderator/rooms' ? 'active' : ''}}">
                                 <p>
                                     Room
                                     @if(notification('room'))
@@ -131,7 +138,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('moderator.link.index') }}" class="nav-link">
+                            <a href="{{ route('moderator.link.index') }}" class="nav-link {{request()->path() == 'moderator/links' ? 'active' : ''}}">
                                 <p>
                                     Advertised link
                                     @if(notification('link'))
@@ -141,7 +148,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('moderator.qrcode.index') }}" class="nav-link">
+                            <a href="{{ route('moderator.qrcode.index') }}" class="nav-link {{request()->path() == 'moderator/qrcodes' ? 'active' : ''}}">
                                 <p>
                                     QR stands
                                 </p>

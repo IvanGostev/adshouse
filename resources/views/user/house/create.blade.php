@@ -90,7 +90,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Number/Name house</label>
+                                                <label>Building/Community name</label>
                                                 <input type="text" name="number" class="form-control"
                                                        placeholder="Enter ..." required>
                                             </div>

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('about')->nullable();
             $table->string('condition')->default('free');
             $table->string('status')->default('moderation');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

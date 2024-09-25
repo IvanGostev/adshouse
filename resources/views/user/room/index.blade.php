@@ -16,20 +16,42 @@
                 <h5 class="mb-2">Rooms</h5>
                 <div class="card card-success">
                     <div class="card-body">
-                        <div class="row">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th style="width: 40px">Status</th>
+                                <th style="width: 40px">Edit</th>
+                                <th style="width: 40px">Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
                             @foreach($rooms as $room)
-                                <div class="col-md-12 col-lg-6 col-xl-4">
-                                    <div class="card mb-2 bg-gradient-dark text-white">
-                                        <img class="card-img-top" src="{{asset($room->img)}}" alt="Dist Photo 1">
-                                        <div class="card-img-overlay d-flex flex-column justify-content-end" style="background: black; opacity: 75%">
-                                            <a href="{{route('user.room.edit', $room->id)}}" class="card-title text-primary text-white" style="cursor: pointer;">{{$room->type()->title}}</a>
-                                            <a class="card-text text-white pb-2 pt-1">{{$room->about}}</a>
-                                            <a href="{{route('user.room.edit', $room->id)}}" class="text-white">Last updated {{$room->updated_at}}</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <tr>
+                                    <td>{{$room->id}}</td>
+                                   <td>{{$room->type()->title}}</td>
+                                    <td>{{$room->about}}</td>
+                                    <td>
+                                        {{$room->status}}
+                                    </td>
+                                    <td>
+                                        <a href="{{route('user.room.edit', $room->id)}}" class="btn btn-light btn-sm">Edit</a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('user.room.destroy', $room->id) }}"
+                                              method="post">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn btn-light btn-sm">Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
                             @endforeach
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

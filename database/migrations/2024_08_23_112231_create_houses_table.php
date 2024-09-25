@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('apartment_number')->nullable();
 
             $table->string('status')->default('moderation');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

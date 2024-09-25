@@ -25,7 +25,7 @@
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th style="width: 50px">Qrcode</th>
+                                        <th style="width: 35px">Qrcode</th>
                                         <th>Url</th>
                                         <th style="width: 30px">Room ID</th>
                                         <th style="width: 30px">Email</th>
@@ -61,9 +61,8 @@
                                                       method="post">
                                                     @method('delete')
                                                     @csrf
-                                                    <button type="submit" class="btn btn-light btn-sm"><i
-                                                            class="fas fa-trash">
-                                                        </i> Delete
+                                                    <button type="submit" class="btn btn-light">
+                                           Delete
                                                     </button>
                                                 </form>
                                             </td>
