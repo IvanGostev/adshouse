@@ -114,7 +114,7 @@
                                     </div>
                                 </form>
                                 <br>
-                                <table class="table table-bordered">
+                                <table class="table table-hover text-nowrap">
                                     <thead>
                                     <tr>
                                         <th>ID</th>

@@ -9,7 +9,7 @@
 
         <section class="jumbotron text-center   mr-5  ml-5" style="background-image: url('/images/tariff.jpg');">
             <div class="container" >
-                <h1>Advertising in apartments/houses</h1>
+                <h1>Advertising in apartments</h1>
                 <p>Choose the tariff below</p>
             </div>
         </section>
@@ -33,7 +33,7 @@
                                         <br>
                                         <strong>Apartments: {{$tariff->number_rooms}} </strong>
                                         <br>
-                                        <strong>Price: {{$tariff->price}} rub.</strong>
+                                        <strong>Price: {{$tariff->price}} AED</strong>
                                     </div>
                                     <br>
                                     <p class="text-muted">

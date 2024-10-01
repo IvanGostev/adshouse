@@ -13,6 +13,7 @@ use App\Models\RoomUserTariff;
 use App\Models\Transition;
 use App\Models\UserTariff;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -21,11 +22,13 @@ class AdsController extends Controller
     function ads(Room $room, string $slug)
     {
         $obj = RoomUserTariff::where('room_id', $room->id)->first();
-
         if ($obj) {
             $UT = UserTariff::where('id', $obj->user_tariff_id)->first();
-            Transition::create(['user_tariff_id' => $UT->id]);
-            if ($UT->type = 'standard') {
+            if (!request()->hasCookie('ut_' . $UT->id)) {
+                Transition::create(['user_tariff_id' => $UT->id]);
+                Cookie::queue('ut_' . $UT->id, 'yes', 60 * 60 * 2);
+            }
+            if ($UT->type == 'standard') {
                 return redirect($UT->url)->with(['room_id' => $room->id]);
             } else {
                 $UTs = RoomUserTariff::join('user_tariffs', 'room_user_tariffs.user_tariff_id', '=', 'user_tariffs.id')
@@ -34,15 +37,13 @@ class AdsController extends Controller
                     ->get();
                 return view('advertiser-url', compact('UTs'));
             }
-
         }
-
         return redirect('/');
     }
 
     public function qrcode(Qrcode $qrcode)
     {
-        $room = Room::where('qrcode_id', $qrcode->id)->first();
+        $room = Room::where('id', $qrcode->room_id)->first();
         if ($room) {
             return redirect()->route('ads', ['room' => $room->id, 'slug' => 'qrcode']);
         } else {

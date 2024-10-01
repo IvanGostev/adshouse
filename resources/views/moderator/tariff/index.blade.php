@@ -19,7 +19,7 @@
                                 <h3 class="card-title">Tariffs</h3>
                             </div>
                             <div class="card-body">
-                                <table class="table table-bordered">
+                                <table class="table table-hover text-nowrap">
                                     <thead>
                                     <tr>
                                         <th>Title</th>
@@ -34,7 +34,7 @@
                                         <tr>
                                             <td>{{$tariff->title}}</td>
                                             <td>{{$tariff->about}}</td>
-                                            <td>{{$tariff->price . 'руб'}}</td>
+                                            <td>{{$tariff->price . ' AED'}}</td>
                                             <td>
                                                 <a class="btn btn-light btn-sm"
                                                    href="{{route('moderator.tariff.edit', $tariff->id)}}">

@@ -8,6 +8,7 @@ use App\Models\Room;
 use App\Models\RoomUserTariff;
 use App\Models\Transition;
 use App\Models\UserTariff;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 
@@ -24,10 +25,10 @@ class LinkModeratorController extends Controller
     {
         try {
             DB::beginTransaction();
-            $link->status = 'approved';
-            $link->update();
             if ($link->tariff()->type = 'standard') {
+            $idsRoomUnsuitable = RoomUserTariff::distinct('room_id')->pluck('room_id')->toArray();
                 $rooms = Room::join('houses', 'rooms.house_id', '=', 'houses.id')
+                    ->whereNot('rooms.id', $idsRoomUnsuitable)
                     ->where('rooms.condition', 'free')
                     ->where('rooms.status', 'approved')
                     ->distinct('houses.id')
@@ -55,10 +56,12 @@ class LinkModeratorController extends Controller
                     }
                 }
             }
+            $link->status = 'approved';
+            $link->finish_date = Carbon::now()->addDays($link->tariff()->days)->toDateTimeString();
+            $link->update();
             DB::commit();
             deleteNotification('link');
         } catch (\Exception $exception) {
-            dd($exception->getMessage());
             DB::rollback();
         }
 

@@ -22,7 +22,7 @@
                                 <h3 class="card-title">Qrcodes</h3>
                             </div>
                             <div class="card-body">
-                                <table class="table table-bordered">
+                                <table class="table table-hover text-nowrap">
                                     <thead>
                                     <tr>
                                         <th style="width: 35px">Qrcode</th>

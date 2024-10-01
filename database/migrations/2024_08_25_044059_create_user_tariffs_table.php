@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('img')->nullable();
             $table->foreignIdFor(Tariff::class)->constrained();
             $table->string('status')->default('moderation');
+            $table->dateTime('finish_date')->nullable();
             $table->timestamps();
         });
     }

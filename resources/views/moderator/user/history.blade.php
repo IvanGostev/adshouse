@@ -38,7 +38,7 @@
                                             <tr>
                                                 <td>{{$transaction->id}}</td>
                                                 <td>{{$transaction->type}}</td>
-                                                <td>{{$transaction->amount . ' RUB'}}</td>
+                                                <td>{{$transaction->amount . ' AED'}}</td>
                                                 <td>{{$transaction->status}}</td>
                                                 <td>{{$transaction->created_at}}</td>
                                             </tr>

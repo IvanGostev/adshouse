@@ -28,7 +28,8 @@ class TariffAdvertiserController extends Controller
 
     public function index(): View
     {
-        $numberFreeRooms = Room::where('status', 'active')->where('condition', 'free')->count();
+        $numberFreeRooms = Room::where('status', 'approved')->where('condition', 'free')->count();
+
         $tariffs = Tariff::where('number_rooms', '<=', $numberFreeRooms)->paginate(10);
         return view('advertiser.tariff.index', compact('tariffs'));
     }
@@ -37,7 +38,7 @@ class TariffAdvertiserController extends Controller
     {
         $tariffs = Tariff::join('user_tariffs', 'tariffs.id', '=', 'user_tariffs.tariff_id')
             ->where('user_tariffs.user_id', '=', auth()->user()->id)
-            ->select('tariffs.*', 'user_tariffs.url', 'user_tariffs.id')
+            ->select('tariffs.*', 'user_tariffs.url', 'user_tariffs.id', 'user_tariffs.img')
             ->get();
         return view('advertiser.tariff.my', compact('tariffs'));
     }
@@ -59,11 +60,13 @@ class TariffAdvertiserController extends Controller
         $user = auth()->user();
         try {
             DB::beginTransaction();
+
             if (!($tariff->price <= $user->balance)) {
                 throw new Exception();
             }
             $user->balance = $user->balance - $tariff->price;
             $user->update();
+
             BalanceApplication::create([
                 'amount' => $tariff->price,
                 'type' => 'purchase',
@@ -75,7 +78,7 @@ class TariffAdvertiserController extends Controller
             $data['tariff_id'] = $tariff->id;
             $data['url'] = $request->url;
             if (isset($request['img'])) {
-                $data['img'] = '/storage/' . Storage::disk('public')->put('/images', $data['img']);
+                $data['img'] = 'storage/' . Storage::disk('public')->put('/images', $request['img']);
             }
             UserTariff::create($data);
             $message = "The tariff has been purchased, check the advertiser's link";

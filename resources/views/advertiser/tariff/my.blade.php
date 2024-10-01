@@ -29,12 +29,21 @@
                                     <p class="text-muted">
                                         {{$tariff->about}}
                                     </p>
+                                    @if($tariff->type == 'shared')
+                                        <div class="form-group">
+                                            <label>Banner</label> <br>
+                                            <a href="{{asset($tariff->img)}}"> <img src="{{asset($tariff->img)}}" alt="" style="height: 50px; width: 100%"></a>
+                                        </div>
+                                    @endif
                                     <div class="form-group">
                                         <label>Advertised link</label>
-                                        <input type="url" class="form-control my-colorpicker1 colorpicker-element" value="{{$tariff->url}}" data-colorpicker-id="1" disabled data-original-title="" title="">
+                                        <input type="url" class="form-control my-colorpicker1 colorpicker-element"
+                                               value="{{$tariff->url}}" data-colorpicker-id="1" disabled
+                                               data-original-title="" title="">
                                     </div>
                                     <div class="form-group">
-                                        <a class="btn btn-light btn-block" href="{{route('advertiser.tariff.show', $tariff->id)}}">Statistic</a>
+                                        <a class="btn btn-light btn-block"
+                                           href="{{route('advertiser.tariff.show', $tariff->id)}}">Statistic</a>
                                     </div>
                                 </form>
                             </div>

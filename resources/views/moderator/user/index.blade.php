@@ -73,6 +73,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                     <div class="col-sm-12  col-md-2 d-flex gap-2">
                                         <button class="btn btn-light mt-3" tabindex="0"
@@ -86,7 +87,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table class="table table-bordered">
+                                <table class="table table-hover text-nowrap">
                                     <thead>
                                     <tr>
                                         <th>Full name</th>
@@ -127,8 +128,8 @@
                                             <td>
                                                 @if ($user->role == 'user')
                                                     <a class="btn btn-light btn-sm"
-                                                       href="{{route('moderator.user.tariffs', $user->id)}}">
-                                                        Tariffs
+                                                       href="{{route('moderator.user.houses', $user->id)}}">
+                                                        Apartments
                                                     </a>
                                                 @else
                                                     -

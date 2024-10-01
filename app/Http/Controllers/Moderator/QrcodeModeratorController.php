@@ -20,7 +20,7 @@ class QrcodeModeratorController extends Controller
         $qrcodes = Qrcode::paginate(10);
         foreach ($qrcodes as &$qrcode) {
             $qrcode['qrcode'] = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(35)->style('round')->generate(route('qrcode', $qrcode->id));
-        }
+        }//->format('png')
         $ids = Qrcode::pluck('room_id')->toArray();
         $rooms = Room::where('status', 'active')->whereNotIn('id', $ids)->get();
         return view('moderator.qrcode.index', compact('qrcodes', 'rooms'));
@@ -73,7 +73,7 @@ class QrcodeModeratorController extends Controller
         $ids = array_filter($ids, function ($element) {
             return $element !== null;
         });
-        $rooms = Room::where('condition', 'free')->where('status', 'approved')->whereNotIn('id', $ids)->paginate(10);
+        $rooms = Room::where('status', 'approved')->whereNotIn('id', $ids)->paginate(10);
         $cities = City::all();
         $districts = District::all();
         $roomActive = Room::where('id', $qrcode->room_id)->first();

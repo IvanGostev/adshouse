@@ -16,11 +16,11 @@
                             <div class="card-header">
                                 <a href="{{ route('moderator.district.create') }}" class="btn btn-block btn-outline-light">Add</a>
                                 <br>
-                                <h3 class="card-title">Districts</h3>
+                                <h3 class="card-title">Areas</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table class="table table-bordered">
+                                <table class="table table-hover text-nowrap">
                                     <thead>
                                     <tr>
                                         <th>Title</th>

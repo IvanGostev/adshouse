@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->double('amount');
             $table->string('type');
-            $table->longText('information');
+            $table->longText('information')->nullable();
             $table->string('status')->default('moderation'); // cancelled // approved
             $table->foreignIdFor(User::class)->constrained();
             $table->timestamps();

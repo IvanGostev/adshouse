@@ -13,9 +13,30 @@ use Illuminate\View\View;
 class BalanceModeratorController extends Controller
 {
 
-    public function index(): View
+    public function index(Request $request): View
     {
-        $applications = BalanceApplication::where('status', 'moderation')->paginate(10);
+        $applications = BalanceApplication::query()
+            ->join('users', 'users.id', '=', 'balance_applications.user_id');
+        $data = $request->all();
+        if (isset($data['status']) and $data['status'] != 'all') {
+            $applications->where('balance_applications.status', $data['status']);
+        }
+        if (isset($data['role']) and $data['role'] != 'all') {
+            $applications->where('users.role', $data['role']);
+        }
+        if (isset($data['email']) and $data['email'] == true) {
+            $applications->where('users.email', 'LIKE', "%{$data['email']}%");
+        }
+        if (isset($data['phone']) and $data['phone'] == true) {
+            $applications->where('users.phone', 'LIKE', "%{$data['phone']}%");
+        }
+        if (isset($data['name']) and $data['name'] == true) {
+            $applications->where('users.name', 'LIKE', "%{$data['name']}%");
+        }
+        if (isset($data['last_name']) and $data['last_name'] == true) {
+            $applications->where('users.last_name', 'LIKE', "%{$data['last_name']}%");
+        }
+        $applications = $applications->select('balance_applications.*')->paginate(10);
         return view('moderator.balance.index', compact('applications'));
     }
 

@@ -120,7 +120,7 @@
                         <li class="nav-item">
                             <a href="{{ route('moderator.house.index') }}" class="nav-link {{request()->path() == 'moderator/houses' ? 'active' : ''}}">
                                 <p>
-                                    House
+                                    Apartment
                                     @if(notification('house'))
                                         <span class="badge badge-light right">{{notification('house')}}</span>
                                     @endif

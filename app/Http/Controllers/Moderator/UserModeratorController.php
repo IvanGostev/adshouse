@@ -74,5 +74,9 @@ class UserModeratorController extends Controller
         return redirect()->route('moderator.user.index');
     }
 
+    function destroy(User $user) {
+        $user->delete();
+        return back();
+    }
 
 }

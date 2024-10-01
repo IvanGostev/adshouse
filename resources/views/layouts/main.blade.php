@@ -25,7 +25,7 @@
 
 </head>
 <style>
-    .dark-mode .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .dark-mode .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+    .dark-mode .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active, .dark-mode .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
         background-color: #fff;
         color: black;
     }
@@ -48,12 +48,23 @@
             </li>
         </ul>
         <ul class="navbar-nav">
+
             <li class="nav-item">
-                <a href="{{route('balance.show')}}" class="nav-link">Balance: <span class="fw-bold">{{auth()->user()->balance}} RUB</span>
+                <a href="{{route('balance.show')}}" class="nav-link">Balance: <span class="fw-bold">{{auth()->user()->balance}} AED</span>
                 </a>
             </li>
-
-
+            @if(!(auth()->user()->role == 'moderator' or auth()->user()->role == 'admin'))
+                <li class="nav-item">
+                    <form action="{{route('change-role')}}" method="post">
+                        @csrf
+                        @method('patch')
+                        <button type="submit"
+                                class="btn btn-light fw-normal mr-2">
+                            Office {{auth()->user()->role == 'user' ? "advertiser" : 'user'}}
+                        </button>
+                    </form>
+                </li>
+            @endif
             <li class="nav-item">
                 <form action="{{route('logout')}}" method="post">
                     @csrf
@@ -61,7 +72,6 @@
                             class="btn btn-outline-light fw-normal">Logout
                     </button>
                 </form>
-
             </li>
         </ul>
     </nav>

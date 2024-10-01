@@ -16,7 +16,7 @@
                 <h5 class="mb-2">Rooms</h5>
                 <div class="card card-success">
                     <div class="card-body">
-                        <table class="table table-bordered">
+                        <table class="table table-hover text-nowrap">
                             <thead>
                             <tr>
                                 <th>ID</th>
@@ -34,7 +34,14 @@
                                    <td>{{$room->type()->title}}</td>
                                     <td>{{$room->about}}</td>
                                     <td>
-                                        {{$room->status}}
+                                        @if($room->status == 'moderation')
+                                            <span class="badge bg-primary">{{$room->status}}</span>
+                                        @elseif($room->status == 'approved')
+                                            <span class="badge bg-success">{{$room->status}}</span>
+                                        @elseif($room->status == 'canceled')
+                                            <span class="badge bg-danger">{{$room->status}}</span>
+                                        @endif
+
                                     </td>
                                     <td>
                                         <a href="{{route('user.room.edit', $room->id)}}" class="btn btn-light btn-sm">Edit</a>
