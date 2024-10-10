@@ -1,11 +1,10 @@
 @extends('layouts.main')
 @section('content')
-
     <div class="content-wrapper" >
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
-                <a href="{{route('user.room.create', $house->id)}}" class="btn btn-light">Add</a>
+                <a href="{{route('owner.room.create', $house->id)}}" class="btn btn-light">Add</a>
             </div>
         </section>
 
@@ -44,10 +43,10 @@
 
                                     </td>
                                     <td>
-                                        <a href="{{route('user.room.edit', $room->id)}}" class="btn btn-light btn-sm">Edit</a>
+                                        <a href="{{route('owner.room.edit', $room->id)}}" class="btn btn-light btn-sm">Edit</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('user.room.destroy', $room->id) }}"
+                                        <form action="{{ route('owner.room.destroy', $room->id) }}"
                                               method="post">
                                             @method('delete')
                                             @csrf

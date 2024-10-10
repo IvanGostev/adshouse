@@ -22,12 +22,13 @@
                         <!-- general form elements -->
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h3 class="card-title">Adding apartment</h3>
+                                <h3 class="card-title">Editing apartment</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{route('user.house.store')}}" enctype="multipart/form-data" method="post">
+                            <form action="{{route('owner.house.update', $house->id)}}" enctype="multipart/form-data" method="post">
                                 @csrf
+                                @method('patch')
                                 <div class="card-body">
 
                                     <div class="row">
@@ -36,13 +37,13 @@
                                             <div class="form-group">
                                                 <label>Title</label>
                                                 <input type="text" name="title" class="form-control"
-                                                       placeholder="Enter ..." required>
+                                                       placeholder="Enter ..." required value="{{$house->title}}">
                                             </div>
                                             <div class="form-group">
                                                 <!-- <label for="customFile">Custom File</label> -->
                                                 <div style="height: 180px">
                                                     <img id="blah1" alt="insert an image" width="auto" height="180px"
-                                                         src="/images/placeholder.png">
+                                                         src="{{$house->img}}">
                                                 </div>
                                                 <br>
                                                 <div class="custom-file">
@@ -60,7 +61,7 @@
                                                 <label>Country</label>
                                                 <select name="country_id" class="form-control">
                                                     @foreach($countries as $country)
-                                                        <option value="{{$country->id}}">{{$country->title}}</option>
+                                                        <option {{$house->country_id == $country->id ? 'selected' : ''}} value="{{$country->id}}">{{$country->title}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -68,7 +69,7 @@
                                                 <label>City</label>
                                                 <select name="city_id" class="form-control">
                                                     @foreach($cities as $city)
-                                                        <option value="{{$city->id}}">{{$city->title}}</option>
+                                                        <option {{$house->city_id == $city->id ? 'selected' : ''}} value="{{$city->id}}">{{$city->title}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -76,30 +77,30 @@
                                                 <label>Area</label>
                                                 <select name="district_id" class="form-control">
                                                     @foreach($districts as $district)
-                                                        <option value="{{$district->id}}">{{$district->title}}</option>
+                                                        <option  {{$house->district_id == $district->id ? 'selected' : ''}} value="{{$district->id}}">{{$district->title}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label>Street</label>
                                                 <input type="text" name="street" required class="form-control"
-                                                       placeholder="Enter ...">
+                                                       placeholder="Enter ..." value="{{$house->street}}">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Building/Community name</label>
+                                                <label>Number/Name house</label>
                                                 <input type="text" name="number" class="form-control"
-                                                       placeholder="Enter ..." required>
+                                                       placeholder="Enter ..." required value="{{$house->number}}">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Number/Name apartment (not necessary if you have a private house)</label>
                                                 <input type="text" name="apartment_number" class="form-control"
-                                                       placeholder="Enter ...">
+                                                       placeholder="Enter ..." value="{{$house->apartment_number}}">
                                             </div>
                                         </div>
                                     </div>
@@ -107,8 +108,8 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Description</label>
-                                                <textarea  class="form-control" rows="5"
-                                                          name="about" placeholder="Enter..." ></textarea>
+                                                <textarea class="form-control" rows="5"
+                                                          name="about" placeholder="Enter..." >{{$house->about}}</textarea>
                                             </div>
                                         </div>
                                     </div>

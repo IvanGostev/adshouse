@@ -122,9 +122,7 @@
                                 <table class="table table-hover text-nowrap">
                                     <thead>
                                     <tr>
-                                        <th>Preview</th>
-                                        <th>Email user</th>
-                                        <th>Title</th>
+                                        <th>Email owner</th>
                                         <th>Description</th>
                                         <th>Country</th>
                                         <th>City</th>
@@ -132,17 +130,12 @@
                                         <th>Street</th>
                                         <th>Room number</th>
                                         <th style="width: 40px">Approve/Moderation</th>
-                                        <th style="width: 40px">Delete</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($houses as $house)
                                         <tr>
-                                            <td>
-                                                <img src="{{asset($house->img)}}" height="200px">
-                                            </td>
                                             <td>{{$house->user()->email}}</td>
-                                            <td>{{$house->title}}</td>
                                             <td>{{$house->about}}</td>
                                             <td>{{$house->country()->title}}</td>
                                             <td>{{$house->city()->title}}</td>
@@ -156,17 +149,6 @@
                                                     @csrf
                                                     <button type="submit"
                                                             class="btn btn-light btn-sm"> {{$house->status == 'approved' ? 'Return to moderation' : 'Approve'}}
-                                                    </button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="{{ route('user.house.destroy', $house->id) }}"
-                                                      method="post">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-light btn-sm"><i
-                                                            class="fas fa-trash">
-                                                        </i> Delete
                                                     </button>
                                                 </form>
                                             </td>

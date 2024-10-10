@@ -48,6 +48,7 @@ class BalanceController extends Controller
             BalanceApplication::create([
                 'amount' => $data['amount'],
                 'type' => $data['type'],
+                'method' => $data['method'],
                 'information' => $data['information'],
                 'status' => 'moderation',
                 'user_id' => auth()->user()->id

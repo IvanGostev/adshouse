@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Tariff;
+use App\Models\Transition;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,9 +18,12 @@ return new class extends Migration
             $table->id();
             $table->double('amount');
             $table->string('type');
+            $table->string('method')->nullable();
             $table->longText('information')->nullable();
             $table->string('status')->default('moderation'); // cancelled // approved
             $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(Tariff::class)->nullable()->constrained();
+            $table->foreignIdFor(Transition::class)->nullable()->constrained();
             $table->timestamps();
         });
     }

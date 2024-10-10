@@ -23,15 +23,35 @@
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
+
+    <!-- Add -->
+
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="{{ asset('admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="{{ asset('admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="{{ asset('admin/plugins/jqvmap/jqvmap.min.css')}}">
+
+
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="{{ asset('admin/plugins/daterangepicker/daterangepicker.css')}}">
+    <!-- summernote -->
+    <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.min.css')}}">
 </head>
 <style>
     .dark-mode .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active, .dark-mode .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
         background-color: #fff;
         color: black;
     }
+     .bg-verydark {
+         background-color: #212529
+     }
 </style>
 {{--        dark-mode--}}
-<body class="dark-mode hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="dark-mode @if(!in_array(auth()->user()->role, ['moderator', 'admin'])) layout-top-nav @endif  layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
 
     <!-- Preloader -->
@@ -43,9 +63,75 @@
     <nav class="main-header navbar navbar-expand navbar-dark justify-content-between" style="background-color: #212529">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-            </li>
+            @if(in_array(auth()->user()->role, ['moderator', 'admin']))
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+            @endif
+            @switch(auth()->user()->role)
+                @case('owner')
+                        <li class="nav-item d-none d-sm-inline-block">
+                            <a href="{{ route('owner.main.index') }}"
+                               class="nav-link {{request()->path() == 'owner' ? 'active' : ''}}">
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="{{ route('owner.house.index') }}"
+                           class="nav-link {{request()->path() == 'owner/houses' ? 'active' : ''}}">
+                            <p>
+                                My apartment
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="{{ route('owner.link.index') }}"
+                           class="nav-link {{request()->path() == 'owner/links' ? 'active' : ''}}">
+                            <p>
+                                Advertiser
+                            </p>
+                        </a>
+                    </li>
+                    @break
+                @case('advertiser')
+                        <li class="nav-item d-none d-sm-inline-block">
+                            <a href="{{ route('advertiser.main.index') }}"
+                               class="nav-link {{request()->path() == 'advertiser' ? 'active' : ''}}">
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="{{route('advertiser.tariff.index')}}"
+                           class="nav-link {{request()->path() == 'advertiser/tariffs' ? 'active' : ''}}">
+                            <p>
+                                Plans
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="{{route('advertiser.tariff.my')}}"
+                           class="nav-link {{request()->path() == 'advertiser/tariffs/my' ? 'active' : ''}}">
+                            <p>
+                                Current plan
+                            </p>
+                        </a>
+                    </li>
+                    @break
+                @case('user')
+                        <li class="nav-item d-none d-sm-inline-block">
+                            <a href="{{ route('user.main.index') }}"
+                               class="nav-link {{request()->path() == 'user' ? 'active' : ''}}">
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                @break
+            @endswitch
         </ul>
         <ul class="navbar-nav">
 
@@ -60,7 +146,7 @@
                         @method('patch')
                         <button type="submit"
                                 class="btn btn-light fw-normal mr-2">
-                            Office {{auth()->user()->role == 'user' ? "advertiser" : 'user'}}
+                            Page {{auth()->user()->role == 'owner' ? "advertiser" : 'owner'}}
                         </button>
                     </form>
                 </li>
@@ -110,7 +196,6 @@
         </div>
     </footer>
 </div>
-<!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
@@ -121,6 +206,7 @@
 <script src="{{asset('admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('admin/dist/js/adminlte.js')}}"></script>
+<script src="{{asset('admin/dist/js/pages/dashboard.js')}}"></script>
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
@@ -272,5 +358,6 @@
         });
     </script><!-- /.График -->
 @endif
+
 </body>
 </html>

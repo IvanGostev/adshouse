@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User\House;
+namespace App\Http\Controllers\Owner\House;
 
 use App\Http\Controllers\Controller;
 use App\Mail\NotificationMail;
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 
-class HouseUserController extends Controller
+class HouseOwnerController extends Controller
 {
     protected function notification() {
         $message = "The apartment has been added for moderation";
@@ -30,7 +30,7 @@ class HouseUserController extends Controller
     function index()
     {
         $houses = House::where('user_id', auth()->user()->id)->paginate(12);
-        return view('user.house.index', compact('houses'));
+        return view('owner.house.index', compact('houses'));
     }
 
     function create()
@@ -39,7 +39,7 @@ class HouseUserController extends Controller
         $countries = Country::all();
         $cities = City::all();
         $districts = District::all();
-        return view('user.house.create', compact('houses', 'countries', 'cities', 'districts'));
+        return view('owner.house.create', compact('houses', 'countries', 'cities', 'districts'));
     }
 
     function store(Request $request)
@@ -52,7 +52,7 @@ class HouseUserController extends Controller
         $data['user_id'] = auth()->user()->id;
         House::create($data);
         $this->notification();
-        return redirect()->route('user.house.index');
+        return redirect()->route('owner.house.index');
     }
 
 
@@ -60,7 +60,7 @@ class HouseUserController extends Controller
         $countries = Country::all();
         $cities = City::all();
         $districts = District::all();
-        return view('user.house.edit', compact('house', 'cities', 'countries', 'districts'));
+        return view('owner.house.edit', compact('house', 'cities', 'countries', 'districts'));
     }
 
     function update(House $house, Request $request) {
@@ -71,7 +71,7 @@ class HouseUserController extends Controller
         }
         $house->update($data);
         $this->notification();
-        return redirect()->route('user.house.index');
+        return redirect()->route('owner.house.index');
     }
     function delete(House $house) {
         $house->delete();

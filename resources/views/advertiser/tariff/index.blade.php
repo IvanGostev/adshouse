@@ -4,15 +4,13 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
+{{--              <h3 class="card-title">--}}
+{{--                  Plans--}}
+{{--              </h3>--}}
             </div><!-- /.container-fluid -->
         </section>
 
-        <section class="jumbotron text-center   mr-5  ml-5" style="background-image: url('/images/tariff.jpg');">
-            <div class="container" >
-                <h1>Advertising in apartments</h1>
-                <p>Choose the tariff below</p>
-            </div>
-        </section>
+
 
 
 

@@ -30,6 +30,7 @@ class LinkModeratorController extends Controller
                 $rooms = Room::join('houses', 'rooms.house_id', '=', 'houses.id')
                     ->whereNot('rooms.id', $idsRoomUnsuitable)
                     ->where('rooms.condition', 'free')
+                    ->where('houses.status', 'approved')
                     ->where('rooms.status', 'approved')
                     ->distinct('houses.id')
                     ->take($link->tariff()->number_rooms)
@@ -43,6 +44,7 @@ class LinkModeratorController extends Controller
             } else {
                 $rooms = Room::join('houses', 'rooms.house_id', '=', 'houses.id')
                     ->where('rooms.condition', 'free')
+                    ->where('houses.status', 'approved')
                     ->where('rooms.status', 'approved')
                     ->distinct('houses.id')
                     ->take($link->tariff()->number_rooms)

@@ -31,7 +31,7 @@
                                         <tr>
                                             <td>{{$link->id}}</td>
                                             <td><a href="{{$link->url}}">{{$link->url}}</a></td>
-                                            <td><a href="{{route('moderator.link.statistic', $link->id)}}" class="btn btn-primary">Statistic</a>  </td>
+                                            <td><a href="{{route('owner.link.statistic', $link->id)}}" class="btn btn-primary">Statistic</a>  </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

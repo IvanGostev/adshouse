@@ -118,23 +118,16 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Preview</th>
-                                        <th>Title house</th>
                                         <th>Address</th>
                                         <th>Type</th>
                                         <th>Description</th>
                                         <th style="width: 40px">Approve/Moderation</th>
-                                        <th style="width: 40px">Delete</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($rooms as $room)
                                         <tr>
                                             <td>{{$room->id}}</td>
-                                            <td>
-                                                <img src="{{asset($room->img)}}" height="200px">
-                                            </td>
-                                            <td>{{$room->house()->title}}</td>
                                             <td>{{$room->house()->country()->title}}, {{$room->house()->city()->title}}, {{$room->house()->district()->title}}, {{$room->house()->street}}, {{$room->house()->number}}  {{$room->house()->apartment_number ?? ''}} </td>
                                             <td>{{$room->type()->title}}</td>
                                             <td>{{$room->about}}</td>
@@ -144,16 +137,6 @@
                                                     @method('patch')
                                                     @csrf
                                                     <button type="submit" class="btn btn-light btn-sm"> {{$room->status == 'approved' ? 'Return to moderation' : 'Approve'}}
-                                                    </button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="{{ route('user.room.destroy', $room->id) }}"
-                                                      method="post">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-light btn-sm">
-                                                        </i> Delete
                                                     </button>
                                                 </form>
                                             </td>

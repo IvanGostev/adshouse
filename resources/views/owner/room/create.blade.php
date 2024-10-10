@@ -26,30 +26,11 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{route('user.room.store', $house->id)}}" enctype="multipart/form-data" method="post">
+                            <form action="{{route('owner.room.store', $house->id)}}" enctype="multipart/form-data" method="post">
                                 @csrf
                                 <div class="card-body">
 
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <!-- text input -->
-                                            <div class="form-group">
-                                                <!-- <label for="customFile">Custom File</label> -->
-                                                <div style="height: 180px">
-                                                    <img id="blah1" alt="insert an image" width="auto" height="180px"
-                                                         src="/images/placeholder.png">
-                                                </div>
-                                                <br>
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="customFile"
-                                                           name="img"
-                                                           onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0])">
-                                                    <label class="custom-file-label" for="customFile">Choose
-                                                        preview</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Type room</label>
@@ -61,10 +42,7 @@
                                             </div>
 
                                         </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Description</label>
                                                 <textarea class="form-control" rows="5"
@@ -74,10 +52,12 @@
                                     </div>
 
 
+
+
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-light">Submit for moderation</button>
+                                        <button type="submit" class="btn btn-light">Submit</button>
                                     </div>
                             </form>
                         </div>

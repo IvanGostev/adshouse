@@ -37,16 +37,38 @@
                                                 <input type="text" name="title" class="form-control"
                                                        placeholder="Enter ..." required>
                                             </div>
-
+                                            <div class="form-group">
+                                                <label>Percentage of the room owner</label>
+                                                <input type="number" name="percent_owner" class="form-control"
+                                                       placeholder="Enter ..." min="1" max="100" value="2">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Percentage of scanning cashback</label>
+                                                <input type="number" name="percent_user" class="form-control"
+                                                       placeholder="Enter ..." min="1" max="100" value="2">
+                                            </div>
                                         </div>
 
                                         <div class="col-sm-6">
-
                                             <div class="form-group">
                                                 <label>Number days</label>
                                                 <input type="text" name="days" class="form-control"
                                                        placeholder="Enter ..." min="1" value="2">
                                             </div>
+                                            <div class="form-group">
+                                                <label>Number of transitions</label>
+                                                <input type="text" name="transitions" class="form-control"
+                                                       placeholder="Enter ..." min="1" value="20">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Type</label>
+                                                <select class="form-control" name="type">
+                                                    <option value="standard">Standard</option>
+                                                    <option value="shared">Shared</option>
+                                                </select>
+                                            </div>
+
                                         </div>
                                     </div>
                                     <div class="row">
@@ -66,29 +88,11 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>The amount per redirect</label>
-                                                <input type="number" name="user_income_from_redirect" class="form-control"
-                                                       placeholder="Enter ..." value="0.01" step="0.001">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>Type</label>
-                                              <select class="form-control" name="type">
-                                                  <option value="standard">Standard</option>
-                                                  <option value="shared">Shared</option>
-                                              </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Description</label>
                                                 <textarea required="" class="form-control" rows="5"
-                                                          placeholder="Enter ..."  name="about"></textarea>
+                                                          placeholder="Enter ..." name="about"></textarea>
                                             </div>
                                         </div>
                                     </div>

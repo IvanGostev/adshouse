@@ -4,6 +4,9 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
+{{--                <h2 class="card-title">--}}
+{{--                    Current plans--}}
+{{--                </h2>--}}
             </div><!-- /.container-fluid -->
         </section>
 

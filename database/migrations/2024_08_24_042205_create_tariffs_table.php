@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('about')->nullable();
-            $table->smallInteger('number_rooms');
+            $table->bigInteger('transitions');
+            $table->bigInteger('number_rooms');
             $table->double('price');
-            $table->double('user_income_from_redirect');
             $table->bigInteger('days');
+            $table->integer('percent_owner');
+            $table->integer('percent_user');
             $table->string('type');
             $table->timestamps();
         });

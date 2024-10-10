@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Room;
+use App\Models\User;
 use App\Models\UserTariff;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,7 +16,10 @@ return new class extends Migration
     {
         Schema::create('transitions', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(UserTariff::class)->nullable()->constrained();
+            $table->foreignIdFor(Room::class)->nullable()->constrained();
+            $table->foreignIdFor(User::class)->nullable()->constrained();
+            $table->foreignIdFor(UserTariff::class)->constrained();
+            $table->string('browser');
             $table->timestamps();
         });
     }

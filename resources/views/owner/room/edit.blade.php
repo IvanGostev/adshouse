@@ -29,7 +29,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{route('user.room.update', $room->id)}}" enctype="multipart/form-data"
+                            <form action="{{route('owner.room.update', $room->id)}}" enctype="multipart/form-data"
                                   method="post">
                                 @csrf
                                 @method('patch')
@@ -104,12 +104,8 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-                                    <!-- /.card-body -->
-
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-light">Submit for moderation</button>
+                                        <button type="submit" class="btn btn-light">Submit</button>
                                     </div>
                             </form>
                         </div>

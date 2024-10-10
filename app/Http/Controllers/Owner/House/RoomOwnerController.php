@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User\House;
+namespace App\Http\Controllers\Owner\House;
 
 use App\Http\Controllers\Controller;
 use App\Mail\NotificationMail;
@@ -16,7 +16,7 @@ use Laravel\Prompts\Note;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
-class RoomUserController extends Controller
+class RoomOwnerController extends Controller
 {
 
     protected function notification() {
@@ -31,13 +31,13 @@ class RoomUserController extends Controller
     function index(House $house)
     {
         $rooms = Room::where('house_id', $house->id)->paginate(12);
-        return view('user.room.index', compact('rooms', 'house'));
+        return view('owner.room.index', compact('rooms', 'house'));
     }
 
     function create(House $house)
     {
         $types = RoomType::all();
-        return view('user.room.create', compact('house', 'types'));
+        return view('owner.room.create', compact('house', 'types'));
     }
 
     function store(House $house, Request $request)
@@ -47,9 +47,10 @@ class RoomUserController extends Controller
         if (isset($data['img'])) {
             $data['img'] = '/storage/' . Storage::disk('public')->put('/images', $data['img']);
         }
+        $data['status'] = 'approved';
         Room::create($data);
-        $this->notification();
-        return redirect()->route('user.room.index', $house->id);
+//        $this->notification();
+        return redirect()->route('owner.room.index', $house->id);
     }
 
     function edit(Room $room)
@@ -58,7 +59,7 @@ class RoomUserController extends Controller
         $slug = 'country:' . $room->house()->country()->title . '&city:' . $room->house()->city()->title . '&district:' . $room->house()->district()->title . '&street:' . $room->house()->street . '&numberhouse:' . $room->house()->number . '&apartmentnumber:' . $room->house()->apartment_number;
         $qrcode = QrCode::size(240)->style('round')->generate(route('ads', ['room' => $room->id, 'slug' => $slug]));
 
-        return view('user.room.edit', compact('room', 'types', 'slug', 'qrcode'));
+        return view('owner.room.edit', compact('room', 'types', 'slug', 'qrcode'));
     }
 
     function update(Room $room, Request $request)
@@ -67,10 +68,10 @@ class RoomUserController extends Controller
         if (isset($data['img'])) {
             $data['img'] = '/storage/' . Storage::disk('public')->put('/images', $data['img']);
         }
-        $room->status = 'moderation';
+        $room->status = 'approved';
         $room->update($data);
-        $this->notification();
-        return redirect()->route('user.room.index', $room->house()->id);
+//        $this->notification();
+        return redirect()->route('owner.room.index', $room->house()->id);
     }
     function delete(Room $room) {
         $room->delete();
