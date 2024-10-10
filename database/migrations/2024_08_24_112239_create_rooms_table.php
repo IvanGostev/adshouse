@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(House::class)->constrained();
             $table->foreignIdFor(RoomType::class)->constrained();
-            $table->string('img')->default('images/room-placeholder.jpg');
+//            $table->string('img')->default('images/room-placeholder.jpg');
             $table->string('about')->nullable();
             $table->string('condition')->default('free');
             $table->string('status')->default('moderation');

@@ -53,9 +53,9 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'phone' => ['string', 'max:255'],
-            'role' => ['string', Rule::in(['user', 'advertiser'])],
+            'role' => ['string', Rule::in(['user', 'advertiser', 'owner'])],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
     }
 

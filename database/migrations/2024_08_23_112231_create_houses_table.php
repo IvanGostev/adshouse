@@ -19,14 +19,13 @@ return new class extends Migration
     {
         Schema::create('houses', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
             $table->longText('about')->nullable();
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(Country::class)->constrained();
             $table->foreignIdFor(City::class)->constrained();
             $table->foreignIdFor(District::class)->constrained();
-            $table->string('img')->nullable();
-            $table->text('street');
+//            $table->string('img')->nullable();
+            $table->text('street')->nullable();
             $table->string('number');
             $table->string('apartment_number')->nullable();
 
