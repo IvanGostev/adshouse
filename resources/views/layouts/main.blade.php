@@ -139,7 +139,7 @@
                 <a href="{{route('balance.show')}}" class="nav-link">Balance: <span class="fw-bold">{{auth()->user()->balance}} AED</span>
                 </a>
             </li>
-            @if(!(auth()->user()->role == 'moderator' or auth()->user()->role == 'admin'))
+            @if(!(auth()->user()->role == 'moderator' or auth()->user()->role == 'admin' or auth()->user()->role == 'user'))
                 <li class="nav-item">
                     <form action="{{route('change-role')}}" method="post">
                         @csrf
@@ -236,81 +236,6 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
 <script src="{{asset('admin/js/app.js')}}"></script>
-<script>
-    $(document).ready(function () {
-        $('#summernote').summernote({
-            height: 300,
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link']],
-                ['view', ['codeview', 'help']]
-            ]
-        });
-    });
-    $(document).ready(function () {
-        $('#summernote1').summernote({
-            height: 300,
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link']],
-                ['view', ['codeview', 'help']]
-            ]
-        });
-    });
-    $(document).ready(function () {
-        $('#summernote2').summernote({
-            height: 300,
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link']],
-                ['view', ['codeview', 'help']]
-            ]
-        });
-    });
-    $(document).ready(function () {
-        $('#summernote3').summernote({
-            height: 300,
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link']],
-                ['view', ['codeview', 'help']]
-            ]
-        });
-    });
-
-    new AirDatepicker('#input-date-pi', {
-        multipleDates: true,
-
-    })
-    new AirDatepicker('#input-date-pi-range', {
-        range: true,
-        dateFormat: 'yyyy-MM-dd',
-
-    })
-
-    new AirDatepicker('#input-date-pi-promocode', {
-        multipleDates: false,
-
-        dateFormat: 'yyyy-MM-dd',
-    })
-
-</script>
 <script src="{{ asset('plugins/chart.js/Chart.min.js')}}"></script>
 
 <form hidden="hidden" id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

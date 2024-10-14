@@ -37,7 +37,7 @@
                                     <tbody>
                                     @foreach($qrcodes as $qrcode)
                                         <tr>
-                                            <td>
+                                            <td id="qrcode">
                                                 {!! $qrcode['qrcode'] !!}
                                             </td>
                                             <td>{{route('qrcode', $qrcode->id)}}</td>
@@ -47,9 +47,9 @@
                                             <td>
                                                 {{$qrcode->room() ? $qrcode->room()->house()->user()->email : 'No'}}
                                             </td>
-                                            <td>
+                                            <td id="download">
                                                 <a class="btn btn-outline-success"
-                                                   href="{{route('moderator.qrcode.edit', $qrcode->id)}}">Download</a>
+                                                   href="{{trim(explode('public', $qrcode['link'])[1])}}" download>Download</a>
                                             </td>
                                             <td>
                                                 <a class="btn btn-light"
@@ -85,4 +85,5 @@
         </section>
         <!-- /.content -->
     </div>
+
 @endsection

@@ -35,17 +35,17 @@
                                             <div class="form-group">
                                                 <label>Title</label>
                                                 <input type="text" name="title" class="form-control"
-                                                       placeholder="Enter ..." required>
+                                                       placeholder="Enter ..." required value="{{$tariff->title}}">
                                             </div>
                                             <div class="form-group">
                                                 <label>Percentage of the room owner</label>
                                                 <input type="number" name="percent_owner" class="form-control"
-                                                       placeholder="Enter ..." min="1" max="100" value="2">
+                                                       placeholder="Enter ..." min="1" max="100" value="{{$tariff->percent_owner}}" >
                                             </div>
                                             <div class="form-group">
                                                 <label>Percentage of scanning cashback</label>
                                                 <input type="number" name="percent_user" class="form-control"
-                                                       placeholder="Enter ..." min="1" max="100" value="2">
+                                                       placeholder="Enter ..." min="1" max="100" value="{{$tariff->percent_user}}">
                                             </div>
                                         </div>
 
@@ -53,19 +53,19 @@
                                             <div class="form-group">
                                                 <label>Number days</label>
                                                 <input type="text" name="days" class="form-control"
-                                                       placeholder="Enter ..." min="1" value="2">
+                                                       placeholder="Enter ..." min="1" value="{{$tariff->days}}">
                                             </div>
                                             <div class="form-group">
                                                 <label>Number of transitions</label>
                                                 <input type="text" name="transitions" class="form-control"
-                                                       placeholder="Enter ..." min="1" value="20">
+                                                       placeholder="Enter ..." min="1" value="{{$tariff->transitions}}">
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Type</label>
                                                 <select class="form-control" name="type">
-                                                    <option value="standard">Standard</option>
-                                                    <option value="shared">Shared</option>
+                                                    <option {{$tariff->type == 'standard' ? 'selected' : ''}} value="standard">Standard</option>
+                                                    <option {{$tariff->type == 'shared' ? 'selected' : ''}} value="shared">Shared</option>
                                                 </select>
                                             </div>
 
@@ -76,14 +76,14 @@
                                             <div class="form-group">
                                                 <label>Price</label>
                                                 <input type="number" name="price" class="form-control"
-                                                       placeholder="Enter ..." value="100">
+                                                       placeholder="Enter ..." value="{{$tariff->price}}">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Number rooms</label>
                                                 <input type="text" name="number_rooms" class="form-control"
-                                                       placeholder="Enter ..." value="1" min="1">
+                                                       placeholder="Enter ..." value="{{$tariff->number_rooms}}" min="1">
                                             </div>
                                         </div>
                                     </div>
@@ -92,7 +92,7 @@
                                             <div class="form-group">
                                                 <label>Description</label>
                                                 <textarea required="" class="form-control" rows="5"
-                                                          placeholder="Enter ..." name="about"></textarea>
+                                                          placeholder="Enter ..." name="about">{{$tariff->about}}</textarea>
                                             </div>
                                         </div>
                                     </div>

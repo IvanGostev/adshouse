@@ -21,89 +21,42 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card card-dark">
-                            <div class="card-header" style="display: flex; justify-content:space-between;">
-                                <div>
-                                    <h3 class="card-title d-block">Editing room
-                                    </h3>
-                                </div>
+                            <div class="card-header">
+                                <h3 class="card-title">Adding room in apartment/house </h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{route('owner.room.update', $room->id)}}" enctype="multipart/form-data"
-                                  method="post">
+                            <form action="{{route('owner.room.update', $house->id)}}" enctype="multipart/form-data" method="post">
                                 @csrf
                                 @method('patch')
                                 <div class="card-body">
+
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            {!! $qrcode !!}
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>ADS URL</label>
-                                                <input type="text" class="form-control"
-                                                       disabled
-                                                       value="{{route('ads', ['room' => $room->id, 'slug' => $slug])}}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Status</label>
-                                                <input type="text" class="form-control"
-                                                       disabled
-                                                       value="{{$room->status}}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Condition</label>
-                                                <input type="text" class="form-control"
-                                                       disabled
-                                                       value="{{$room->condition}}">
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-
-                                            <div class="form-group">
-                                                <!-- <label for="customFile">Custom File</label> -->
-                                                <div style="height: 180px">
-                                                    <img id="blah1" alt="insert an image" width="auto" height="180px"
-                                                         src="{{asset($room->img ?? '/images/room-placeholder.jpg')}}">
-                                                </div>
-                                                <br>
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="customFile"
-                                                           name="img"
-                                                           onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0])">
-                                                    <label class="custom-file-label" for="customFile">Choose
-                                                        preview</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Type room</label>
                                                 <select name="room_type_id" class="form-control">
                                                     @foreach($types as $type)
-                                                        <option
-                                                            {{$room->type_id == $type->id ? 'selected' : ''}} value="{{$type->id}}">{{$type->title}}</option>
+                                                        <option {{$type->id == $room->room_type_id ? 'selected' : ''}} value="{{$type->id}}">{{$type->title}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
 
                                         </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Description</label>
                                                 <textarea class="form-control" rows="5"
-                                                          name="about">{{$room->about}}</textarea>
+                                                          name="about" placeholder="Enter ...">{{$room->about}}</textarea>
                                             </div>
                                         </div>
                                     </div>
+
+
+
+
+                                    <!-- /.card-body -->
+
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-light">Submit</button>
                                     </div>

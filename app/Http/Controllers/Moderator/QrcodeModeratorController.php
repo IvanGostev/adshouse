@@ -19,8 +19,16 @@ class QrcodeModeratorController extends Controller
     {
         $qrcodes = Qrcode::paginate(10);
         foreach ($qrcodes as &$qrcode) {
+
+        if (file_exists('qrcodes/qrcode_'. $qrcode->id .'.svg' )) {
+            $path = 'public/qrcodes/qrcode_'. $qrcode->id .'.svg';
             $qrcode['qrcode'] = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(35)->style('round')->generate(route('qrcode', $qrcode->id));
-        }//->format('png')
+        } else {
+            $path = public_path('qrcodes/qrcode_' . $qrcode->id . '.svg');
+            $qrcode['qrcode'] = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(35)->style('round')->generate(route('qrcode', $qrcode->id), $path);
+        }
+            $qrcode['link'] = $path;
+        }
         $ids = Qrcode::pluck('room_id')->toArray();
         $rooms = Room::where('status', 'active')->whereNotIn('id', $ids)->get();
         return view('moderator.qrcode.index', compact('qrcodes', 'rooms'));

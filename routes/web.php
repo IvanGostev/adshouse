@@ -34,15 +34,30 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::patch('/change-role', [App\Http\Controllers\RoleManagerController::class, 'change'])->name('change-role');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
+    Route::get('/roles', function () {
         if (auth()->user()->role == 'moderator' or auth()->user()->role == 'admin') {
             return redirect()->route('moderator.house.index');
         } else if (auth()->user()->role == 'owner') {
             return redirect()->route('owner.main.index');
         } else if (auth()->user()->role == 'advertiser') {
             return redirect()->route('advertiser.main.index');
+        }  else if (auth()->user()->role == 'user') {
+            return redirect()->route('user.main.index');
         }
     });
+    Route::get('/', function () {
+        // main page for all, this temp
+        if (auth()->user()->role == 'moderator' or auth()->user()->role == 'admin') {
+            return redirect()->route('moderator.house.index');
+        } else if (auth()->user()->role == 'owner') {
+            return redirect()->route('owner.main.index');
+        } else if (auth()->user()->role == 'advertiser') {
+            return redirect()->route('advertiser.main.index');
+        }  else if (auth()->user()->role == 'user') {
+            return redirect()->route('user.main.index');
+        }
+    });
+
     Route::middleware('verified')->group(function () {
         Route::prefix('owner')->name('owner.')->group(function () {
             Route::controller(MainOwnerController::class)->name('main.')->group(function () {
