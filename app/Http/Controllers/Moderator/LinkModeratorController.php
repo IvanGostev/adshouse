@@ -62,7 +62,6 @@ class LinkModeratorController extends Controller
             $link->finish_date = Carbon::now()->addDays($link->tariff()->days)->toDateTimeString();
             $link->update();
             DB::commit();
-            deleteNotification('link');
         } catch (\Exception $exception) {
             DB::rollback();
         }
@@ -87,7 +86,6 @@ class LinkModeratorController extends Controller
                 'user_id' => $user->id
             ]);
             DB::commit();
-            deleteNotification('link');
         } catch (\Exception $exception) {
             DB::rollback();
         }
@@ -96,13 +94,13 @@ class LinkModeratorController extends Controller
 
     public function statistic(UserTariff $link)
     {
-        $transitionsForChartAdvertiserLink = Transition::where('user_tariff_id', $link->id)
+        $transitionsForQrcode = Transition::where('user_tariff_id', $link->id)
             ->groupBy('date')
             ->orderBy('date', 'ASC')
             ->get(array(
                 DB::raw('Date(created_at) as date'),
                 DB::raw('COUNT(*) as "views"')
             ));
-        return view('moderator.link.statistics', compact('transitionsForChartAdvertiserLink'));
+        return view('moderator.qrcode.statistics', compact('transitionsForQrcode'));
     }
 }

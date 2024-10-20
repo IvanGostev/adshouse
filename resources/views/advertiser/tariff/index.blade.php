@@ -49,7 +49,7 @@
                                         <input type="url" name="url" class="form-control my-colorpicker1 colorpicker-element" data-colorpicker-id="1" data-original-title="" title="">
                                     </div>
                                     <div class="form-group">
-                                        <button class="btn btn btn-light btn-block" type="submit">Bye</button>
+                                        <button class="btn btn btn-light btn-block" type="submit">Pay</button>
                                     </div>
                                 </form>
                             </div>

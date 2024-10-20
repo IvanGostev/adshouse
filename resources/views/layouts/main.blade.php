@@ -139,18 +139,6 @@
                 <a href="{{route('balance.show')}}" class="nav-link">Balance: <span class="fw-bold">{{auth()->user()->balance}} AED</span>
                 </a>
             </li>
-            @if(!(auth()->user()->role == 'moderator' or auth()->user()->role == 'admin' or auth()->user()->role == 'user'))
-                <li class="nav-item">
-                    <form action="{{route('change-role')}}" method="post">
-                        @csrf
-                        @method('patch')
-                        <button type="submit"
-                                class="btn btn-light fw-normal mr-2">
-                            Page {{auth()->user()->role == 'owner' ? "advertiser" : 'owner'}}
-                        </button>
-                    </form>
-                </li>
-            @endif
             <li class="nav-item">
                 <form action="{{route('logout')}}" method="post">
                     @csrf
@@ -189,10 +177,10 @@
 
     <!-- Main Footer -->
     <footer class="main-footer" style="position: relative">
-        <strong>Авторское право &copy; 2024 <a href="/">{{ config('app.name', 'Laravel') }}</a>.</strong>
-        Все права защищены.
+        <strong>Copyright  &copy; 2024 <a href="/">{{ config('app.name', 'Laravel') }}</a>.</strong>
+        All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
-            <b>Версия</b> 1.0.0
+            <b>Version</b> 1.0.0
         </div>
     </footer>
 </div>
@@ -283,6 +271,45 @@
         });
     </script><!-- /.График -->
 @endif
-
+@if(isset($transitionsForQrcode))
+    <script>
+        $(document).ready(function () {
+            $("#chartQrcode").shieldChart({
+                theme: "dark",
+                primaryHeader: {
+                    text: "Number of clicks on qrcodes"
+                },
+                exportOptions: {
+                    image: false,
+                    print: false
+                },
+                axisX: {
+                    categoricalValues: [
+                        @foreach($transitionsForQrcode as $transition)
+                            "{{$transition->date}}",
+                        @endforeach
+                    ]
+                },
+                tooltipSettings: {
+                    chartBound: true,
+                    axisMarkers: {
+                        enabled: true,
+                        mode: 'xy'
+                    }
+                },
+                dataSeries: [{
+                    seriesType: 'line',
+                    collectionAlias: "Number of clicks",
+                    data: [
+                        @foreach($transitionsForQrcode as $transition)
+                            {{$transition->views}},
+                        @endforeach
+                    ]
+                }],
+                backgroundColor: "#212529",
+            });
+        });
+    </script><!-- /.График -->
+@endif
 </body>
 </html>

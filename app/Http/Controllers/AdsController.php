@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BalanceApplication;
 use App\Models\PaymentTransaction;
 use App\Models\Qrcode;
+use App\Models\QrcodeTransition;
 use App\Models\Room;
 use App\Models\RoomUserTariff;
 use App\Models\Transition;
@@ -77,6 +78,8 @@ class AdsController extends Controller
 
     public function qrcode(Qrcode $qrcode)
     {
+       $qrcodet =  QrcodeTransition::create(['qrcode_id' => $qrcode->id]);
+       dd($qrcodet);
         $room = Room::where('id', $qrcode->room_id)->first();
         if ($room) {
             return redirect()->route('ads', ['room' => $room->id, 'slug' => 'qrcode']);

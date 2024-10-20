@@ -32,6 +32,7 @@ class BalanceController extends Controller
         $data = $request->validate([
             'type' => ['string', Rule::in(['replenish', 'withdraw'])],
             'amount' => ['required'],
+            'method' => ['required', Rule::in(['account'])],
             'information' => ['string', 'required']
         ]);
         if ($data['type'] == 'withdraw') {
@@ -62,6 +63,7 @@ class BalanceController extends Controller
             }
             Notification::create(['type' => 'balance']);
         } catch (Exception $exception) {
+            dd($exception->getMessage());
             DB::rollback();
         }
         return back();

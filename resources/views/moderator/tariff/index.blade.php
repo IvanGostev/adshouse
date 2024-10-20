@@ -16,7 +16,7 @@
                             <div class="card-header">
                                 <a href="{{ route('moderator.tariff.create') }}" class="btn btn-block btn-outline-light">Add</a>
                                 <br>
-                                <h3 class="card-title">Tariffs</h3>
+                                <h3 class="card-title">Plans</h3>
                             </div>
                             <div class="card-body">
                                 <table class="table table-hover text-nowrap">

@@ -121,7 +121,7 @@
                                     <div class="col-sm-12  col-md-2 d-flex gap-2">
                                         <button class="btn btn-light mt-3" tabindex="0"
                                                 aria-controls="example1" type="submit"><span>Search</span></button>
-                                        <a href="{{route('moderator.user.index')}}" class="btn btn-secondary mt-3"
+                                        <a href="{{route('moderator.balance.index')}}" class="btn btn-secondary mt-3"
                                            tabindex="0"
                                            aria-controls="example1" type="submit"><span>Refresh</span></a>
                                     </div>
@@ -137,6 +137,7 @@
                                         <th>Full name</th>
                                         <th>Type</th>
                                         <th>Amount</th>
+                                        <th>Method</th>
                                         <th>Information</th>
                                         <th>Date</th>
                                         <th style="width: 100px" >Status</th>
@@ -148,6 +149,7 @@
                                             <td>{{$item->user()->name}} {{$item->user()->last_name}}</td>
                                             <td>{{$item->type}}</td>
                                             <td>{{$item->amount}}</td>
+                                            <td>{{$item->method}}</td>
                                             <td>{{$item->information}}</td>
                                             <td>{{$item->created_at}}</td>
                                             <td>

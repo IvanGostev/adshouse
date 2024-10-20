@@ -26,35 +26,26 @@
                         <div class="col-lg-8" style="display: flex; flex-direction: column; justify-content: center; ">
                             <div class="card card-verydark">
                                 <div class="card-header">
-                                    <h3 class="card-title">Operation with funds</h3>
+                                    <h3 class="card-title">{{auth()->user()->role == 'advertiser' ? 'Replenishment of the balance' : 'Withdrawal of the balance'}}</h3>
                                 </div>
 
 
                                 <form action="{{route('balance.handler')}}" method="post">
                                     @csrf
+                                    <input name="type" hidden value="{{auth()->user()->role == 'advertiser' ? 'replenish' : 'withdraw'}}">
                                     <div class="card-body">
-
                                         <div class="col-md-12">
                                             <label for="exampleInputEmail1">Amount</label>
                                             <div class="input-group">
-                                                <input type="number" step="0.1" class="form-control"
+                                                <input type="number" step="0.1" class="form-control"  {{auth()->user()->role != 'advertiser' ? 'value=' . auth()->user()->balance : ''}}
                                                        id="exampleInputEmail1"
-                                                       value="{{auth()->user()->balance}}" min="1" required
-                                                       name="amount">
+                                                       name="amount" >
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">AED</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12 mt-1">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Type operation</label>
-                                                <select class="form-select" required name="type">
-                                                    <option value="replenish">Replenish</option>
-                                                    <option value="withdraw">Withdraw</option>
-                                                </select>
-                                            </div>
-                                        </div>
+
                                         <div class="col-md-12 mt-1">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Method</label>
@@ -66,7 +57,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Account/Card Information</label>
-                                                <textarea name="information" class="form-control" required></textarea>
+                                                <input name="information" class="form-control" required placeholder="0000 0000 0000 0000">
                                             </div>
                                         </div>
                                     </div>
@@ -89,6 +80,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Type</th>
+                                            <th>Method</th>
                                             <th>Amount</th>
                                             <th>Status</th>
                                             <th>Date</th>
@@ -99,6 +91,7 @@
                                             <tr>
                                                 <td>{{$transaction->id}}</td>
                                                 <td>{{$transaction->type}}</td>
+                                                <td>{{$transaction->method}}</td>
                                                 <td>{{$transaction->amount . ' AED'}}</td>
                                                 <td>{{$transaction->status}}</td>
                                                 <td>{{$transaction->created_at}}</td>

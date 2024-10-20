@@ -133,7 +133,6 @@
                             <div class="row mb-3">
                                 <label for="password-confirm"
                                        class="col-md-4 col-form-label text-md-end">{{ __('Choose role') }}</label>
-
                                 <div class="col-md-6">
                                     <select name="role" id="" class="form-select">
                                         <option value="advertiser">Advertiser</option>

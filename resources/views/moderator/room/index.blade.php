@@ -109,7 +109,7 @@
                                     <div class="col-sm-12  col-md-2 d-flex gap-2">
                                         <button class="btn btn-light mt-3" tabindex="0"
                                                 aria-controls="example1" type="submit"  ><span>Search</span></button>
-                                        <a href="{{route('moderator.house.index')}}" class="btn btn-secondary mt-3" tabindex="0"
+                                        <a href="{{route('moderator.room.index')}}" class="btn btn-secondary mt-3" tabindex="0"
                                            aria-controls="example1" type="submit"><span>Refresh</span></a>
                                     </div>
                                 </form>

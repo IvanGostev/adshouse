@@ -49,7 +49,6 @@ class RoomOwnerController extends Controller
         }
         $data['status'] = 'approved';
         Room::create($data);
-//        $this->notification();
         return redirect()->route('owner.room.index', $house->id);
     }
 
@@ -57,7 +56,7 @@ class RoomOwnerController extends Controller
     {
         $types = RoomType::all();
         $slug = 'country:' . $room->house()->country()->title . '&city:' . $room->house()->city()->title . '&district:' . $room->house()->district()->title . '&street:' . $room->house()->street . '&numberhouse:' . $room->house()->number . '&apartmentnumber:' . $room->house()->apartment_number;
-        $qrcode = QrCode::size(240)->style('round')->generate(route('ads', ['room' => $room->id, 'slug' => $slug]));
+        $qrcode = QrCode::size(500)->style('round')->generate(route('ads', ['room' => $room->id, 'slug' => $slug]));
 
         return view('owner.room.edit', compact('room', 'types', 'slug', 'qrcode'));
     }
@@ -70,7 +69,6 @@ class RoomOwnerController extends Controller
         }
         $room->status = 'approved';
         $room->update($data);
-//        $this->notification();
         return redirect()->route('owner.room.index', $room->house()->id);
     }
     function delete(Room $room) {

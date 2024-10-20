@@ -64,7 +64,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('moderator.tariff.index') }}" class="nav-link {{request()->path() == 'moderator/tariffs' ? 'active' : ''}}">
                                     <p>
-                                        Tariff
+                                        Plan
                                     </p>
                                 </a>
                             </li>
@@ -99,9 +99,6 @@
                                 <a href="{{ route('moderator.room.index') }}" class="nav-link {{request()->path() == 'moderator/rooms' ? 'active' : ''}}">
                                     <p>
                                         Room
-                                        @if(notification('room'))
-                                            <span class="badge badge-light right">{{notification('room')}}</span>
-                                        @endif
                                     </p>
                                 </a>
                             </li>

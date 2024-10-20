@@ -112,6 +112,7 @@
                                             <th>City</th>
                                             <th>District</th>
                                             <th>Street</th>
+                                            <th>Type room</th>
                                             <th>Email</th>
                                             <th style="width: 40px">USE</th>
                                         </tr>
@@ -123,6 +124,7 @@
                                                 <td>{{$room->house()->city()->title}}</td>
                                                 <td>{{$room->house()->district()->title}}</td>
                                                 <td>{{$room->house()->street}}</td>
+                                                <td>{{$room->type()->title}}</td>
                                                 <td>{{$room->house()->user()->email}}</td>
                                                 <td>
                                                     <form action="{{ route('moderator.qrcode.update', $qrcode->id) }}"

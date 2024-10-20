@@ -189,6 +189,7 @@ Route::middleware('auth')->group(function () {
             });
             Route::controller(QrcodeModeratorController::class)->prefix('qrcodes')->name('qrcode.')->group(function () {
                 Route::get('/', 'index')->name('index');
+                Route::get('/{qrcode}/statistic', 'statistic')->name('statistic');
                 Route::get('/{qrcode}/edit', 'edit')->name('edit');
                 Route::get('/{qrcode}/search', 'search')->name('search');
                 Route::post('/', 'store')->name('store');
