@@ -134,11 +134,12 @@
             @endswitch
         </ul>
         <ul class="navbar-nav">
-
+            @if(!in_array(auth()->user()->role, ['moderator', 'admin']))
             <li class="nav-item">
                 <a href="{{route('balance.show')}}" class="nav-link">Balance: <span class="fw-bold">{{auth()->user()->balance}} AED</span>
                 </a>
             </li>
+            @endif
             <li class="nav-item">
                 <form action="{{route('logout')}}" method="post">
                     @csrf
@@ -237,7 +238,7 @@
             $("#chartAdvertiserLink").shieldChart({
                 theme: "dark",
                 primaryHeader: {
-                    text: "The number of clicks on the advertised link"
+                    text: "The number of clicks on the advжertised link"
                 },
                 exportOptions: {
                     image: false,
