@@ -108,67 +108,69 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>Full name</th>
-                                        <th style="width: 40px">Email</th>
-                                        <th style="width: 40px">Phone</th>
-                                        <th style="width: 40px">Role</th>
-                                        <th style="width: 40px">Balance</th>
-                                        <th style="width: 40px">History</th>
-                                        <th style="width: 40px">Tariffs</th>
-                                        <th style="width: 40px">Houses</th>
-                                        <th style="width: 40px">Delete</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($users as $user)
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-hover text-nowrap">
+                                        <thead>
                                         <tr>
-                                            <td>{{$user->name}} {{$user->last_name}}</td>
-                                            <td>{{$user->email}}</td>
-                                            <td>{{$user->phone}}</td>
-                                            <td>{{$user->role}}</td>
-                                            <td>{{$user->balance}}</td>
-                                            <td>
-                                                <a class="btn btn-light btn-sm"
-                                                   href="{{route('moderator.user.history', $user->id)}}">
-                                                    History
-                                                </a>
-                                            </td>
-                                            <td>
-                                                @if ($user->role == 'advertiser')
-                                                    <a class="btn btn-light btn-sm"
-                                                       href="{{route('moderator.user.tariffs', $user->id)}}">
-                                                        Tariffs
-                                                    </a>
-                                                @else
-                                                    -
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($user->role == 'user')
-                                                    <a class="btn btn-light btn-sm"
-                                                       href="{{route('moderator.user.houses', $user->id)}}">
-                                                        Apartments
-                                                    </a>
-                                                @else
-                                                    -
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <form action="{{ route('moderator.user.destroy', $user->id) }}"
-                                                      method="post">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-light btn-sm">Delete
-                                                    </button>
-                                                </form>
-                                            </td>
+                                            <th>Full name</th>
+                                            <th style="width: 40px">Email</th>
+                                            <th style="width: 40px">Phone</th>
+                                            <th style="width: 40px">Role</th>
+                                            <th style="width: 40px">Balance</th>
+                                            <th style="width: 40px">History</th>
+                                            <th style="width: 40px">Tariffs</th>
+                                            <th style="width: 40px">Houses</th>
+                                            <th style="width: 40px">Delete</th>
                                         </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($users as $user)
+                                            <tr>
+                                                <td>{{$user->name}} {{$user->last_name}}</td>
+                                                <td>{{$user->email}}</td>
+                                                <td>{{$user->phone}}</td>
+                                                <td>{{$user->role}}</td>
+                                                <td>{{$user->balance}}</td>
+                                                <td>
+                                                    <a class="btn btn-light btn-sm"
+                                                       href="{{route('moderator.user.history', $user->id)}}">
+                                                        History
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    @if ($user->role == 'advertiser')
+                                                        <a class="btn btn-light btn-sm"
+                                                           href="{{route('moderator.user.tariffs', $user->id)}}">
+                                                            Tariffs
+                                                        </a>
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($user->role == 'user')
+                                                        <a class="btn btn-light btn-sm"
+                                                           href="{{route('moderator.user.houses', $user->id)}}">
+                                                            Apartments
+                                                        </a>
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <form action="{{ route('moderator.user.destroy', $user->id) }}"
+                                                          method="post">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-light btn-sm">Delete
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">

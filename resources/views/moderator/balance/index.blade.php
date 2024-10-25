@@ -131,59 +131,63 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>Full name</th>
-                                        <th>Type</th>
-                                        <th>Amount</th>
-                                        <th>Method</th>
-                                        <th>Information</th>
-                                        <th>Date</th>
-                                        <th style="width: 100px" >Status</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($applications as $item)
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-hover text-nowrap">
+                                        <thead>
                                         <tr>
-                                            <td>{{$item->user()->name}} {{$item->user()->last_name}}</td>
-                                            <td>{{$item->type}}</td>
-                                            <td>{{$item->amount}}</td>
-                                            <td>{{$item->method}}</td>
-                                            <td>{{$item->information}}</td>
-                                            <td>{{$item->created_at}}</td>
-                                            <td>
-                                                @if($item->status == 'moderation')
-                                                <div style="display: flex; gap: 10px">
-                                                    <form style="display: block;" action="{{ route('moderator.balance.update', $item->id) }}"
-                                                          method="post">
-                                                        @csrf
-                                                        @method('patch')
-                                                        <button name="status" value="approved" type="submit"
-                                                                class="btn btn-success btn-sm">Approve
-                                                        </button>
-                                                    </form>
-
-                                                    <form style="display: block;" action="{{ route('moderator.balance.update', $item->id) }}"
-                                                          method="post">
-                                                        @csrf
-                                                        @method('patch')
-                                                        <button name="status" value="cancelled" type="submit"
-                                                                class="btn btn-danger btn-sm">Reject
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                                @elseif($item->status == 'approved')
-                                                    <span class="badge bg-success">{{$item->status}}</span>
-                                                @elseif($item->status == 'canceled')
-                                                    <span class="badge bg-danger">{{$item->status}}</span>
-                                                @endif
-
-                                            </td>
+                                            <th>Full name</th>
+                                            <th>Type</th>
+                                            <th>Amount</th>
+                                            <th>Method</th>
+                                            <th>Information</th>
+                                            <th>Date</th>
+                                            <th style="width: 100px">Status</th>
                                         </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($applications as $item)
+                                            <tr>
+                                                <td>{{$item->user()->name}} {{$item->user()->last_name}}</td>
+                                                <td>{{$item->type}}</td>
+                                                <td>{{$item->amount}}</td>
+                                                <td>{{$item->method}}</td>
+                                                <td>{{$item->information}}</td>
+                                                <td>{{$item->created_at}}</td>
+                                                <td>
+                                                    @if($item->status == 'moderation')
+                                                        <div style="display: flex; gap: 10px">
+                                                            <form style="display: block;"
+                                                                  action="{{ route('moderator.balance.update', $item->id) }}"
+                                                                  method="post">
+                                                                @csrf
+                                                                @method('patch')
+                                                                <button name="status" value="approved" type="submit"
+                                                                        class="btn btn-success btn-sm">Approve
+                                                                </button>
+                                                            </form>
+
+                                                            <form style="display: block;"
+                                                                  action="{{ route('moderator.balance.update', $item->id) }}"
+                                                                  method="post">
+                                                                @csrf
+                                                                @method('patch')
+                                                                <button name="status" value="cancelled" type="submit"
+                                                                        class="btn btn-danger btn-sm">Reject
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    @elseif($item->status == 'approved')
+                                                        <span class="badge bg-success">{{$item->status}}</span>
+                                                    @elseif($item->status == 'canceled')
+                                                        <span class="badge bg-danger">{{$item->status}}</span>
+                                                    @endif
+
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">

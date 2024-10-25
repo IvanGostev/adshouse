@@ -119,43 +119,45 @@
                                     </div>
                                 </form>
                                 <br>
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>Email owner</th>
-                                        <th>Description</th>
-                                        <th>Country</th>
-                                        <th>City</th>
-                                        <th>District</th>
-                                        <th>Street</th>
-                                        <th>Room number</th>
-                                        <th style="width: 40px">Approve/Moderation</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($houses as $house)
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-hover text-nowrap">
+                                        <thead>
                                         <tr>
-                                            <td>{{$house->user()->email}}</td>
-                                            <td>{{$house->about}}</td>
-                                            <td>{{$house->country()->title}}</td>
-                                            <td>{{$house->city()->title}}</td>
-                                            <td>{{$house->district()->title}}</td>
-                                            <td>{{$house->street}}</td>
-                                            <td>{{$house->countRooms()}}</td>
-                                            <td>
-                                                <form action="{{ route('moderator.house.update', $house->id) }}"
-                                                      method="post">
-                                                    @method('patch')
-                                                    @csrf
-                                                    <button type="submit"
-                                                            class="btn btn-light btn-sm"> {{$house->status == 'approved' ? 'Return to moderation' : 'Approve'}}
-                                                    </button>
-                                                </form>
-                                            </td>
+                                            <th>Email owner</th>
+                                            <th>Description</th>
+                                            <th>Country</th>
+                                            <th>City</th>
+                                            <th>District</th>
+                                            <th>Street</th>
+                                            <th>Room number</th>
+                                            <th style="width: 40px">Approve/Moderation</th>
                                         </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($houses as $house)
+                                            <tr>
+                                                <td>{{$house->user()->email}}</td>
+                                                <td>{{$house->about}}</td>
+                                                <td>{{$house->country()->title}}</td>
+                                                <td>{{$house->city()->title}}</td>
+                                                <td>{{$house->district()->title}}</td>
+                                                <td>{{$house->street}}</td>
+                                                <td>{{$house->countRooms()}}</td>
+                                                <td>
+                                                    <form action="{{ route('moderator.house.update', $house->id) }}"
+                                                          method="post">
+                                                        @method('patch')
+                                                        @csrf
+                                                        <button type="submit"
+                                                                class="btn btn-light btn-sm"> {{$house->status == 'approved' ? 'Return to moderation' : 'Approve'}}
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">

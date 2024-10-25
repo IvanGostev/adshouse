@@ -14,48 +14,51 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <a href="{{ route('moderator.room-type.create') }}" class="btn btn-block btn-outline-light">Add</a>
+                                <a href="{{ route('moderator.room-type.create') }}"
+                                   class="btn btn-block btn-outline-light">Add</a>
                                 <br>
                                 <h3 class="card-title">Types rooms</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th style="width: 40px">Edit</th>
-                                        <th style="width: 40px">Delete</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($types as $type)
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-hover text-nowrap">
+                                        <thead>
                                         <tr>
-                                            <td>{{$type->title}}</td>
-                                            <td>
-                                                <a class="btn btn-light btn-sm"
-                                                   href="{{route('moderator.room-type.edit', $type->id)}}">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                    Edit
-                                                </a>
-                                            </td>
-
-                                            <td>
-                                                <form action="{{ route('moderator.room-type.destroy', $type->id) }}"
-                                                      method="post">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <button type="mit" class="btn btn-light btn-sm"><i
-                                                            class="fas fa-trash">
-                                                        </i> Delete
-                                                    </button>
-                                                </form>
-                                            </td>
+                                            <th>Title</th>
+                                            <th style="width: 40px">Edit</th>
+                                            <th style="width: 40px">Delete</th>
                                         </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($types as $type)
+                                            <tr>
+                                                <td>{{$type->title}}</td>
+                                                <td>
+                                                    <a class="btn btn-light btn-sm"
+                                                       href="{{route('moderator.room-type.edit', $type->id)}}">
+                                                        <i class="fas fa-pencil-alt">
+                                                        </i>
+                                                        Edit
+                                                    </a>
+                                                </td>
+
+                                                <td>
+                                                    <form action="{{ route('moderator.room-type.destroy', $type->id) }}"
+                                                          method="post">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button type="mit" class="btn btn-light btn-sm"><i
+                                                                class="fas fa-trash">
+                                                            </i> Delete
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">

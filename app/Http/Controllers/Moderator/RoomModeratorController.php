@@ -50,6 +50,23 @@ class RoomModeratorController extends Controller
         $cities = City::all();
         $districts = District::all();
         $rooms = Room::paginate(12);
+        foreach ($rooms as &$room) {
+           $qrcode  = Qrcode::where('room_id', $room->id)->first();
+             if ($qrcode) {
+                 if (file_exists('qrcodes/qrcode_' . $qrcode->id . '.svg')) {
+                     $path = 'public/qrcodes/qrcode_' . $qrcode->id . '.svg';
+                 } else {
+                     $path = public_path('qrcodes/qrcode_' . $qrcode->id . '.svg');
+                     \SimpleSoftwareIO\QrCode\Facades\QrCode::size(250)->style('round')->generate(route('qrcode', $qrcode->id), $path);
+                 }
+                 $room['qrcode'] = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(35)->style('round')->generate(route('qrcode', $qrcode->id));
+                 $room['qrcode_link'] = $path;
+             } else {
+                 $room['qrcode'] = null;
+                 $room['qrcode_link'] = null;
+             }
+
+        }
         return view('moderator.room.index', compact('rooms', 'cities', 'districts'));
     }
 
@@ -63,7 +80,6 @@ class RoomModeratorController extends Controller
             $room->update();
         }
         $room->update();
-        deleteNotification('room');
         return back();
     }
 }

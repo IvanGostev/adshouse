@@ -22,11 +22,12 @@
                         <!-- general form elements -->
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h3 class="card-title">Adding room in apartment/house </h3>
+                                <h3 class="card-title">Editing room in apartment/house </h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{route('owner.room.update', $house->id)}}" enctype="multipart/form-data" method="post">
+                            <form action="{{route('owner.room.update', $room->id)}}" enctype="multipart/form-data"
+                                  method="post">
                                 @csrf
                                 @method('patch')
                                 <div class="card-body">
@@ -37,7 +38,8 @@
                                                 <label>Type room</label>
                                                 <select name="room_type_id" class="form-control">
                                                     @foreach($types as $type)
-                                                        <option {{$type->id == $room->room_type_id ? 'selected' : ''}} value="{{$type->id}}">{{$type->title}}</option>
+                                                        <option
+                                                            {{$type->id == $room->room_type_id ? 'selected' : ''}} value="{{$type->id}}">{{$type->title}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -53,13 +55,12 @@
                                     </div>
 
 
-
-
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-light">Submit</button>
                                     </div>
+                                </div>
                             </form>
                         </div>
                         <!-- /.card -->

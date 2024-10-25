@@ -39,8 +39,8 @@ class BalanceController extends Controller
             $user = auth()->user();
             if ($user->balance >= $data['amount']) {
                 $user->balance = $user->balance - $data['amount'];
-            }
-            else {
+                $user->update();
+            } else {
                 return back();
             }
         }

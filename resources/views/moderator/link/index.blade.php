@@ -18,55 +18,58 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 50px">ID</th>
-                                        <th>Preview</th>
-                                        <th>URL</th>
-                                        <th style="width: 40px">Approve</th>
-                                        <th style="width: 150px">Refund the funds</th>
-                                        <th style="width: 150px">Statistic</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($links as $link)
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-hover text-nowrap">
+                                        <thead>
                                         <tr>
-                                            <td>{{$link->id}}</td>
-                                            <td>
-                                                <img src="{{asset($link->img)}}" height="200px">
-                                            </td>
-                                            <td>{{$link->url}}</td>
-                                            <td>
-                                                @if($link->status != 'approved')
-                                                <form action="{{ route('moderator.link.approve', $link->id) }}"
-                                                      method="post">
-                                                    @method('patch')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-light btn-sm"> Approve
-                                                    </button>
-                                                </form>
-                                                    @endif
-                                            </td>
-
-                                            <td>
-                                                @if($link->status != 'approved')
-                                                <form action="{{ route('moderator.link.refund', $link->id) }}"
-                                                      method="post">
-                                                    @method('patch')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-light btn-sm"> Refund
-                                                    </button>
-                                                </form>
-                                                    @endif
-                                            </td>
-                                            <td>
-                                                <a href="{{route('moderator.link.statistic', $link->id)}}" class="btn btn-primary">Statistic</a>
-                                            </td>
+                                            <th style="width: 50px">ID</th>
+                                            <th>Preview</th>
+                                            <th>URL</th>
+                                            <th style="width: 40px">Approve</th>
+                                            <th style="width: 150px">Refund the funds</th>
+                                            <th style="width: 150px">Statistic</th>
                                         </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($links as $link)
+                                            <tr>
+                                                <td>{{$link->id}}</td>
+                                                <td>
+                                                    <img src="{{asset($link->img)}}" height="200px">
+                                                </td>
+                                                <td>{{$link->url}}</td>
+                                                <td>
+                                                    @if($link->status != 'approved')
+                                                        <form action="{{ route('moderator.link.approve', $link->id) }}"
+                                                              method="post">
+                                                            @method('patch')
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-light btn-sm"> Approve
+                                                            </button>
+                                                        </form>
+                                                    @endif
+                                                </td>
+
+                                                <td>
+                                                    @if($link->status != 'approved')
+                                                        <form action="{{ route('moderator.link.refund', $link->id) }}"
+                                                              method="post">
+                                                            @method('patch')
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-light btn-sm"> Refund
+                                                            </button>
+                                                        </form>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <a href="{{route('moderator.link.statistic', $link->id)}}"
+                                                       class="btn btn-primary">Statistic</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">

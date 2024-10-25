@@ -21,12 +21,13 @@
                         <!-- general form elements -->
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h3 class="card-title">Adding plan</h3>
+                                <h3 class="card-title">Editing plan</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{ route('moderator.tariff.store') }}" method="post">
+                            <form action="{{ route('moderator.tariff.update', $tariff->id) }}" method="post">
                                 @csrf
+                                @method('patch')
                                 <div class="card-body">
 
                                     <div class="row">
@@ -96,8 +97,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">

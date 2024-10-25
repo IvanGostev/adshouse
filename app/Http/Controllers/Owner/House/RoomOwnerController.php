@@ -19,10 +19,11 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class RoomOwnerController extends Controller
 {
 
-    protected function notification() {
+    protected function notification()
+    {
         $message = "The room has been added for moderation";
         $users = User::where('role', 'moderator')->get();
-        foreach($users as $user) {
+        foreach ($users as $user) {
             Mail::to($user->email)->send(new NotificationMail($message));
         }
         Notification::create(['type' => 'room']);
@@ -57,8 +58,8 @@ class RoomOwnerController extends Controller
         $types = RoomType::all();
         $slug = 'country:' . $room->house()->country()->title . '&city:' . $room->house()->city()->title . '&district:' . $room->house()->district()->title . '&street:' . $room->house()->street . '&numberhouse:' . $room->house()->number . '&apartmentnumber:' . $room->house()->apartment_number;
         $qrcode = QrCode::size(500)->style('round')->generate(route('ads', ['room' => $room->id, 'slug' => $slug]));
-
-        return view('owner.room.edit', compact('room', 'types', 'slug', 'qrcode'));
+        $house = $room->house();
+        return view('owner.room.edit', compact('room', 'types', 'slug', 'qrcode', 'house'));
     }
 
     function update(Room $room, Request $request)
@@ -71,7 +72,9 @@ class RoomOwnerController extends Controller
         $room->update($data);
         return redirect()->route('owner.room.index', $room->house()->id);
     }
-    function delete(Room $room) {
+
+    function delete(Room $room)
+    {
         $room->delete();
         return back();
     }
