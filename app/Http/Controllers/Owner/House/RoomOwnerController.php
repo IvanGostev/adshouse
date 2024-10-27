@@ -31,7 +31,7 @@ class RoomOwnerController extends Controller
 
     function index(House $house)
     {
-        $rooms = Room::where('house_id', $house->id)->paginate(12);
+        $rooms = Room::where('house_id', $house->id)->latest()->paginate(12);
         return view('owner.room.index', compact('rooms', 'house'));
     }
 

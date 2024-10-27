@@ -78,8 +78,7 @@ class AdsController extends Controller
 
     public function qrcode(Qrcode $qrcode)
     {
-       $qrcodet =  QrcodeTransition::create(['qrcode_id' => $qrcode->id]);
-       dd($qrcodet);
+       QrcodeTransition::create(['qrcode_id' => $qrcode->id]);
         $room = Room::where('id', $qrcode->room_id)->first();
         if ($room) {
             return redirect()->route('ads', ['room' => $room->id, 'slug' => 'qrcode']);

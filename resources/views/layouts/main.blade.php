@@ -1,6 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
+    <style>
+        .card {
+            background-color: #212529 !important;
+        }
+
+        .dark-mode .content-wrapper {
+            background-color: #343a40;
+            color: #fff;
+        }
+        .select2-selection, .select2-selection__rendered, .dropdown-wrapper
+        {
+            background-color: #454d55 !important;
+            color: #fff;
+        }
+        .select2.selection {
+            background-color: #343a40;
+        }
+        .select2-selection__choice {
+            background-color: #007bff!important;
+            border-color: #006fe6!important;
+            color: #fff!important;
+        }
+    </style>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,6 +63,7 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/daterangepicker/daterangepicker.css')}}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css')}}">
 </head>
 <style>
     .dark-mode .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active, .dark-mode .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
@@ -151,16 +175,7 @@
         </ul>
     </nav>
     <!-- /.navbar -->
-    <style>
-        .card {
-            background-color: #212529 !important;
-        }
 
-        .dark-mode .content-wrapper {
-            background-color: #343a40;
-            color: #fff;
-        }
-    </style>
 
     <!-- Main Sidebar Container -->
 
@@ -312,5 +327,9 @@
         });
     </script><!-- /.График -->
 @endif
+<script src="{{ asset('admin/plugins/select2/js/select2.full.min.js')}}"></script>
+<script>
+    $('.select2').select2()
+</script>
 </body>
 </html>

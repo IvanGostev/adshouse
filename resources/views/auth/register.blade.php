@@ -117,7 +117,7 @@
                                                    name="password" style=" border-radius: 0.375rem;"
                                                    required autocomplete="new-password">
                                             <span class="input-group-text"
-                                                  style="position: absolute; right: 0; border-radius: 0.375rem;">
+                                                  style="position: absolute; right: 0; border-radius: 0.375rem; z-index: 1000">
                                                     <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                                                 </span>
                                         </div>

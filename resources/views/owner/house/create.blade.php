@@ -74,15 +74,18 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
+                                                <label>Rooms</label>
+                                                <select class="select2"  multiple name="types[]" data-placeholder="Select rooms" style="width: 100%;">
+                                                    @foreach($types as $type)
+                                                        <option value="{{$type->id}}">{{$type->title}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
                                                 <label>Description</label>
-                                                <textarea  class="form-control" rows="19"
+                                                <textarea  class="form-control" rows="7"
                                                            name="about" placeholder="Enter..." ></textarea>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-
                                         </div>
                                     </div>
                                     <div class="card-footer">
