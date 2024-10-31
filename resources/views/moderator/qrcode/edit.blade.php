@@ -161,26 +161,41 @@
                                     @method('patch')
                                     <div class="card-body">
                                         <div class="col-sm-12">
-                                            <!-- text input -->
-                                            <div class="form-group">
-                                                <label>Free rooms</label>
-                                                <p>
+                                            <label>Free rooms</label>
+                                            <div class="card-body table-responsive p-0">
+                                                <table class="table table-hover text-nowrap">
+                                                    <thead>
                                                     <tr>
-                                                        <td>{{$roomActive->title}}</td>
-                                                        <td>{{$roomActive->house()->country()->title}}</td>
-                                                        <td>{{$roomActive->house()->city()->title}}</td>
-                                                        <td>{{$roomActive->house()->district()->title}}</td>
-                                                        <td>{{$roomActive->house()->street}}</td>
-                                                        <td>{{$roomActive->house()->user()->email}}</td>
+                                                        <th>Type room</th>
+                                                        <th>Country</th>
+                                                        <th>City</th>
+                                                        <th>District</th>
+                                                        <th>Street</th>
+                                                        <th>First name</th>
+                                                        <th>Last name</th>
+                                                        <th>Email</th>
                                                     </tr>
-                                                </p>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>{{$roomActive->type()->title}}</td>
+                                                            <td>{{$roomActive->house()->country()->title}}</td>
+                                                            <td>{{$roomActive->house()->city()->title}}</td>
+                                                            <td>{{$roomActive->house()->district()->title}}</td>
+                                                            <td>{{$roomActive->house()->street}}</td>
+                                                            <td>{{$roomActive->house()->user()->name}}</td>
+                                                            <td>{{$roomActive->house()->user()->last_name}}</td>
+                                                            <td>{{$roomActive->house()->user()->email}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-light">Unpin</button>
+                                        <button type="submit" class="btn btn-light text-bold">Unpin</button>
                                     </div>
                                 </form>
                             </div>
