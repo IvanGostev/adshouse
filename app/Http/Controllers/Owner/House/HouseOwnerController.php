@@ -54,7 +54,12 @@ class HouseOwnerController extends Controller
         if (isset($data['img'])) {
             $data['img'] = '/storage/' . Storage::disk('public')->put('/images', $data['img']);
         }
-        $types = $data['types'];
+        if (isset($data['types'])) {
+            $types = $data['types'];
+        } else {
+            $types = [];
+        }
+
         unset($data['types']);
 
         $data['user_id'] = auth()->user()->id;

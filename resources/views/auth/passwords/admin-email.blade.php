@@ -36,9 +36,8 @@
                                    class="col-md-4 col-form-label text-md-end">{{ __('Choose your role') }}</label>
                             <div class="col-md-6">
                                 <select name="role" id="" class="form-select">
-                                    <option value="advertiser">Advertiser</option>
-                                    <option value="owner">Owner</option>
-                                    <option value="user">Сlient</option>
+                                    <option value="moderator">Moderator</option>
+                                    <option value="admin">Admin</option>
                                 </select>
                                 @error('role')
                                 <span class="invalid-feedback" role="alert">

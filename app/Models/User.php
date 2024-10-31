@@ -2,11 +2,28 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+
+class ResetPasswordNotificationUpdated extends ResetPasswordNotification {
+    protected function resetUrl($notifiable)
+    {
+        if (static::$createUrlCallback) {
+            return call_user_func(static::$createUrlCallback, $notifiable, $this->token);
+        }
+
+        return url(route('password.reset', [
+            'token' => $this->token,
+            'email' => $notifiable->getEmailForPasswordReset(),
+            'role' => $notifiable->getRoleForPasswordReset(),
+        ], false));
+    }
+}
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -29,6 +46,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
     ];
+    public function getRoleForPasswordReset()
+    {
+        return $this->role;
+    }
+    public function sendPasswordResetNotification(#[\SensitiveParameter] $token)
+    {
+        $this->notify(new ResetPasswordNotificationUpdated($token));
+    }
 
     /**
      * Get the attributes that should be cast.
@@ -42,4 +67,5 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
 }

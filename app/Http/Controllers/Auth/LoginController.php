@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Rules\CorrectRoleForEmail;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use stdClass;
 
 class LoginController extends Controller
 {
@@ -22,18 +25,15 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
 
-    protected function authenticated(Request $request, $user)
+    protected function validateLogin(Request $request)
     {
-        $role = $request->role;
-
-        if (in_array($role, ['user', 'advertiser', 'owner'])) {
-            if (!in_array($user->role, ['moderator', 'admin'])) {
-                $user['role'] = $role;
-                $user->update();
-            }
-        }
-
+        $request->validate([
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+            'role' => 'required|string', new CorrectRoleForEmail($request->email),
+        ]);
     }
+
 
     /**
      * Where to redirect users after login.
@@ -47,6 +47,11 @@ class LoginController extends Controller
      *
      * @return void
      */
+    public function showAdminLoginForm()
+    {
+        return view('auth.admin-login');
+    }
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Rules\UniqueEmailForRoleRule;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -24,13 +25,13 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
     protected $redirectTo = '/roles';
-
 
 
     /**
@@ -46,9 +47,11 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -56,15 +59,16 @@ class RegisterController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'phone' => ['string', 'max:255'],
             'role' => ['string', Rule::in(['user', 'advertiser', 'owner'])],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', new UniqueEmailForRoleRule($data['role']), 'string', 'email', 'max:255',],
             'password' => ['required', 'string', 'min:8'],
         ]);
     }
+//'unique:users'
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\Models\User
      */
     protected function create(array $data)

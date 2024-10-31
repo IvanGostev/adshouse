@@ -72,7 +72,8 @@ class TariffAdvertiserController extends Controller
                 'type' => 'purchase',
                 'information' => 'Purchase of a tariff, ' . $tariff->title,
                 'status' => 'approved',
-                'user_id' => $user->id
+                'user_id' => $user->id,
+                'method' => 'Internal purchase'
             ]);
             $data['user_id'] = $user->id;
             $data['tariff_id'] = $tariff->id;
@@ -91,6 +92,7 @@ class TariffAdvertiserController extends Controller
             DB::commit();
             return redirect()->route('advertiser.tariff.my');
         } catch (Exception $exception) {
+            dd($exception->getMessage());
             DB::rollBack();
             return redirect()->route('balance.show');
         }

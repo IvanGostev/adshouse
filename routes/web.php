@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdsController;
 use App\Http\Controllers\Advertiser\MainAdvertiserController;
 use App\Http\Controllers\Advertiser\TariffAdvertiserController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\BalanceController;
 use App\Http\Controllers\Moderator\BalanceModeratorController;
@@ -23,6 +25,15 @@ use App\Http\Controllers\Owner\MainOwnerController;
 use App\Http\Controllers\User\MainUserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+
+Route::controller(LoginController::class)->group(function () {
+    Route::get('admin-login', 'showAdminLoginForm');
+});
+
+Route::controller(ForgotPasswordController::class)->group(function () {
+    Route::get('/admin-password/reset', 'showAdminLinkRequestForm');
+});
 
 Route::controller(VerificationController::class)->group(function () {
     Route::get('/email/verify', 'notice')->name('verification.notice');
@@ -195,7 +206,7 @@ Route::middleware('auth')->group(function () {
                 Route::post('/', 'store')->name('store');
                 Route::patch('/{qrcode}/update', 'update')->name('update');
                 Route::patch('/{qrcode}/free', 'free')->name('free');
-                Route::delete('/', 'destroy')->name('destroy');
+                Route::delete('/{qrcode}', 'destroy')->name('destroy');
             });
         });
     });
