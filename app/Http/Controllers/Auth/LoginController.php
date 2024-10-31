@@ -34,7 +34,11 @@ class LoginController extends Controller
         ]);
     }
 
+    protected function credentials(Request $request)
+    {
 
+        return $request->only($this->username(), 'password', 'role');
+    }
     /**
      * Where to redirect users after login.
      *
@@ -45,7 +49,7 @@ class LoginController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function showAdminLoginForm()
     {

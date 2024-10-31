@@ -32,7 +32,7 @@ Route::controller(LoginController::class)->group(function () {
 });
 
 Route::controller(ForgotPasswordController::class)->group(function () {
-    Route::get('/admin-password/reset', 'showAdminLinkRequestForm');
+    Route::get('/admin-password/reset', 'showAdminLinkRequestForm')->name('admin.password.reset');
 });
 
 Route::controller(VerificationController::class)->group(function () {
