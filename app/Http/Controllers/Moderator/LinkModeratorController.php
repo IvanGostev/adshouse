@@ -9,6 +9,7 @@ use App\Models\RoomUserTariff;
 use App\Models\Transition;
 use App\Models\UserTariff;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 
@@ -26,35 +27,67 @@ class LinkModeratorController extends Controller
         try {
             DB::beginTransaction();
             if ($link->tariff()->type = 'standard') {
-            $idsRoomUnsuitable = RoomUserTariff::distinct('room_id')->pluck('room_id')->toArray();
-                $rooms = Room::join('houses', 'rooms.house_id', '=', 'houses.id')
+                $idsRoomUnsuitable = RoomUserTariff::distinct('room_id')->pluck('room_id')->toArray();
+                $rooms = Room::query();
+                $rooms->join('houses', 'rooms.house_id', '=', 'houses.id')
                     ->whereNot('rooms.id', $idsRoomUnsuitable)
                     ->where('rooms.condition', 'free')
                     ->where('houses.status', 'approved')
                     ->where('rooms.status', 'approved')
-                    ->distinct('houses.id')
+                    ->distinct('houses.id');
+                if ($link["country_id"] != null) {
+                    $rooms->where('houses.country_id', $link["country_id"]);
+                }
+                if ($link["city_id"] != null) {
+                    $rooms->where('houses.city_id', $link["city_id"]);
+                }
+                if ($link["district_id"] != null) {
+                    $rooms->where('houses.district_id', $link["district_id"]);
+                }
+                $rooms = $rooms->inRandomOrder()
                     ->take($link->tariff()->number_rooms)
                     ->select('rooms.*')
                     ->get();
+                $items = 0;
                 foreach ($rooms as &$room) {
+                    $items++;
                     RoomUserTariff::create(['user_tariff_id' => $link->id, 'room_id' => $room->id]);
                     $room->condition = 'occupied';
                     $room->update();
                 }
+                if ($items != $link->tariff()->number_rooms) {
+                    throw new Exception("There are not enough rooms");
+                }
             } else {
-                $rooms = Room::join('houses', 'rooms.house_id', '=', 'houses.id')
+                $rooms = Room::query();
+                $rooms->join('houses', 'rooms.house_id', '=', 'houses.id')
                     ->where('rooms.condition', 'free')
                     ->where('houses.status', 'approved')
                     ->where('rooms.status', 'approved')
-                    ->distinct('houses.id')
+                    ->distinct('houses.id');
+                if ($link["country_id"] != null) {
+                    $rooms->where('houses.country_id', $link["country_id"]);
+                }
+                if ($link["city_id"] != null) {
+                    $rooms->where('houses.city_id', $link["city_id"]);
+                }
+                if ($link["district_id"] != null) {
+                    $rooms->where('houses.district_id', $link["district_id"]);
+                }
+                $rooms = $rooms->inRandomOrder()
                     ->take($link->tariff()->number_rooms)
                     ->select('rooms.*')
                     ->get();
+                $items = 0;
                 foreach ($rooms as &$room) {
+                    $items++;
                     RoomUserTariff::create(['user_tariff_id' => $link->id, 'room_id' => $room->id]);
                     if (RoomUserTariff::where('room_id', $room->id)->count() >= 5) {
                         $room->condition = 'occupied';
                         $room->update();
+                    }
+                    if ($items != $link->tariff()->number_rooms) {
+                        throw new Exception("There are not enough rooms");
                     }
                 }
             }
@@ -63,6 +96,7 @@ class LinkModeratorController extends Controller
             $link->update();
             DB::commit();
         } catch (\Exception $exception) {
+            dd($exception->getMessage());
             DB::rollback();
         }
 

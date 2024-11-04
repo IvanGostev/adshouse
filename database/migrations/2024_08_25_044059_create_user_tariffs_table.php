@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\City;
+use App\Models\Country;
+use App\Models\District;
 use App\Models\Tariff;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -19,8 +22,13 @@ return new class extends Migration
             $table->text('url');
             $table->string('img')->nullable();
             $table->foreignIdFor(Tariff::class)->constrained();
+            $table->foreignIdFor(Country::class)->nullable()->constrained();
+            $table->foreignIdFor(City::class)->nullable()->constrained();
+            $table->foreignIdFor(District::class)->nullable()->constrained();
             $table->string('status')->default('moderation');
             $table->dateTime('finish_date')->nullable();
+            $table->bigInteger('fulfilled_transitions')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

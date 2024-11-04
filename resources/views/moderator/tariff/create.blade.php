@@ -38,6 +38,28 @@
                                                        placeholder="Enter ..." required>
                                             </div>
                                             <div class="form-group">
+                                                <label>Type</label>
+                                                <select class="form-control" name="type">
+                                                    <option value="standard">Standard</option>
+                                                    <option value="shared">Shared</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Method</label>
+                                                <select class="form-control" name="method">
+                                                    <option value="rooms">Rooms</option>
+                                                    <option value="transitions">Transitions</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 method-transitions" style="display: none">
+                                            <div class="form-group">
+                                                <label>Number of transitions</label>
+                                                <input type="number" name="transitions" class="form-control"
+                                                       placeholder="Enter ..." min="1" value="20" >
+                                            </div>
+                                            <div class="form-group">
                                                 <label>Percentage of the room owner</label>
                                                 <input type="number" name="percent_owner" class="form-control"
                                                        placeholder="Enter ..." min="1" max="100" value="2">
@@ -47,36 +69,37 @@
                                                 <input type="number" name="percent_user" class="form-control"
                                                        placeholder="Enter ..." min="1" max="100" value="2">
                                             </div>
-                                        </div>
 
-                                        <div class="col-sm-6">
+
+                                        </div>
+                                        <div class="col-sm-6 method-rooms">
                                             <div class="form-group">
-                                                <label>Number days</label>
-                                                <input type="text" name="days" class="form-control"
+                                                <label>Days</label>
+                                                <input type="number" name="days" class="form-control"
                                                        placeholder="Enter ..." min="1" value="2">
                                             </div>
-                                            <div class="form-group">
-                                                <label>Number of transitions</label>
-                                                <input type="text" name="transitions" class="form-control"
-                                                       placeholder="Enter ..." min="1" value="20">
-                                            </div>
 
                                             <div class="form-group">
-                                                <label>Type</label>
-                                                <select class="form-control" name="type">
-                                                    <option value="standard">Standard</option>
-                                                    <option value="shared">Shared</option>
-                                                </select>
+                                                <label>Amount of the room owner</label>
+                                                <input type="number" name="amount_owner" class="form-control"
+                                                       placeholder="Enter ..." min="1" max="100" value="2">
                                             </div>
-
+                                            <div class="form-group">
+                                                <label>Amount of scanning cashback</label>
+                                                <input type="number" name="amount_user" class="form-control"
+                                                       placeholder="Enter ..." min="1" max="100" value="2">
+                                            </div>
                                         </div>
                                     </div>
+
+
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Price</label>
+                                                <label>Price  </label>
                                                 <input type="number" name="price" class="form-control"
-                                                       placeholder="Enter ..." value="100">
+                                                      value="100"  placeholder="Enter ...">
+{{--                                                placeholder="if the transitions method is the price per transition"--}}
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -120,5 +143,18 @@
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
+
     </div>
+    <script src="{{ asset('admin/plugins/jquery/jquery.min.js')}}"></script>
+    <script>
+        $('[name="method"]').change(function () {
+            if ($('[name="method"]').val() === 'transitions') {
+                $('.method-transitions').css("display", "block");
+                $('.method-rooms').css("display", "none");
+            } else {
+                $('.method-transitions').css("display", "none");
+                $('.method-rooms').css("display", "block");
+            }
+        })
+    </script>
 @endsection

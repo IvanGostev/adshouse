@@ -4,9 +4,9 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
-{{--                <h2 class="card-title">--}}
-{{--                    Current plans--}}
-{{--                </h2>--}}
+                {{--                <h2 class="card-title">--}}
+                {{--                    Current plans--}}
+                {{--                </h2>--}}
             </div><!-- /.container-fluid -->
         </section>
 
@@ -15,19 +15,35 @@
                 <div class="row">
                     @foreach($tariffs as $tariff)
                         <div class="col-md-3">
-                            <div class="card card-light">
+                            <div class="card {{$tariff->deleted_at == null ? "card-light" : "card-red" }}">
                                 <div class="card-header">
                                     <h3 class="card-title">{{$tariff->title}}</h3>
                                 </div>
-                                <form class="card-body" method="post">
-                                    @csrf
-                                    <div class="align-items-center text-center">
-                                        <strong>Days: {{$tariff->days}}</strong>
-                                        <br>
-                                        <strong>Apartments: {{$tariff->number_rooms}} </strong>
-                                        <br>
-                                        <strong>Price: {{$tariff->price}} AED</strong>
-                                    </div>
+                                <div class="card-body">
+                                    @if($tariff->method == 'rooms')
+                                        <div class="align-items-center text-center">
+                                            @if ($tariff->deleted_at)
+                                                <strong class="text-red">The tariff has expired</strong>
+                                            @endif
+                                            <strong>Days: {{$tariff->days}}</strong>
+                                            <br>
+                                            <strong>Apartments: {{$tariff->number_rooms}} </strong>
+                                            <br>
+                                            <strong>Price: {{$tariff->price}} AED</strong>
+                                        </div>
+                                    @else
+
+                                        <div class="align-items-center text-center">
+                                            @if ($tariff->deleted_at)
+                                                <strong class="text-red">The tariff has expired</strong>
+                                            @endif
+                                            <strong>Transitions: {{$tariff->fulfilled_transitions . '/' . $tariff->transitions}}</strong>
+                                            <br>
+                                            <strong>Apartments: {{$tariff->number_rooms}} </strong>
+                                            <br>
+                                            <strong>Price: {{$tariff->price}} AED</strong>
+                                        </div>
+                                    @endif
                                     <br>
                                     <p class="text-muted">
                                         {{$tariff->about}}
@@ -35,7 +51,8 @@
                                     @if($tariff->type == 'shared')
                                         <div class="form-group">
                                             <label>Banner</label> <br>
-                                            <a href="{{asset($tariff->img)}}"> <img src="{{asset($tariff->img)}}" alt="" style="height: 50px; width: 100%"></a>
+                                            <a href="{{asset($tariff->img)}}"> <img src="{{asset($tariff->img)}}" alt=""
+                                                                                    style="height: 50px; width: 100%"></a>
                                         </div>
                                     @endif
                                     <div class="form-group">
@@ -44,26 +61,19 @@
                                                value="{{$tariff->url}}" data-colorpicker-id="1" disabled
                                                data-original-title="" title="">
                                     </div>
-                                    <div class="form-group">
-                                        <a class="btn btn-light btn-block"
-                                           href="{{route('advertiser.tariff.show', $tariff->id)}}">Statistic</a>
-                                    </div>
-                                </form>
+                                    @if (!$tariff->deleted_at)
+                                        <div class="form-group">
+                                            <a class="btn btn-light btn-block"
+                                               href="{{route('advertiser.tariff.show', $tariff->id)}}">Statistic</a>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
             </div>
         </section>
-
-
-
-
-
-
-
-
-
 
 
     </div>

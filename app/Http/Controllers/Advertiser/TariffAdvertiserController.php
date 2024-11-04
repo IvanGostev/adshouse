@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Advertiser;
 use App\Http\Controllers\Controller;
 use App\Mail\NotificationMail;
 use App\Models\BalanceApplication;
+use App\Models\City;
+use App\Models\District;
 use App\Models\Notification;
 use App\Models\Room;
 use App\Models\RoomUserTariff;
@@ -29,23 +31,26 @@ class TariffAdvertiserController extends Controller
     public function index(): View
     {
         $numberFreeRooms = Room::where('status', 'approved')->where('condition', 'free')->count();
-
         $tariffs = Tariff::where('number_rooms', '<=', $numberFreeRooms)->paginate(10);
-        return view('advertiser.tariff.index', compact('tariffs'));
+        $countries = Country::all();
+        $cities = City::all();
+        $districts = District::all();
+        return view('advertiser.tariff.index', compact('tariffs', 'countries', 'cities', 'districts'));
     }
 
     public function my(): View
     {
         $tariffs = Tariff::join('user_tariffs', 'tariffs.id', '=', 'user_tariffs.tariff_id')
             ->where('user_tariffs.user_id', '=', auth()->user()->id)
-            ->select('tariffs.*', 'user_tariffs.url', 'user_tariffs.id', 'user_tariffs.img')
+            ->select('tariffs.*', 'user_tariffs.url', 'user_tariffs.id', 'user_tariffs.img', 'user_tariffs.fulfilled_transitions', 'user_tariffs.deleted_at')
+            ->latest()
             ->get();
         return view('advertiser.tariff.my', compact('tariffs'));
     }
 
     public function show(UserTariff $UT)
     {
-       $transitionsForChartAdvertiserLink = Transition::where('user_tariff_id', $UT->id)
+        $transitionsForChartAdvertiserLink = Transition::where('user_tariff_id', $UT->id)
             ->groupBy('date')
             ->orderBy('date', 'ASC')
             ->get(array(
@@ -78,13 +83,22 @@ class TariffAdvertiserController extends Controller
             $data['user_id'] = $user->id;
             $data['tariff_id'] = $tariff->id;
             $data['url'] = $request->url;
+            if ($request['country_id'] != 'all') {
+                $data['country_id'] = $request->country_id;
+            }
+            if ($request['city_id'] != 'all') {
+                $data['city_id'] = $request->city_id;
+            }
+            if ($request['district_id'] != 'all') {
+                $data['district_id'] = $request->district_id;
+            }
             if (isset($request['img'])) {
                 $data['img'] = 'storage/' . Storage::disk('public')->put('/images', $request['img']);
             }
             UserTariff::create($data);
             $message = "The tariff has been purchased, check the advertiser's link";
             $users = User::where('role', 'moderator')->get();
-            foreach($users as $user) {
+            foreach ($users as $user) {
                 Mail::to($user->email)->send(new NotificationMail($message));
             }
             Notification::create(['type' => 'link']);
@@ -92,7 +106,6 @@ class TariffAdvertiserController extends Controller
             DB::commit();
             return redirect()->route('advertiser.tariff.my');
         } catch (Exception $exception) {
-            dd($exception->getMessage());
             DB::rollBack();
             return redirect()->route('balance.show');
         }

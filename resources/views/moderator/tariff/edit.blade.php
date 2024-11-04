@@ -29,7 +29,6 @@
                                 @csrf
                                 @method('patch')
                                 <div class="card-body">
-
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <!-- text input -->
@@ -39,52 +38,80 @@
                                                        placeholder="Enter ..." required value="{{$tariff->title}}">
                                             </div>
                                             <div class="form-group">
-                                                <label>Percentage of the room owner</label>
-                                                <input type="number" name="percent_owner" class="form-control"
-                                                       placeholder="Enter ..." min="1" max="100" value="{{$tariff->percent_owner}}" >
+                                                <label>Type:</label>
+                                                <br>
+                                                <label>{{$tariff->type}}</label>
                                             </div>
                                             <div class="form-group">
-                                                <label>Percentage of scanning cashback</label>
-                                                <input type="number" name="percent_user" class="form-control"
-                                                       placeholder="Enter ..." min="1" max="100" value="{{$tariff->percent_user}}">
+                                                <label>Method:</label>
+                                                <br>
+                                                <label>{{$tariff->method}}</label>
                                             </div>
                                         </div>
+                                        @if ($tariff->method == 'transitions')
+                                            <div class="col-sm-6 method-transitions">
+                                                <div class="form-group">
+                                                    <label>Number of transitions</label>
+                                                    <input type="number" name="transitions" class="form-control"
+                                                           placeholder="Enter ..." min="1"
+                                                           value="{{$tariff->transitions}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Percentage of the room owner</label>
+                                                    <input type="number" name="percent_owner" class="form-control"
+                                                           placeholder="Enter ..." min="1" max="100"
+                                                           value="{{$tariff->percent_owner}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Percentage of scanning cashback</label>
+                                                    <input type="number" name="percent_user" class="form-control"
+                                                           placeholder="Enter ..." min="1" max="100"
+                                                           value="{{$tariff->percent_user}}">
+                                                </div>
 
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>Number days</label>
-                                                <input type="text" name="days" class="form-control"
-                                                       placeholder="Enter ..." min="1" value="{{$tariff->days}}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Number of transitions</label>
-                                                <input type="text" name="transitions" class="form-control"
-                                                       placeholder="Enter ..." min="1" value="{{$tariff->transitions}}">
-                                            </div>
 
-                                            <div class="form-group">
-                                                <label>Type</label>
-                                                <select class="form-control" name="type">
-                                                    <option {{$tariff->type == 'standard' ? 'selected' : ''}} value="standard">Standard</option>
-                                                    <option {{$tariff->type == 'shared' ? 'selected' : ''}} value="shared">Shared</option>
-                                                </select>
                                             </div>
+                                        @else
+                                            <div class="col-sm-6 method-rooms">
+                                                <div class="form-group">
+                                                    <label>Days</label>
+                                                    <input type="number" name="days" class="form-control"
+                                                           placeholder="Enter ..." min="1" value="{{$tariff->days}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Amount of the room owner</label>
+                                                    <input type="number" name="amount_owner" class="form-control"
+                                                           placeholder="Enter ..." min="1" max="100"
+                                                           value="{{$tariff->amount_owner}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Amount of scanning cashback</label>
+                                                    <input type="number" name="amount_user" class="form-control"
+                                                           placeholder="Enter ..." min="1" max="100"
+                                                           value="{{$tariff->amount_user}}">
+                                                </div>
+                                            </div>
+                                        @endif
 
-                                        </div>
+
                                     </div>
+
+
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Price</label>
+                                                <label>Price </label>
                                                 <input type="number" name="price" class="form-control"
                                                        placeholder="Enter ..." value="{{$tariff->price}}">
                                             </div>
                                         </div>
+
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Number rooms</label>
                                                 <input type="text" name="number_rooms" class="form-control"
-                                                       placeholder="Enter ..." value="{{$tariff->number_rooms}}" min="1">
+                                                       placeholder="Enter ..." value="{{$tariff->number_rooms}}"
+                                                       min="1">
                                             </div>
                                         </div>
                                     </div>
@@ -92,11 +119,12 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Description</label>
-                                                <textarea required="" class="form-control" rows="5"
-                                                          placeholder="Enter ..." name="about">{{$tariff->about}}</textarea>
+                                                <textarea required="" class="form-control" rows="5" placeholder="Enter ..." name="about">{{$tariff->about}}</textarea>
                                             </div>
                                         </div>
                                     </div>
+
+
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
@@ -119,5 +147,7 @@
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
+
     </div>
+    =
 @endsection

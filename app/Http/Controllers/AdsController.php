@@ -25,33 +25,66 @@ class AdsController extends Controller
 
                 Cookie::queue('ut_' . $UT->id, 'yes', 60 * 60 * 2);
                 $tariff = $UT->tariff();
-                $priceTransition = $tariff->price / $tariff->transitions;
+
                 $transition = [
                     'room_id' => $room->id,
                     'user_tariff_id' => $UT->id,
                     'browser' => Agent::browser()
                 ];
+
+                if ($tariff->method == 'transitions') {
+                    $UT['fulfilled_transitions'] = $UT['fulfilled_transitions'] + 1;
+                    $UT->update();
+                    if ($UT['fulfilled_transitions'] > $tariff->transitions) {
+                        $RUTs = RoomUserTariff::where('user_tariff_id', $UT->id)->get();
+                        $rooms = $UT->rooms();
+                        foreach ($rooms as $room) {
+                            $room["condition"] = 'free';
+                            $room->update();
+                        }
+                        foreach ($RUTs as $RUT) {
+                            $RUT->delete();
+                        }
+                        $UT->delete();
+                        return redirect('/');
+                    }
+                }
+
+
                 if (Auth::check()) {
                     $user = auth()->user();
                     $transition['user_id'] = $user->id;
                     // Update balance for user
-                    $addSum = ($tariff->percent_user / 100) * $priceTransition;
+
+                    if ($tariff->method == 'rooms') {
+                        $addSum = $tariff->amount_user;
+                    } else if ($tariff->method == 'transitions') {
+                        $priceTransition = $tariff->price / $tariff->transitions;
+                        $addSum = ($tariff->percent_user / 100) * $priceTransition;
+                    }
                     $user->balance = $user->balance + $addSum;
                     $user->update();
 
                     BalanceApplication::create([
                         'amount' => $addSum,
                         'type' => 'cashback',
+                        'method' => 'cashback',
                         'user_id' => $user->id,
-                          'status' => 'approved'
+                        'status' => 'approved'
                     ]);
                 }
-                    $transition = Transition::create($transition);
+                $transition = Transition::create($transition);
 
 
                 // Update balance for owner
                 $user = $RUT->room()->house()->user();
-                $addSum = ($tariff->percent_owner / 100) * $priceTransition;
+                if ($tariff->method == 'rooms') {
+                    $addSum = $tariff->amount_owner;
+                } else if ($tariff->method == 'transitions') {
+                    $addSum = ($tariff->percent_owner / 100) * $priceTransition;
+                }
+
+
                 $user->balance = $user->balance + $addSum;
                 $user->update();
 
@@ -59,6 +92,7 @@ class AdsController extends Controller
                     'transition_id' => $transition->id,
                     'amount' => $addSum,
                     'type' => 'transition link',
+                    'method' => 'transition link',
                     'user_id' => $user->id,
                     'status' => 'approved'
                 ]);
@@ -78,7 +112,7 @@ class AdsController extends Controller
 
     public function qrcode(Qrcode $qrcode)
     {
-       QrcodeTransition::create(['qrcode_id' => $qrcode->id]);
+        QrcodeTransition::create(['qrcode_id' => $qrcode->id]);
         $room = Room::where('id', $qrcode->room_id)->first();
         if ($room) {
             return redirect()->route('ads', ['room' => $room->id, 'slug' => 'qrcode']);

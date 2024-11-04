@@ -25,7 +25,8 @@
                                         <thead>
                                         <tr>
                                             <th>Title</th>
-                                            <th>Description</th>
+                                            <th>Method</th>
+                                            <th>Type</th>
                                             <th>Price</th>
                                             <th style="width: 40px">Edit</th>
                                             <th style="width: 40px">Delete</th>
@@ -35,7 +36,8 @@
                                         @foreach($tariffs as $tariff)
                                             <tr>
                                                 <td>{{$tariff->title}}</td>
-                                                <td>{{$tariff->about}}</td>
+                                                <td>{{$tariff->method}}</td>
+                                                <td>{{$tariff->type}}</td>
                                                 <td>{{$tariff->price . ' AED'}}</td>
                                                 <td>
                                                     <a class="btn btn-light btn-sm"
