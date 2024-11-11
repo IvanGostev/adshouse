@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="container">
                     <h1>
-                        Statistics of visitings
+                        Visit statistics
                     </h1>
                 </div>
             </div>

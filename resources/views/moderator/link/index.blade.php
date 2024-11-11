@@ -85,4 +85,13 @@
         </section>
         <!-- /.content -->
     </div>
+    @if($errors->any())
+        <div id="toastsContainerTopRight" class="toasts-top-right fixed">
+            <div class="toast bg-danger fade show" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header"><strong class="mr-auto">Error</strong>
+                </div>
+                <div class="toast-body">{{$errors->first()}}</div>
+            </div>
+        </div>
+    @endif
 @endsection

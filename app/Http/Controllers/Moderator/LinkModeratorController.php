@@ -108,19 +108,24 @@ class LinkModeratorController extends Controller
     {
         try {
             DB::beginTransaction();
-            $link->status = 'cancelled';
+            $link['status'] = 'cancelled';
+            $link->update();
             $user = $link->user();
             $user->balance = $user->balance + $link->tariff()->price;
             $user->update();
             BalanceApplication::create([
                 'amount' => $link->tariff()->price,
                 'type' => 'refund',
+                'method' => 'refund',
                 'information' => 'Refund of a tariff, ' . $link->tariff()->title,
                 'status' => 'approved',
                 'user_id' => $user->id
             ]);
             DB::commit();
         } catch (\Exception $exception) {
+            return back()->withErrors([
+                'error' => $exception->getMessage()
+            ]);
             DB::rollback();
         }
         return back();

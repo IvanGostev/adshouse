@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Moderator;
 use App\Http\Controllers\Controller;
 use App\Mail\PasswordMail;
 use App\Models\BalanceApplication;
+use App\Models\House;
 use App\Models\User;
 use App\Models\UserTariff;
 use Illuminate\Auth\Events\Registered;
@@ -53,10 +54,11 @@ class UserModeratorController extends Controller
         $items = UserTariff::where('user_id', $user->id)->get();
         return view('moderator.user.tariffs', compact('items'));
     }
+
     function houses(User $user)
     {
-        $items = UserTariff::where('user_id', $user->id)->get();
-        return view('moderator.user.tariffs', compact('items'));
+        $houses = House::where('user_id', $user->id)->paginate(10);
+        return view('moderator.owner.houses', compact('houses'));
     }
     function create()
     {

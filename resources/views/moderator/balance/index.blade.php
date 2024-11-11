@@ -73,6 +73,10 @@
                                                             All
                                                         </option>
                                                         <option
+                                                            {{request()['role'] == 'owner' ? 'selected' : '' }} value="owner">
+                                                            Owner
+                                                        </option>
+                                                        <option
                                                             {{request()['role'] == 'advertiser' ? 'selected' : '' }} value="advertiser">
                                                             Advertiser
                                                         </option>
@@ -83,6 +87,10 @@
                                                         <option
                                                             {{request()['role'] == 'moderator' ? 'selected' : '' }} value="moderator">
                                                             Moderator
+                                                        </option>
+                                                        <option
+                                                            {{request()['role'] == 'admin' ? 'selected' : '' }} value="admin">
+                                                            Admin
                                                         </option>
                                                     </select>
                                                 </div>

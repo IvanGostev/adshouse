@@ -118,8 +118,8 @@
                                             <th style="width: 40px">Role</th>
                                             <th style="width: 40px">Balance</th>
                                             <th style="width: 40px">History</th>
-                                            <th style="width: 40px">Tariffs</th>
-                                            <th style="width: 40px">Houses</th>
+                                            <th style="width: 40px">Plans</th>
+                                            <th style="width: 40px">Apartments</th>
                                             <th style="width: 40px">Delete</th>
                                         </tr>
                                         </thead>
@@ -141,14 +141,14 @@
                                                     @if ($user->role == 'advertiser')
                                                         <a class="btn btn-light btn-sm"
                                                            href="{{route('moderator.user.tariffs', $user->id)}}">
-                                                            Tariffs
+                                                            Plans
                                                         </a>
                                                     @else
                                                         -
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if ($user->role == 'user')
+                                                    @if ($user->role == 'owner')
                                                         <a class="btn btn-light btn-sm"
                                                            href="{{route('moderator.user.houses', $user->id)}}">
                                                             Apartments

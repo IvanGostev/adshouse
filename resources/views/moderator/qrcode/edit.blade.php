@@ -125,7 +125,7 @@
                                                 <td>{{$room->house()->district()->title}}</td>
                                                 <td>{{$room->house()->street}}</td>
                                                 <td>{{$room->type()->title}}</td>
-                                                <td>{{$room->house()->user()->email}}</td>
+                                                <td><a href="/moderator/users?email={{$room->house()->user()->email}}">{{$room->house()->user()->email}}</a></td>
                                                 <td>
                                                     <form action="{{ route('moderator.qrcode.update', $qrcode->id) }}"
                                                           method="post">
@@ -177,16 +177,16 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>{{$roomActive->type()->title}}</td>
-                                                            <td>{{$roomActive->house()->country()->title}}</td>
-                                                            <td>{{$roomActive->house()->city()->title}}</td>
-                                                            <td>{{$roomActive->house()->district()->title}}</td>
-                                                            <td>{{$roomActive->house()->street}}</td>
-                                                            <td>{{$roomActive->house()->user()->name}}</td>
-                                                            <td>{{$roomActive->house()->user()->last_name}}</td>
-                                                            <td>{{$roomActive->house()->user()->email}}</td>
-                                                        </tr>
+                                                    <tr>
+                                                        <td>{{$roomActive->type()->title}}</td>
+                                                        <td>{{$roomActive->house()->country()->title}}</td>
+                                                        <td>{{$roomActive->house()->city()->title}}</td>
+                                                        <td>{{$roomActive->house()->district()->title}}</td>
+                                                        <td>{{$roomActive->house()->street}}</td>
+                                                        <td>{{$roomActive->house()->user()->name}}</td>
+                                                        <td>{{$roomActive->house()->user()->last_name}}</td>
+                                                        <td><a href="/moderator/users?email={{$roomActive->house()->user()->email}}">{{$roomActive->house()->user()->email}}</a></td>
+                                                    </tr>
                                                     </tbody>
                                                 </table>
                                             </div>

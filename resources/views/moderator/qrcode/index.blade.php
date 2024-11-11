@@ -106,10 +106,11 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
+                                                '
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-2">
+                                    <div class="col-sm'-12 col-md-2">
                                         <div>
                                             <div class="fw-bold fs-6">Email owner</div>
                                             <div class="fht-cell">
@@ -173,7 +174,9 @@
                                                     {{$qrcode->room() ? $qrcode->room()->type()->title : '-'}}
                                                 </td>
                                                 <td>
-                                                    {{$qrcode->room() ? $qrcode->room()->house()->user()->email : 'No'}}
+                                                    <a href="/moderator/users?email={{$qrcode->room() ? $qrcode->room()->house()->user()->email : ''}}">
+                                                        {{$qrcode->room() ? $qrcode->room()->house()->user()->email : 'No'}}
+                                                    </a>
                                                 </td>
                                                 <td id="download">
                                                     <a class="btn btn-outline-success"
