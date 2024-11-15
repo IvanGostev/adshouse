@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Moderator;
 
 use App\Http\Controllers\Controller;
 use App\Models\BalanceApplication;
+use App\Models\HistoryRoomUserTariff;
 use App\Models\Room;
 use App\Models\RoomUserTariff;
 use App\Models\Transition;
@@ -52,6 +53,7 @@ class LinkModeratorController extends Controller
                 foreach ($rooms as &$room) {
                     $items++;
                     RoomUserTariff::create(['user_tariff_id' => $link->id, 'room_id' => $room->id]);
+                    HistoryRoomUserTariff::create(['user_tariff_id' => $link->id, 'room_id' => $room->id]);
                     $room->condition = 'occupied';
                     $room->update();
                 }
@@ -82,6 +84,7 @@ class LinkModeratorController extends Controller
                 foreach ($rooms as &$room) {
                     $items++;
                     RoomUserTariff::create(['user_tariff_id' => $link->id, 'room_id' => $room->id]);
+                    HistoryRoomUserTariff::create(['user_tariff_id' => $link->id, 'room_id' => $room->id]);
                     if (RoomUserTariff::where('room_id', $room->id)->count() >= 5) {
                         $room->condition = 'occupied';
                         $room->update();
@@ -138,7 +141,7 @@ class LinkModeratorController extends Controller
             ->orderBy('date', 'ASC')
             ->get(array(
                 DB::raw('Date(created_at) as date'),
-                DB::raw('COUNT(*) as "views"')гыук
+                DB::raw('COUNT(*) as "views"')
             ));
         return view('moderator.qrcode.statistics', compact('transitionsForQrcode'));
     }

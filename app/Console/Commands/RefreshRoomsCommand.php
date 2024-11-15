@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\HistoryRoomUserTariff;
 use App\Models\Room;
 use App\Models\RoomUserTariff;
 use App\Models\UserTariff;
@@ -55,6 +56,7 @@ class RefreshRoomsCommand extends Command
                         ->get();
                     foreach ($rooms as &$room) {
                         RoomUserTariff::create(['user_tariff_id' => $UT->id, 'room_id' => $room->id]);
+                        HistoryRoomUserTariff::create(['user_tariff_id' => $UT->id, 'room_id' => $room->id]);
                         $room->condition = 'occupied';
                         $room->update();
                     }
@@ -68,6 +70,7 @@ class RefreshRoomsCommand extends Command
                         ->get();
                     foreach ($rooms as &$room) {
                         RoomUserTariff::create(['user_tariff_id' => $UT->id, 'room_id' => $room->id]);
+                        HistoryRoomUserTariff::create(['user_tariff_id' => $UT->id, 'room_id' => $room->id]);
                         if (RoomUserTariff::where('room_id', $room->id)->count() >= 5) {
                             $room->condition = 'occupied';
                             $room->update();
