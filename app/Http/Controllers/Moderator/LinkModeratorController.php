@@ -134,15 +134,19 @@ class LinkModeratorController extends Controller
         return back();
     }
 
-    public function statistic(UserTariff $link)
+    public function statistic(UserTariff $UT)
     {
-        $transitionsForQrcode = Transition::where('user_tariff_id', $link->id)
+        $transitionsForQrcode = Transition::where('user_tariff_id', $UT->id)
             ->groupBy('date')
             ->orderBy('date', 'ASC')
             ->get(array(
                 DB::raw('Date(created_at) as date'),
                 DB::raw('COUNT(*) as "views"')
             ));
-        return view('moderator.qrcode.statistics', compact('transitionsForQrcode'));
+        $historyRooms = HistoryRoomUserTariff::where('user_tariff_id', $UT->id)->get()
+            ->groupBy(function($events) {
+                return Carbon::parse($events->created_at)->format('Y-m-d');
+            });
+        return view('moderator.qrcode.statistics', compact('transitionsForQrcode', 'historyRooms'));
     }
 }

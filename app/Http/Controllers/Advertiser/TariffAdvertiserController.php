@@ -8,6 +8,7 @@ use App\Mail\NotificationMail;
 use App\Models\BalanceApplication;
 use App\Models\City;
 use App\Models\District;
+use App\Models\HistoryRoomUserTariff;
 use App\Models\Notification;
 use App\Models\Room;
 use App\Models\RoomUserTariff;
@@ -17,6 +18,7 @@ use App\Models\Region;
 use App\Models\Transition;
 use App\Models\User;
 use App\Models\UserTariff;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -57,7 +59,11 @@ class TariffAdvertiserController extends Controller
                 DB::raw('Date(created_at) as date'),
                 DB::raw('COUNT(*) as "views"')
             ));
-        return view('advertiser.tariff.statistics', compact('transitionsForChartAdvertiserLink'));
+        $historyRooms = HistoryRoomUserTariff::where('user_tariff_id', $UT->id)->get()
+            ->groupBy(function($events) {
+                return Carbon::parse($events->created_at)->format('Y-m-d');
+            });
+        return view('advertiser.tariff.statistics', compact('transitionsForChartAdvertiserLink', 'historyRooms'));
     }
 
     public function bye(Request $request, Tariff $tariff): RedirectResponse

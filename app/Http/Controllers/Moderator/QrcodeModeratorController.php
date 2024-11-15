@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\District;
+use App\Models\HistoryRoomUserTariff;
 use App\Models\Qrcode;
 use App\Models\QrcodeTransition;
 use App\Models\Room;
@@ -14,6 +15,7 @@ use App\Models\Room;
 use App\Models\RoomType;
 use App\Models\Transition;
 use App\Models\UserTariff;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
@@ -152,6 +154,7 @@ class QrcodeModeratorController extends Controller
         $qrcode->delete();
         return back();
     }
+
     public function statistic(Qrcode $qrcode)
     {
         $transitionsForChartAdvertiserLink = QrcodeTransition::where('qrcode_id', $qrcode->id)
@@ -161,6 +164,13 @@ class QrcodeModeratorController extends Controller
                 DB::raw('Date(created_at) as date'),
                 DB::raw('COUNT(*) as "views"')
             ));
-        return view('moderator.link.statistics', compact('transitionsForChartAdvertiserLink'));
+        $historyRooms = HistoryRoomUserTariff::join('qrcodes', 'qrcodes.room_id', '=', 'history_room_user_tariffs.room_id')
+            ->where('qrcodes.id', $qrcode->id)
+            ->select('history_room_user_tariffs.*')
+            ->get()
+            ->groupBy(function ($events) {
+                return Carbon::parse($events->created_at)->format('Y-m-d');
+            });
+        return view('moderator.link.statistics', compact('transitionsForChartAdvertiserLink', 'historyRooms'));
     }
 }

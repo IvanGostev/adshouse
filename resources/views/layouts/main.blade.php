@@ -253,7 +253,7 @@
             $("#chartAdvertiserLink").shieldChart({
                 theme: "dark",
                 primaryHeader: {
-                    text: "The number of clicks on the advжertised link"
+                    text: "The number of clicks on the advertised link"
                 },
                 exportOptions: {
                     image: false,
