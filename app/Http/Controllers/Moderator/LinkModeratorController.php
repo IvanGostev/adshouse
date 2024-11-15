@@ -138,7 +138,7 @@ class LinkModeratorController extends Controller
             ->orderBy('date', 'ASC')
             ->get(array(
                 DB::raw('Date(created_at) as date'),
-                DB::raw('COUNT(*) as "views"')
+                DB::raw('COUNT(*) as "views"')гыук
             ));
         return view('moderator.qrcode.statistics', compact('transitionsForQrcode'));
     }
