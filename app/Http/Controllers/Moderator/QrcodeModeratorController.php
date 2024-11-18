@@ -171,6 +171,14 @@ class QrcodeModeratorController extends Controller
             ->groupBy(function ($events) {
                 return Carbon::parse($events->created_at)->format('Y-m-d');
             });
-        return view('moderator.link.statistics', compact('transitionsForChartAdvertiserLink', 'historyRooms'));
+        $links = HistoryRoomUserTariff::join('qrcodes', 'qrcodes.room_id', '=', 'history_room_user_tariffs.room_id')
+            ->join('user_tariffs', 'user_tariffs.id', '=', 'history_room_user_tariffs.user_tariff_id')
+            ->where('qrcodes.id', $qrcode->id)
+            ->select('user_tariffs.url', "history_room_user_tariffs.*")
+            ->get()
+            ->groupBy(function ($events) {
+                return Carbon::parse($events->created_at)->format('Y-m-d');
+            });
+        return view('moderator.link.statistics', compact('transitionsForChartAdvertiserLink', 'historyRooms', 'links'));
     }
 }
