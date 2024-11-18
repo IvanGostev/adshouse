@@ -167,6 +167,7 @@ class QrcodeModeratorController extends Controller
         $historyRooms = HistoryRoomUserTariff::join('qrcodes', 'qrcodes.room_id', '=', 'history_room_user_tariffs.room_id')
             ->where('qrcodes.id', $qrcode->id)
             ->select('history_room_user_tariffs.*')
+            ->latest()
             ->get()
             ->groupBy(function ($events) {
                 return Carbon::parse($events->created_at)->format('Y-m-d');
@@ -175,6 +176,7 @@ class QrcodeModeratorController extends Controller
             ->join('user_tariffs', 'user_tariffs.id', '=', 'history_room_user_tariffs.user_tariff_id')
             ->where('qrcodes.id', $qrcode->id)
             ->select('user_tariffs.url', "history_room_user_tariffs.*")
+            ->latest()
             ->get()
             ->groupBy(function ($events) {
                 return Carbon::parse($events->created_at)->format('Y-m-d');
