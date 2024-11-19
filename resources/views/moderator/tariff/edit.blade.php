@@ -59,13 +59,13 @@
                                                 <div class="form-group">
                                                     <label>Percentage of the room owner</label>
                                                     <input type="number" name="percent_owner" class="form-control"
-                                                           placeholder="Enter ..." min="1" max="100"
+                                                           placeholder="Enter ..." min="1" max="100" step="0.1"
                                                            value="{{$tariff->percent_owner}}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Percentage of scanning cashback</label>
                                                     <input type="number" name="percent_user" class="form-control"
-                                                           placeholder="Enter ..." min="1" max="100"
+                                                           placeholder="Enter ..." min="1" max="100" step="0.1"
                                                            value="{{$tariff->percent_user}}">
                                                 </div>
 
@@ -81,13 +81,13 @@
                                                 <div class="form-group">
                                                     <label>Amount of the room owner</label>
                                                     <input type="number" name="amount_owner" class="form-control"
-                                                           placeholder="Enter ..." min="1" max="100"
+                                                           placeholder="Enter ..." min="1" max="100" step="0.1"
                                                            value="{{$tariff->amount_owner}}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Amount of scanning cashback</label>
                                                     <input type="number" name="amount_user" class="form-control"
-                                                           placeholder="Enter ..." min="1" max="100"
+                                                           placeholder="Enter ..." min="1" max="100" step="0.1"
                                                            value="{{$tariff->amount_user}}">
                                                 </div>
                                             </div>
@@ -101,7 +101,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Price </label>
-                                                <input type="number" name="price" class="form-control"
+                                                <input type="number" name="price" class="form-control" step="0.1"
                                                        placeholder="Enter ..." value="{{$tariff->price}}">
                                             </div>
                                         </div>

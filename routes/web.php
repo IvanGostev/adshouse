@@ -26,6 +26,9 @@ use App\Http\Controllers\User\MainUserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/home', function () {
+    return redirect()->route('roles');
+})->name('home');
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('admin-login', 'showAdminLoginForm');
@@ -41,7 +44,8 @@ Route::controller(VerificationController::class)->group(function () {
     Route::post('/email/resend', 'resend')->name('verification.resend');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 Route::patch('/change-role', [App\Http\Controllers\RoleManagerController::class, 'change'])->name('change-role');
 
 Route::middleware('auth')->group(function () {
@@ -55,19 +59,8 @@ Route::middleware('auth')->group(function () {
         }  else if (auth()->user()->role == 'user') {
             return redirect()->route('user.main.index');
         }
-    });
-    Route::get('/', function () {
-        // main page for all, this temp
-        if (auth()->user()->role == 'moderator' or auth()->user()->role == 'admin') {
-            return redirect()->route('moderator.house.index');
-        } else if (auth()->user()->role == 'owner') {
-            return redirect()->route('owner.main.index');
-        } else if (auth()->user()->role == 'advertiser') {
-            return redirect()->route('advertiser.main.index');
-        }  else if (auth()->user()->role == 'user') {
-            return redirect()->route('user.main.index');
-        }
-    });
+    })->name('roles');
+
 
     Route::middleware('verified')->group(function () {
         Route::prefix('owner')->name('owner.')->group(function () {

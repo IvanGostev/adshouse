@@ -62,12 +62,12 @@
                                             <div class="form-group">
                                                 <label>Percentage of the room owner</label>
                                                 <input type="number" name="percent_owner" class="form-control"
-                                                       placeholder="Enter ..." min="1" max="100" value="2">
+                                                       placeholder="Enter ..." min="1" step="0.1" max="100" value="2">
                                             </div>
                                             <div class="form-group">
                                                 <label>Percentage of scanning cashback</label>
                                                 <input type="number" name="percent_user" class="form-control"
-                                                       placeholder="Enter ..." min="1" max="100" value="2">
+                                                       placeholder="Enter ..." min="1" step="0.1" max="100" value="2">
                                             </div>
 
 
@@ -76,18 +76,18 @@
                                             <div class="form-group">
                                                 <label>Days</label>
                                                 <input type="number" name="days" class="form-control"
-                                                       placeholder="Enter ..." min="1" value="2">
+                                                       placeholder="Enter ..." step="1" min="1" value="2">
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Amount of the room owner</label>
                                                 <input type="number" name="amount_owner" class="form-control"
-                                                       placeholder="Enter ..." min="1" max="100" value="2">
+                                                       placeholder="Enter ..." min="1" step="0.1" max="100" value="2">
                                             </div>
                                             <div class="form-group">
                                                 <label>Amount of scanning cashback</label>
                                                 <input type="number" name="amount_user" class="form-control"
-                                                       placeholder="Enter ..." min="1" max="100" value="2">
+                                                       placeholder="Enter ..." min="1" step="0.1" max="100" value="2">
                                             </div>
                                         </div>
                                     </div>
@@ -98,7 +98,7 @@
                                             <div class="form-group">
                                                 <label>Price  </label>
                                                 <input type="number" name="price" class="form-control"
-                                                      value="100"  placeholder="Enter ...">
+                                                      value="100" step="0.1" placeholder="Enter ...">
 {{--                                                placeholder="if the transitions method is the price per transition"--}}
                                             </div>
                                         </div>
