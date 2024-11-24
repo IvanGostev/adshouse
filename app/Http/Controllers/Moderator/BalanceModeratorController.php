@@ -36,7 +36,7 @@ class BalanceModeratorController extends Controller
         if (isset($data['last_name']) and $data['last_name'] == true) {
             $applications->where('users.last_name', 'LIKE', "%{$data['last_name']}%");
         }
-        $applications = $applications->select('balance_applications.*')->paginate(10);
+        $applications = $applications->select('balance_applications.*')->latest()->paginate(10);
         return view('moderator.balance.index', compact('applications'));
     }
 

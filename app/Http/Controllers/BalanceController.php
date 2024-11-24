@@ -23,7 +23,7 @@ class BalanceController extends Controller
 {
     function show()
     {
-        $transactions = BalanceApplication::where('user_id', auth()->user()->id)->get();
+        $transactions = BalanceApplication::where('user_id', auth()->user()->id)->latest()->get();
         return view('balance.show', compact('transactions'));
     }
 

@@ -23,6 +23,10 @@ use App\Http\Controllers\Owner\House\RoomOwnerController;
 use App\Http\Controllers\Owner\LinkOwnerController;
 use App\Http\Controllers\Owner\MainOwnerController;
 use App\Http\Controllers\User\MainUserController;
+use App\Http\Middleware\AdvertiserMiddleware;
+use App\Http\Middleware\ClientMiddleware;
+use App\Http\Middleware\ModeratorMiddleware;
+use App\Http\Middleware\OwnerMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -63,7 +67,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::middleware('verified')->group(function () {
-        Route::prefix('owner')->name('owner.')->group(function () {
+        Route::prefix('owner')->name('owner.')->middleware(OwnerMiddleware::class)->group(function () {
             Route::controller(MainOwnerController::class)->name('main.')->group(function () {
                 Route::get('/', 'index')->name('index');
             });
@@ -89,12 +93,12 @@ Route::middleware('auth')->group(function () {
             });
 
         });
-        Route::prefix('user')->name('user.')->group(function () {
+        Route::prefix('user')->name('user.')->middleware(ClientMiddleware::class)->group(function () {
             Route::controller(MainUserController::class)->name('main.')->group(function () {
                 Route::get('/', 'index')->name('index');
             });
         });
-        Route::prefix('advertiser')->name('advertiser.')->group(function () {
+        Route::prefix('advertiser')->name('advertiser.')->middleware(AdvertiserMiddleware::class)->group(function () {
             Route::controller(MainAdvertiserController::class)->name('main.')->group(function () {
                 Route::get('/', 'index')->name('index');
             });
@@ -105,7 +109,7 @@ Route::middleware('auth')->group(function () {
                 Route::post('/{tariff}', 'bye')->name('bye');
             });
         });
-        Route::prefix('moderator')->name('moderator.')->group(function () {
+        Route::prefix('moderator')->name('moderator.')->middleware(ModeratorMiddleware::class)->group(function () {
             Route::controller(UserModeratorController::class)
                 ->prefix('users')
                 ->name('user.')

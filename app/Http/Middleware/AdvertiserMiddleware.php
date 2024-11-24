@@ -4,10 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\HttpFoundation\Response;
+use function Laravel\Prompts\error;
 
-class WWWMiddleware
+class AdvertiserMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,9 @@ class WWWMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (substr($request->header('host'), 0, 4) === 'www.') {
-            $request->headers->set('host', 'kudryastudio.com');
-            return Redirect::to($request->path());
+        if (auth()->user()->role == 'advertiser') {
+            return $next($request);
         }
-        return $next($request);
+        return back();
     }
 }
