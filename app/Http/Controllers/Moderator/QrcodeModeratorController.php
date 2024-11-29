@@ -52,11 +52,11 @@ class QrcodeModeratorController extends Controller
 
                 $qrcodes->where('users.email', 'LIKE', "%{$data['email']}%");
             }
-        } else {
+        } elseif(isset($data['status']) and $data['status'] == 'free') {
 
             $qrcodes->whereNull('room_id');
         }
-        $qrcodes = $qrcodes->select('qrcodes.*')->paginate($data['paginateNumber'] ?? 12);
+        $qrcodes = $qrcodes->select('qrcodes.*')->latest()->paginate($data['paginateNumber'] ?? 12);
 
         foreach ($qrcodes as &$qrcode) {
             if (file_exists('qrcodes/qrcode_' . $qrcode->id . '.svg')) {

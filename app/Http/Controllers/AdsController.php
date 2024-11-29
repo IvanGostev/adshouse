@@ -107,7 +107,7 @@ class AdsController extends Controller
                 return view('advertiser-url', compact('UTs'));
             }
         }
-        return redirect('/');
+        return redirect('https://adshouse.ae/');
     }
 
     public function qrcode(Qrcode $qrcode)

@@ -32,6 +32,10 @@
                                                         class="form-select bootstrap-table-filter-control-price "
                                                         style="width: 100%;" dir="ltr" name="status">
                                                         <option
+                                                            {{request()['status'] == 'all' ? 'selected' : '' }}  value="all">
+                                                            All
+                                                        </option>
+                                                        <option
                                                             {{request()['status'] == 'free' ? 'selected' : '' }}  value="free">
                                                             Free
                                                         </option>
@@ -151,9 +155,8 @@
                                         <tr>
                                             <th style="width: 35px!important;">Qrcode</th>
                                             <th>Url</th>
-                                            <th style="width: 30px">Room ID</th>
-                                            <th style="width: 30px">Type room</th>
-                                            <th style="width: 30px">Email</th>
+                                            <th style="width: 30px">Advertiser</th>
+                                            <th style="width: 30px">Owner</th>
                                             <th style="width: 40px">Download</th>
                                             <th style="width: 150px">Statistic</th>
                                             <th style="width: 40px">Edit</th>
@@ -162,21 +165,35 @@
                                         </thead>
                                         <tbody>
                                         @foreach($qrcodes as $qrcode)
-                                            <tr>
-                                                <td id="qrcode" style="width: 35px!important;">
+                                            <tr @if($qrcode->advertiser())  style="border-color: darkred" @endif>
+                                                <td id="qrcode" style="width: 35px!important;" >
                                                     {!! $qrcode['qrcode'] !!}
                                                 </td>
                                                 <td>{{route('qrcode', $qrcode->id)}}</td>
                                                 <td>
-                                                    {{$qrcode->room_id}}
+                                                    @if($qrcode->advertiser())
+                                                      <span style="color: red">  Link:</span> <a href="{{$qrcode->advertiser()->url}}">{{$qrcode->advertiser()->url}}</a><br>
+                                                        <span style="color: red"> Email: </span>  <a
+                                                            href="/moderator/users?email={{$qrcode->advertiser()->email}}">
+                                                            {{$qrcode->advertiser()->email}}
+                                                        </a>
+                                                    @else
+                                                        <span style="color: green">Free</span>
+                                                    @endif
+
                                                 </td>
                                                 <td>
-                                                    {{$qrcode->room() ? $qrcode->room()->type()->title : '-'}}
-                                                </td>
-                                                <td>
-                                                    <a href="/moderator/users?email={{$qrcode->room() ? $qrcode->room()->house()->user()->email : ''}}">
-                                                        {{$qrcode->room() ? $qrcode->room()->house()->user()->email : 'No'}}
+                                                    @if($qrcode->room())
+                                                    Type
+                                                    room: {{$qrcode->room() ? $qrcode->room()->type()->title : '-'}}
+                                                    <br>
+                                                    Email: <a
+                                                        href="/moderator/users?email={{$qrcode->room() ? $qrcode->room()->house()->user()->email : ''}}">
+                                                        {{$qrcode->room() ? $qrcode->room()->house()->user()->email : ''}}
                                                     </a>
+                                                    @else
+                                                        Free
+                                                    @endif
                                                 </td>
                                                 <td id="download">
                                                     <a class="btn btn-outline-success"
