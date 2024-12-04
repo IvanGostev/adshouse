@@ -99,8 +99,9 @@ class LinkModeratorController extends Controller
             $link->update();
             DB::commit();
         } catch (\Exception $exception) {
-            dd($exception->getMessage());
             DB::rollback();
+            dd($exception->getMessage());
+
         }
 
         return back();
@@ -126,10 +127,48 @@ class LinkModeratorController extends Controller
             ]);
             DB::commit();
         } catch (\Exception $exception) {
+            DB::rollback();
             return back()->withErrors([
                 'error' => $exception->getMessage()
             ]);
+
+        }
+        return back();
+    }
+
+
+    function refundAfterApprove(UserTariff $link)
+    {
+        try {
+            $RUTs = RoomUserTariff::where('user_tariff_id', $link->id)->get();
+            foreach ($RUTs as $RUT) {
+                $room = $RUT->room();
+                $room['condition'] = 'free';
+                $room->update();
+                $RUT->delete();
+            }
+
+            DB::beginTransaction();
+            $link['status'] = 'cancelled';
+            $link->update();
+            $user = $link->user();
+            $user->balance = $user->balance + $link->tariff()->price;
+            $user->update();
+            BalanceApplication::create([
+                'amount' => $link->tariff()->price,
+                'type' => 'refund',
+                'method' => 'refund',
+                'information' => 'Refund of a tariff, ' . $link->tariff()->title,
+                'status' => 'approved',
+                'user_id' => $user->id
+            ]);
+            DB::commit();
+        } catch (\Exception $exception) {
             DB::rollback();
+            return back()->withErrors([
+                'error' => $exception->getMessage()
+            ]);
+
         }
         return back();
     }

@@ -198,6 +198,7 @@ Route::middleware(\App\Http\Middleware\WWWMiddleware::class)->group(function () 
                     Route::get('/{link}/statistic', 'statistic')->name('statistic');
                     Route::patch('/{link}/approve', 'approve')->name('approve');
                     Route::patch('/{link}/refund', 'refund')->name('refund');
+                    Route::patch('/{link}/refundAfterApprove', 'refundAfterApprove')->name('refundAfterApprove');
                 });
                 Route::controller(QrcodeModeratorController::class)->prefix('qrcodes')->name('qrcode.')->group(function () {
                     Route::get('/', 'index')->name('index');

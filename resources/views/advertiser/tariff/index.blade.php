@@ -37,7 +37,7 @@
 
                                     @if($tariff->type == 'shared')
                                         <div class="form-group">
-                                            <label>Preview</label>
+                                            <label>Preview 1448 x 128</label>
                                             <input type="file" class="form-control my-colorpicker1 colorpicker-element"
                                                    name="img" data-colorpicker-id="1" data-original-title="" title="">
                                         </div>

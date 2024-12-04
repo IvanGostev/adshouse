@@ -44,6 +44,7 @@ class TariffAdvertiserController extends Controller
     {
         $tariffs = Tariff::join('user_tariffs', 'tariffs.id', '=', 'user_tariffs.tariff_id')
             ->where('user_tariffs.user_id', '=', auth()->user()->id)
+            ->where('user_tariffs.status', '!=', 'cancelled')
             ->select('tariffs.*', 'user_tariffs.url', 'user_tariffs.id', 'user_tariffs.img', 'user_tariffs.fulfilled_transitions', 'user_tariffs.deleted_at')
             ->latest()
             ->get();

@@ -59,6 +59,14 @@
                                                             <button type="submit" class="btn btn-light btn-sm"> Refund
                                                             </button>
                                                         </form>
+                                                    @else
+                                                        <form action="{{ route('moderator.link.refundAfterApprove', $link->id) }}"
+                                                              method="post">
+                                                            @method('patch')
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-light btn-sm"> Refund
+                                                            </button>
+                                                        </form>
                                                     @endif
                                                 </td>
                                                 <td>

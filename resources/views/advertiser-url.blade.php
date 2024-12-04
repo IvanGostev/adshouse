@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
@@ -31,11 +29,13 @@
         background-color: #fff;
         color: black;
     }
+
     .overflow-x-hidden {
-        overflow-x: hidden!important;
+        overflow-x: hidden !important;
     }
 </style>
-<body class="dark-mode hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed layout-top-nav overflow-x-hidden">
+<body
+    class="dark-mode hold-transition layout-fixed layout-navbar-fixed layout-footer-fixed layout-top-nav overflow-x-hidden">
 <div class="wrapper">
 
     <!-- Preloader -->
@@ -44,7 +44,8 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-dark justify-content-center" style="background-color: #212529; width: 100%!important;">
+    <nav class="main-header navbar navbar-dark justify-content-center"
+         style="background-color: #212529; width: 100%!important;">
 
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -65,19 +66,17 @@
     </style>
 
 
-    <div class="content-wrapper " style="width: 100%!important;">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-            </div><!-- /.container-fluid -->
-        </section>
+    <div class="content-wrapper " style="width: 100%!important; margin-top: 5rem">
+
         <section class="content-wrapper">
             <div class="row">
                 <div class="col-12">
                     @foreach($UTs as $UT)
-                        <a style="display: block;  height: 10rem; background-image: url({{asset($UT->img)}});"
-                           href="{{$UT->url}}" class="jumbotron text-center   mr-5  ml-5">
-                        </a>
+                        <div class="mr-1  ml-1">
+                            <a style="display: block;  max-height: 30rem;  max-width: 160rem;  background-image: url({{asset($UT->img)}}); background-size: 100% 100%;"
+                               href="{{$UT->url}}" class="jumbotron text-center   ">
+                            </a>
+                        </div>
                     @endforeach
                 </div>
             </div>
