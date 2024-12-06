@@ -18,9 +18,12 @@ class UserTariff extends Model
     {
         return Tariff::where('id', $this->tariff_id)->first();
     }
-    public function user()
-    {
-        return User::where('id', $this->user_id)->first();
+    public function user() {
+        $user =  User::where('id', $this->user_id)->first();
+        if (!$user) {
+            $user = User::onlyTrashed()->where('id', $this->user_id)->first();
+        }
+        return $user;
     }
 
     public function rooms()

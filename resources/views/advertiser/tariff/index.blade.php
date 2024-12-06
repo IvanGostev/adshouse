@@ -26,8 +26,6 @@
                                     <div class="align-items-center text-center">
                                         <strong>Days: {{$tariff->days}}</strong>
                                         <br>
-                                        <strong>Apartments: {{$tariff->number_rooms}} </strong>
-                                        <br>
                                         <strong>Price: {{$tariff->price}} AED</strong>
                                     </div>
                                     <br>
@@ -37,7 +35,11 @@
 
                                     @if($tariff->type == 'shared')
                                         <div class="form-group">
-                                            <label>Preview 1448 x 128</label>
+                                            <label>
+                                                Preview
+                                                Recommended size: 1080 x 1080 pixels
+                                                Aspect Ratio: 1:1
+                                            </label>
                                             <input type="file" class="form-control my-colorpicker1 colorpicker-element"
                                                    name="img" data-colorpicker-id="1" data-original-title="" title="">
                                         </div>

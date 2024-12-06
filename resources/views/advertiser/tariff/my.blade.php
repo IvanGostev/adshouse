@@ -27,8 +27,6 @@
                                             @endif
                                             <strong>Days: {{$tariff->days}}</strong>
                                             <br>
-                                            <strong>Apartments: {{$tariff->number_rooms}} </strong>
-                                            <br>
                                             <strong>Price: {{$tariff->price}} AED</strong>
                                         </div>
                                     @else
@@ -38,8 +36,6 @@
                                                 <strong class="text-red">The tariff has expired</strong>
                                             @endif
                                             <strong>Transitions: {{$tariff->fulfilled_transitions . '/' . $tariff->transitions}}</strong>
-                                            <br>
-                                            <strong>Apartments: {{$tariff->number_rooms}} </strong>
                                             <br>
                                             <strong>Price: {{$tariff->price}} AED</strong>
                                         </div>

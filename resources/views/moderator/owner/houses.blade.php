@@ -28,6 +28,8 @@
                                         <th>City</th>
                                         <th>District</th>
                                         <th>Street</th>
+                                        <th>Building/Community name</th>
+                                        <th>Number/Name apartment</th>
                                         <th>Room number</th>
                                     </tr>
                                     </thead>
@@ -41,6 +43,8 @@
                                             <td>{{$house->city()->title}}</td>
                                             <td>{{$house->district()->title}}</td>
                                             <td>{{$house->street}}</td>
+                                            <td>{{$house->number}}</td>
+                                            <td>{{$house->apartment_number}}</td>
                                             <td>{{$house->countRooms()}}</td>
                                         </tr>
                                     @endforeach

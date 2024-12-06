@@ -12,6 +12,11 @@ class BalanceApplication extends Model
     protected $guarded = false;
 
     public function user() {
-        return User::where('id', $this->user_id)->first();
+        $user =  User::where('id', $this->user_id)->first();
+        if (!$user) {
+            $user = User::onlyTrashed()->where('id', $this->user_id)->first();
+        }
+        return $user;
     }
+
 }

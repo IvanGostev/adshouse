@@ -10,18 +10,26 @@
             background-color: #343a40;
             color: #fff;
         }
-        .select2-selection, .select2-selection__rendered, .dropdown-wrapper
-        {
+
+        .select2-selection, .select2-selection__rendered, .dropdown-wrapper {
             background-color: #454d55 !important;
             color: #fff;
         }
+
         .select2.selection {
             background-color: #343a40;
         }
+
         .select2-selection__choice {
-            background-color: #007bff!important;
-            border-color: #006fe6!important;
-            color: #fff!important;
+            background-color: #007bff !important;
+            border-color: #006fe6 !important;
+            color: #fff !important;
+        }
+
+        @media (max-width: 450px) {
+            .small-box h3 {
+                font-size: 1.4rem !important;
+            }
         }
     </style>
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -52,7 +60,8 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="{{ asset('admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+    <link rel="stylesheet"
+          href="{{ asset('admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- JQVMap -->
@@ -70,12 +79,14 @@
         background-color: #fff;
         color: black;
     }
-     .bg-verydark {
-         background-color: #212529
-     }
+
+    .bg-verydark {
+        background-color: #212529
+    }
 </style>
 {{--        dark-mode--}}
-<body class="dark-mode @if(!in_array(auth()->user()->role, ['moderator', 'admin'])) layout-top-nav @endif  layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body
+    class="dark-mode @if(!in_array(auth()->user()->role, ['moderator', 'admin'])) layout-top-nav @endif  layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
 
     <!-- Preloader -->
@@ -84,100 +95,107 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-dark justify-content-between" style="background-color: #212529">
-        <!-- Left navbar links -->
-        <ul class="navbar-nav">
-            @if(in_array(auth()->user()->role, ['moderator', 'admin']))
+    <nav class="main-header navbar navbar-expand-sm  navbar-dark justify-content-between"
+         style="background-color: #212529">
+        <div class="container-fluid">
+            <button class="navbar-toggler collapsed btn btn-dark btn-md" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarSupportedContent" style="">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                    @if(in_array(auth()->user()->role, ['moderator', 'admin']))
+                        <li class="nav-item">
+                            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
+                                    class="fas fa-bars"></i></a>
+                        </li>
+                    @endif
+                    @switch(auth()->user()->role)
+                        @case('owner')
+                            <li class="nav-item d-sm-inline-block">
+                                <a href="{{ route('owner.main.index') }}"
+                                   class="nav-link {{request()->path() == 'owner' ? 'active' : ''}}">
+                                    <p>
+                                        Dashboard
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item d-sm-inline-block">
+                                <a href="{{ route('owner.house.index') }}"
+                                   class="nav-link {{request()->path() == 'owner/houses' ? 'active' : ''}}">
+                                    <p>
+                                        My apartment
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item d-sm-inline-block">
+                                <a href="{{ route('owner.link.index') }}"
+                                   class="nav-link {{request()->path() == 'owner/links' ? 'active' : ''}}">
+                                    <p>
+                                        Advertiser
+                                    </p>
+                                </a>
+                            </li>
+                            @break
+                        @case('advertiser')
+                            <li class="nav-item  d-sm-inline-block">
+                                <a href="{{ route('advertiser.main.index') }}"
+                                   class="nav-link {{request()->path() == 'advertiser' ? 'active' : ''}}">
+                                    <p>
+                                        Dashboard
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item d-sm-inline-block">
+                                <a href="{{route('advertiser.tariff.index')}}"
+                                   class="nav-link {{request()->path() == 'advertiser/tariffs' ? 'active' : ''}}">
+                                    <p>
+                                        Plans
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item d-sm-inline-block">
+                                <a href="{{route('advertiser.tariff.my')}}"
+                                   class="nav-link {{request()->path() == 'advertiser/tariffs/my' ? 'active' : ''}}">
+                                    <p>
+                                        Current plan
+                                    </p>
+                                </a>
+                            </li>
+                            @break
+                        @case('user')
+                            <li class="nav-item d-sm-inline-block">
+                                <a href="{{ route('user.main.index') }}"
+                                   class="nav-link {{request()->path() == 'user' ? 'active' : ''}}">
+                                    <p>
+                                        Dashboard
+                                    </p>
+                                </a>
+                            </li>
+                            @break
+                    @endswitch
+                </ul>
+            </div>
+            <ul class="navbar-nav" style="display: flex; min-width: 210px!important; flex-direction: row; gap: 10px" >
+                @if(!in_array(auth()->user()->role, ['moderator', 'admin']))
+                    <li class="nav-item">
+                        <a href="{{route('balance.show')}}" class="nav-link">Balance: <span class="fw-bold">{{auth()->user()->balance}} AED</span>
+                        </a>
+                    </li>
+                @endif
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                    <form action="{{route('logout')}}" method="post">
+                        @csrf
+                        <button type="submit"
+                                class="btn btn-outline-light fw-normal">Logout
+                        </button>
+                    </form>
                 </li>
-            @endif
-            @switch(auth()->user()->role)
-                @case('owner')
-                        <li class="nav-item d-none d-sm-inline-block">
-                            <a href="{{ route('owner.main.index') }}"
-                               class="nav-link {{request()->path() == 'owner' ? 'active' : ''}}">
-                                <p>
-                                    Dashboard
-                                </p>
-                            </a>
-                        </li>
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <a href="{{ route('owner.house.index') }}"
-                           class="nav-link {{request()->path() == 'owner/houses' ? 'active' : ''}}">
-                            <p>
-                                My apartment
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <a href="{{ route('owner.link.index') }}"
-                           class="nav-link {{request()->path() == 'owner/links' ? 'active' : ''}}">
-                            <p>
-                                Advertiser
-                            </p>
-                        </a>
-                    </li>
-                    @break
-                @case('advertiser')
-                        <li class="nav-item d-none d-sm-inline-block">
-                            <a href="{{ route('advertiser.main.index') }}"
-                               class="nav-link {{request()->path() == 'advertiser' ? 'active' : ''}}">
-                                <p>
-                                    Dashboard
-                                </p>
-                            </a>
-                        </li>
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <a href="{{route('advertiser.tariff.index')}}"
-                           class="nav-link {{request()->path() == 'advertiser/tariffs' ? 'active' : ''}}">
-                            <p>
-                                Plans
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <a href="{{route('advertiser.tariff.my')}}"
-                           class="nav-link {{request()->path() == 'advertiser/tariffs/my' ? 'active' : ''}}">
-                            <p>
-                                Current plan
-                            </p>
-                        </a>
-                    </li>
-                    @break
-                @case('user')
-                        <li class="nav-item d-none d-sm-inline-block">
-                            <a href="{{ route('user.main.index') }}"
-                               class="nav-link {{request()->path() == 'user' ? 'active' : ''}}">
-                                <p>
-                                    Dashboard
-                                </p>
-                            </a>
-                        </li>
-                @break
-            @endswitch
-        </ul>
-        <ul class="navbar-nav">
-            @if(!in_array(auth()->user()->role, ['moderator', 'admin']))
-            <li class="nav-item">
-                <a href="{{route('balance.show')}}" class="nav-link">Balance: <span class="fw-bold">{{auth()->user()->balance}} AED</span>
-                </a>
-            </li>
-            @endif
-            <li class="nav-item">
-                <form action="{{route('logout')}}" method="post">
-                    @csrf
-                    <button type="submit"
-                            class="btn btn-outline-light fw-normal">Logout
-                    </button>
-                </form>
-            </li>
-        </ul>
+            </ul>
+        </div>
     </nav>
-    <!-- /.navbar -->
 
-
-    <!-- Main Sidebar Container -->
 
     @include('includes.sidebar')
 
@@ -193,7 +211,7 @@
 
     <!-- Main Footer -->
     <footer class="main-footer" style="position: relative">
-        <strong>Copyright  &copy; 2024 <a href="/">{{ config('app.name', 'Laravel') }}</a>.</strong>
+        <strong>Copyright &copy; 2024 <a href="/">{{ config('app.name', 'Laravel') }}</a>.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
             <b>Version</b> 1.0.0
