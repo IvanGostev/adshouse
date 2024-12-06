@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" data-bs-theme="dark" class="overflow-x-hidden">
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
@@ -69,17 +69,35 @@
     <div class="content-wrapper " style="width: 100%!important; margin-top: 5rem">
 
         <section class="content-wrapper">
-            <div class="row">
-                <div class="col-12">
+            <div class="row overflow-x-hidden" >
+
                     @foreach($UTs as $UT)
-                        <div class="mr-1  ml-1">
-                            <a style="display: block;  max-height: 30rem;  max-width: 160rem;  background-image: url({{asset($UT->img)}}); background-size: 100% 100%;"
-                               href="{{$UT->url}}" class="jumbotron text-center   ">
+
+                        <div  class="col-md-6 col">
+                            <a href="{{$UT->url}}" class="card mb-2 bg-gradient-dark m-1" style="min-width: 120px;" >
+                                <img class="card-img-top" src="{{asset($UT->img)}}" alt="Dist Photo 1" style="width: 100%; height: 100%;">
                             </a>
                         </div>
+
+                        <div  class="col-md-6 col">
+                            <a href="{{$UT->url}}" class="card mb-2 bg-gradient-dark m-1" style="min-width: 120px;">
+                                <img class="card-img-top" src="{{asset($UT->img)}}" alt="Dist Photo 1" style="width: 100%; height: 100%;">
+                            </a>
+                        </div>
+
+                        <div  class="col-md-6 col">
+                            <a href="{{$UT->url}}" class="card mb-2 bg-gradient-dark m-1" style="min-width: 120px;">
+                                <img class="card-img-top" src="{{asset($UT->img)}}" alt="Dist Photo 1" style="width: 100%; height: 100%;">
+                            </a>
+                        </div>
+{{--                        <div class="mr-1  ml-1">--}}
+{{--                            <a style="display: block;  max-height: 30rem;  max-width: 160rem;  background-image: url({{asset($UT->img)}}); background-size: 100% 100%;"--}}
+{{--                               href="{{$UT->url}}" class="jumbotron text-center   ">--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
                     @endforeach
                 </div>
-            </div>
+
         </section>
     </div>
 

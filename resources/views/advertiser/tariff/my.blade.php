@@ -48,7 +48,7 @@
                                         <div class="form-group">
                                             <label>Banner</label> <br>
                                             <a href="{{asset($tariff->img)}}"> <img src="{{asset($tariff->img)}}" alt=""
-                                                                                    style="height: 50px; width: 100%"></a>
+                                                                                    style="height: 100%; width: 100%"></a>
                                         </div>
                                     @endif
                                     <div class="form-group">
