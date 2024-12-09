@@ -17,10 +17,11 @@
                                 <h3 class="card-title">Apartments</h3>
                             </div>
                             <!-- /.card-header -->
-                            <div class="card-body">
-                                <table class="table table-bordered">
+                            <div class="card-body table-responsive">
+                                <table class="table table-hover table-bordered">
                                     <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>Date of creation</th>
                                         <th>Email user</th>
                                         <th>Description</th>
@@ -36,6 +37,7 @@
                                     <tbody>
                                     @foreach($houses as $house)
                                         <tr>
+                                            <td>{{$house->id}}</td>
                                             <td>{{$house->created_at}}</td>
                                             <td>{{$house->user()->email}}</td>
                                             <td>{{$house->about}}</td>

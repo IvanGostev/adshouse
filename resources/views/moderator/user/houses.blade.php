@@ -17,8 +17,8 @@
                                 <h3 class="card-title">Apartments</h3>
                             </div>
                             <!-- /.card-header -->
-                            <div class="card-body">
-                                <table class="table table-bordered">
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover table-bordered">
                                     <thead>
                                     <tr>
                                         <th>Preview</th>

@@ -108,6 +108,7 @@
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
+                                            <th>A ID</th>
                                             <th>ID</th>
                                             <th>Country</th>
                                             <th>City</th>
@@ -121,6 +122,7 @@
                                         <tbody>
                                         @foreach($rooms as $room)
                                             <tr>
+                                                <td>{{$room->house_id}}</td>
                                                 <td>{{$room->id}}</td>
                                                 <td>{{$room->house()->country()->title}}</td>
                                                 <td>{{$room->house()->city()->title}}</td>
