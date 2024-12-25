@@ -23,21 +23,21 @@
                                     @if($tariff->method == 'rooms')
                                         <div class="align-items-center text-center">
                                             @if ($tariff->deleted_at)
-                                                <strong class="text-red">The tariff has expired</strong>
+                                                <strong class="text-red">{{__('main.The tariff has expired')}}</strong>
                                             @endif
-                                            <strong>Days: {{$tariff->days}}</strong>
+                                            <strong>{{__('main.Days')}}: {{$tariff->days}}</strong>
                                             <br>
-                                            <strong>Price: {{$tariff->price}} AED</strong>
+                                            <strong>{{__('main.Price')}}: {{$tariff->price}} AED</strong>
                                         </div>
                                     @else
 
                                         <div class="align-items-center text-center">
                                             @if ($tariff->deleted_at)
-                                                <strong class="text-red">The tariff has expired</strong>
+                                                <strong class="text-red">{{__('main.The tariff has expired')}}</strong>
                                             @endif
-                                            <strong>Transitions: {{$tariff->fulfilled_transitions . '/' . $tariff->transitions}}</strong>
+                                            <strong>{{__('main.Transitions')}}: {{$tariff->fulfilled_transitions . '/' . $tariff->transitions}}</strong>
                                             <br>
-                                            <strong>Price: {{$tariff->price}} AED</strong>
+                                            <strong>{{__('main.Price')}}: {{$tariff->price}} AED</strong>
                                         </div>
                                     @endif
                                     <br>
@@ -46,13 +46,13 @@
                                     </p>
                                     @if($tariff->type == 'shared')
                                         <div class="form-group">
-                                            <label>Banner</label> <br>
+                                            <label>{{__('main.Banner')}}</label> <br>
                                             <a href="{{asset($tariff->img)}}"> <img src="{{asset($tariff->img)}}" alt=""
                                                                                     style="height: 100%; width: 100%"></a>
                                         </div>
                                     @endif
                                     <div class="form-group">
-                                        <label>Advertised link</label>
+                                        <label>{{__('main.Advertised link')}}</label>
                                         <input type="url" class="form-control my-colorpicker1 colorpicker-element"
                                                value="{{$tariff->url}}" data-colorpicker-id="1" disabled
                                                data-original-title="" title="">
@@ -60,7 +60,7 @@
                                     @if (!$tariff->deleted_at)
                                         <div class="form-group">
                                             <a class="btn btn-light btn-block"
-                                               href="{{route('advertiser.tariff.show', $tariff->id)}}">Statistic</a>
+                                               href="{{route('advertiser.tariff.show', $tariff->id)}}">{{__('main.Statistic')}}</a>
                                         </div>
                                     @endif
                                 </div>
@@ -70,7 +70,5 @@
                 </div>
             </div>
         </section>
-
-
     </div>
 @endsection

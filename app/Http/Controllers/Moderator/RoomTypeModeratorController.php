@@ -26,8 +26,9 @@ class RoomTypeModeratorController extends Controller
     {
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
+            'language' => ['required', 'string', 'max:3'],
         ]);
-        RoomType::create(['title' => $request->title]);
+        RoomType::create(['title' => $request->title, 'language' => $request->language]);
         return redirect()->route('moderator.room-type.index');
     }
 

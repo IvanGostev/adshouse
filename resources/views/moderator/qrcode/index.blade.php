@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('moderator.layouts.main')
 @section('content')
     <div class="content-wrapper" style="min-height: 1302.4px;">
         <!-- Content Header (Page header) -->
@@ -16,16 +16,16 @@
                             <div class="card-header">
                                 <form action="{{ route('moderator.qrcode.store') }}" method="post">
                                     @csrf
-                                    <button class="btn btn-block btn-light" type="submit">Add</button>
+                                    <button class="btn btn-block btn-light" type="submit">{{__('admin.Add')}}</button>
                                 </form>
                                 <br>
-                                <h3 class="card-title">Qrcodes</h3>
+                                <h3 class="card-title">{{__('admin.Qrcodes')}}</h3>
                             </div>
                             <div class="card-body">
                                 <form class="row" action="{{route('moderator.qrcode.index')}}">
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">Status</div>
+                                            <div class="fw-bold fs-6">{{__('admin.Status')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <select
@@ -33,15 +33,15 @@
                                                         style="width: 100%;" dir="ltr" name="status">
                                                         <option
                                                             {{request()['status'] == 'all' ? 'selected' : '' }}  value="all">
-                                                            All
+                                                            {{__('admin.All')}}
                                                         </option>
                                                         <option
                                                             {{request()['status'] == 'free' ? 'selected' : '' }}  value="free">
-                                                            Free
+                                                            {{__('admin.Free')}}
                                                         </option>
                                                         <option
                                                             {{request()['status'] == 'attached' ? 'selected' : '' }} value="attached">
-                                                            Attached
+                                                            {{__('admin.Attached')}}
                                                         </option>
                                                     </select>
                                                 </div>
@@ -50,13 +50,13 @@
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">City</div>
+                                            <div class="fw-bold fs-6">{{__('admin.City')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <select
                                                         class="form-select bootstrap-table-filter-control-price "
                                                         style="width: 100%;" dir="ltr" name="city_id">
-                                                        <option value="all">All</option>
+                                                        <option value="all">{{__('admin.All')}}</option>
                                                         @foreach($cities as $city)
                                                             <option
                                                                 {{request()['city_id'] == $city->id ? 'selected' : '' }} value="{{$city->id}}">{{$city->title}}</option>
@@ -68,13 +68,13 @@
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">District</div>
+                                            <div class="fw-bold fs-6">{{__('admin.District')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <select
                                                         class="form-select bootstrap-table-filter-control-price "
                                                         style="width: 100%;" dir="ltr" name="district_id">
-                                                        <option value="all">All</option>
+                                                        <option value="all">{{__('admin.All')}}</option>
                                                         @foreach($districts as $district)
                                                             <option
                                                                 {{request()['city_id'] == $district->id ? 'selected' : '' }} value="{{$district->id}}">{{$district->title}}</option>
@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">Street</div>
+                                            <div class="fw-bold fs-6">{{__('admin.Street')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <input type="text" value="{{request()['street'] ?? ''}}"
@@ -97,26 +97,26 @@
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">Type room</div>
+                                            <div class="fw-bold fs-6">{{__('admin.Type room')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <select
                                                         class="form-select bootstrap-table-filter-control-price "
                                                         style="width: 100%;" dir="ltr" name="room_type_id">
-                                                        <option value="all">All</option>
+                                                        <option value="all">{{__('admin.All')}}</option>
                                                         @foreach($types as $type)
                                                             <option
                                                                 {{request()['room_type_id'] == $type->id ? 'selected' : '' }} value="{{$type->id}}">{{$type->title}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                '
+
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm'-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">Email owner</div>
+                                            <div class="fw-bold fs-6">{{__('admin.Email owner')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <input type="text" value="{{request()['email'] ?? ''}}" name="email"
@@ -127,7 +127,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">Display</div>
+                                            <div class="fw-bold fs-6">{{__('admin.Display')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <input type="number" value="{{request()['paginateNumber'] ?? 12}}"
@@ -139,10 +139,10 @@
                                     <div class="col-md-2">
                                         <div class="col-sm-12  d-flex gap-2">
                                             <button class="btn btn-light mt-4" tabindex="0"
-                                                    aria-controls="example1" type="submit"><span>Search</span></button>
+                                                    aria-controls="example1" type="submit"><span>{{__('admin.Search')}}</span></button>
                                             <a href="{{route('moderator.qrcode.index')}}" class="btn btn-secondary mt-4"
                                                tabindex="0"
-                                               aria-controls="example1" type="submit"><span>Refresh</span></a>
+                                               aria-controls="example1" type="submit"><span>{{__('admin.Refresh')}}</span></a>
                                         </div>
                                     </div>
 
@@ -153,14 +153,14 @@
                                     <table class="table table-hover text-nowrap">
                                         <thead>
                                         <tr>
-                                            <th style="width: 35px!important;">Qrcode</th>
-                                            <th>Url</th>
-                                            <th style="width: 30px">Advertiser</th>
-                                            <th style="width: 30px">Owner</th>
-                                            <th style="width: 40px">Download</th>
-                                            <th style="width: 150px">Statistic</th>
-                                            <th style="width: 40px">Edit</th>
-                                            <th style="width: 40px">Delete</th>
+                                            <th style="width: 35px!important;">{{__('admin.Qrcode')}}</th>
+                                            <th>{{__('admin.Url')}}</th>
+                                            <th style="width: 30px">{{__('admin.Advertiser')}}</th>
+                                            <th style="width: 30px">{{__('admin.Owner')}}</th>
+                                            <th style="width: 40px">{{__('admin.Download')}}</th>
+                                            <th style="width: 150px">{{__('admin.Statistic')}}</th>
+                                            <th style="width: 40px">{{__('admin.Edit')}}</th>
+                                            <th style="width: 40px">{{__('admin.Delete')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -172,40 +172,39 @@
                                                 <td>{{route('qrcode', $qrcode->id)}}</td>
                                                 <td>
                                                     @if($qrcode->advertiser())
-                                                      <span style="color: red">  Link:</span> <a href="{{$qrcode->advertiser()->url}}">{{$qrcode->advertiser()->url}}</a><br>
-                                                        <span style="color: red"> Email: </span>  <a
+                                                      <span style="color: red">{{__('admin.Link')}} :</span> <a href="{{$qrcode->advertiser()->url}}">{{$qrcode->advertiser()->url}}</a><br>
+                                                        <span style="color: red">{{__('admin.Email')}}: </span>  <a
                                                             href="/moderator/users?email={{$qrcode->advertiser()->email}}">
                                                             {{$qrcode->advertiser()->email}}
                                                         </a>
                                                     @else
-                                                        <span style="color: green">Free</span>
+                                                        <span style="color: green">{{__('admin.Free')}}</span>
                                                     @endif
 
                                                 </td>
                                                 <td>
                                                     @if($qrcode->room())
-                                                    Type
-                                                    room: {{$qrcode->room() ? $qrcode->room()->type()->title : '-'}}
+                                                    {{__('admin.Type room')}}: {{$qrcode->room() ? $qrcode->room()->type()->title : '-'}}
                                                     <br>
-                                                    Email: <a
+                                                        {{__('admin.Email')}}: <a
                                                         href="/moderator/users?email={{$qrcode->room() ? $qrcode->room()->house()->user()->email : ''}}">
                                                         {{$qrcode->room() ? $qrcode->room()->house()->user()->email : ''}}
                                                     </a>
                                                     @else
-                                                        Free
+                                                        {{__('admin.Free')}}
                                                     @endif
                                                 </td>
                                                 <td id="download">
                                                     <a class="btn btn-outline-success"
-                                                       href="{{trim(explode('public', $qrcode['link'])[1])}}" download>Download</a>
+                                                       href="{{trim(explode('public', $qrcode['link'])[1])}}" download>{{__('admin.Download')}}</a>
                                                 </td>
                                                 <td>
                                                     <a href="{{route('moderator.qrcode.statistic', $qrcode->id)}}"
-                                                       class="btn btn-primary">Statistic</a>
+                                                       class="btn btn-primary">{{__('admin.Statistic')}}</a>
                                                 </td>
                                                 <td>
                                                     <a class="btn btn-light"
-                                                       href="{{route('moderator.qrcode.edit', $qrcode->id)}}">Edit</a>
+                                                       href="{{route('moderator.qrcode.edit', $qrcode->id)}}">{{__('admin.Edit')}}</a>
                                                 </td>
 
                                                 <td>
@@ -214,7 +213,7 @@
                                                         @method('delete')
                                                         @csrf
                                                         <button type="submit" class="btn btn-light">
-                                                            Delete
+                                                            {{__('admin.Delete')}}
                                                         </button>
                                                     </form>
                                                 </td>

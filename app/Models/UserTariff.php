@@ -16,7 +16,13 @@ class UserTariff extends Model
 
     public function tariff()
     {
-        return Tariff::where('id', $this->tariff_id)->first();
+        $tariff = Tariff::where('id', $this->tariff_id)->first();
+        if ($tariff) {
+            return $tariff;
+        } else {
+            return Tariff::onlyTrashed()->where('id', $this->tariff_id)->first();
+        }
+
     }
     public function user() {
         $user =  User::where('id', $this->user_id)->first();

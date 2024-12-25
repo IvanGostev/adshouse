@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('moderator.layouts.main')
 @section('content')
     <div class="content-wrapper" style="min-height: 1302.4px;">
         <!-- Content Header (Page header) -->
@@ -15,21 +15,21 @@
                         <div class="card">
                             <div class="card-header">
                                 <a href="{{ route('moderator.tariff.create') }}"
-                                   class="btn btn-block btn-outline-light">Add</a>
+                                   class="btn btn-block btn-outline-light">{{__('admin.Add')}}</a>
                                 <br>
-                                <h3 class="card-title">Plans</h3>
+                                <h3 class="card-title">{{__('admin.Plans')}}</h3>
                             </div>
                             <div class="card-body">
                                 <div class="card-body table-responsive p-0">
                                     <table class="table table-hover text-nowrap">
                                         <thead>
                                         <tr>
-                                            <th>Title</th>
-                                            <th>Method</th>
-                                            <th>Type</th>
-                                            <th>Price</th>
-                                            <th style="width: 40px">Edit</th>
-                                            <th style="width: 40px">Delete</th>
+                                            <th>{{__('admin.Title')}}</th>
+                                            <th>{{__('admin.Method')}}</th>
+                                            <th>{{__('admin.Type')}}</th>
+                                            <th>{{__('admin.Price')}}</th>
+                                            <th style="width: 40px">{{__('admin.Edit')}}</th>
+                                            <th style="width: 40px">{{__('admin.Delete')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>

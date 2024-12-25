@@ -36,7 +36,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Registration') }}</div>
+                    <div class="card-header">{{ __('auth.Registration') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
@@ -44,7 +44,7 @@
 
                             <div class="row mb-3">
                                 <label for="name"
-                                       class="col-md-4 col-form-label text-md-end">{{ __('First name') }}</label>
+                                       class="col-md-4 col-form-label text-md-end">{{ __('auth.First name') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -60,7 +60,7 @@
                             </div>
                             <div class="row mb-3">
                                 <label for="name"
-                                       class="col-md-4 col-form-label text-md-end">{{ __('Last name') }}</label>
+                                       class="col-md-4 col-form-label text-md-end">{{ __('auth.Last name') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('Phone') }}</label>
+                                <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('auth.Phone') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="phone" type="tel"
@@ -90,7 +90,7 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('auth.Email') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -107,7 +107,7 @@
 
                             <div class="row mb-3">
                                 <label for="password"
-                                       class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                                       class="col-md-4 col-form-label text-md-end">{{ __('auth.Password') }}</label>
 
                                 <div class="col-md-6">
                                     <div class="input-group">
@@ -132,12 +132,12 @@
 
                             <div class="row mb-3">
                                 <label for="password-confirm"
-                                       class="col-md-4 col-form-label text-md-end">{{ __('Choose role') }}</label>
+                                       class="col-md-4 col-form-label text-md-end">{{ __('auth.Choose role') }}</label>
                                 <div class="col-md-6">
                                     <select name="role" id="" class="form-select">
-                                        <option value="advertiser">Advertiser</option>
-                                        <option value="owner">Owner</option>
-                                        <option value="user">Сlient</option>
+                                        <option value="advertiser">{{ __('auth.Advertiser') }}</option>
+                                        <option value="owner">{{ __('auth.Owner') }}</option>
+                                        <option value="user">{{ __('auth.Client') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -145,7 +145,7 @@
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-outline-light">
-                                        {{ __('Register') }}
+                                        {{ __('auth.Register') }}
                                     </button>
                                 </div>
                             </div>

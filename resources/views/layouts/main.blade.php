@@ -117,7 +117,7 @@
                                 <a href="{{ route('owner.main.index') }}"
                                    class="nav-link {{request()->path() == 'owner' ? 'active' : ''}}">
                                     <p>
-                                        Dashboard
+                                        {{__('main.Dashboard')}}
                                     </p>
                                 </a>
                             </li>
@@ -125,7 +125,7 @@
                                 <a href="{{ route('owner.house.index') }}"
                                    class="nav-link {{request()->path() == 'owner/houses' ? 'active' : ''}}">
                                     <p>
-                                        My apartment
+                                        {{__('main.My apartment')}}
                                     </p>
                                 </a>
                             </li>
@@ -133,7 +133,7 @@
                                 <a href="{{ route('owner.link.index') }}"
                                    class="nav-link {{request()->path() == 'owner/links' ? 'active' : ''}}">
                                     <p>
-                                        Advertiser
+                                        {{__('main.Advertiser')}}
                                     </p>
                                 </a>
                             </li>
@@ -143,7 +143,7 @@
                                 <a href="{{ route('advertiser.main.index') }}"
                                    class="nav-link {{request()->path() == 'advertiser' ? 'active' : ''}}">
                                     <p>
-                                        Dashboard
+                                         {{__('main.Dashboard')}}
                                     </p>
                                 </a>
                             </li>
@@ -151,7 +151,7 @@
                                 <a href="{{route('advertiser.tariff.index')}}"
                                    class="nav-link {{request()->path() == 'advertiser/tariffs' ? 'active' : ''}}">
                                     <p>
-                                        Plans
+                                        {{__('main.Plans')}}
                                     </p>
                                 </a>
                             </li>
@@ -159,7 +159,7 @@
                                 <a href="{{route('advertiser.tariff.my')}}"
                                    class="nav-link {{request()->path() == 'advertiser/tariffs/my' ? 'active' : ''}}">
                                     <p>
-                                        Current plan
+                                        {{__('main.Current plan')}}
                                     </p>
                                 </a>
                             </li>
@@ -169,7 +169,7 @@
                                 <a href="{{ route('user.main.index') }}"
                                    class="nav-link {{request()->path() == 'user' ? 'active' : ''}}">
                                     <p>
-                                        Dashboard
+                                        {{__('main.Dashboard')}}
                                     </p>
                                 </a>
                             </li>
@@ -180,18 +180,35 @@
             <ul class="navbar-nav" style="display: flex; min-width: 210px!important; flex-direction: row; gap: 10px" >
                 @if(!in_array(auth()->user()->role, ['moderator', 'admin']))
                     <li class="nav-item">
-                        <a href="{{route('balance.show')}}" class="nav-link">Balance: <span class="fw-bold">{{auth()->user()->balance}} AED</span>
+                        <a href="{{route('balance.show')}}" class="nav-link">{{__('main.Balance')}}: <span class="fw-bold">{{auth()->user()->balance}} AED</span>
                         </a>
                     </li>
                 @endif
+                    <li class="nav-item">
+                        <form action="{{route('language.switch')}}" method="post">
+                            @csrf
+                            <select onchange="this.form.submit()" name="language"
+                                    class="form-select bootstrap-table-filter-control-price "
+                                    style="width: 100%;" dir="ltr">
+                                <option
+                                    {{((session()->get('language') !== null ) and (session()->get('language') == 'en')) ? 'selected' : ''}} value="en">
+                                    English
+                                </option>
+                                <option {{((session()->get('language') !== null ) and (session()->get('language') == 'ru')) ? 'selected' : ''}} value="ru">
+                                    Русский
+                                </option>
+                            </select>
+                        </form>
+                    </li>
                 <li class="nav-item">
                     <form action="{{route('logout')}}" method="post">
                         @csrf
                         <button type="submit"
-                                class="btn btn-outline-light fw-normal">Logout
+                                class="btn btn-outline-light fw-normal">{{__('main.Logout')}}
                         </button>
                     </form>
                 </li>
+
             </ul>
         </div>
     </nav>
@@ -211,10 +228,10 @@
 
     <!-- Main Footer -->
     <footer class="main-footer" style="position: relative">
-        <strong>Copyright &copy; 2024 <a href="/">{{ config('app.name', 'Laravel') }}</a>.</strong>
-        All rights reserved.
+        <strong>{{ __('admin.Copyright &copy; 2024')}}<a href="/">{{ config('app.name', 'Laravel') }}</a>.</strong>
+        {{ __('admin.All rights reserved')}}.
         <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 1.0.0
+            {!! __('admin.<b>Version</b> 1.0.0') !!}
         </div>
     </footer>
 </div>
@@ -271,7 +288,7 @@
             $("#chartAdvertiserLink").shieldChart({
                 theme: "dark",
                 primaryHeader: {
-                    text: "The number of clicks on the advertised link"
+                    text: "{{__('main.The number of clicks on the advertised link')}}"
                 },
                 exportOptions: {
                     image: false,
@@ -293,7 +310,7 @@
                 },
                 dataSeries: [{
                     seriesType: 'line',
-                    collectionAlias: "Number of clicks",
+                    collectionAlias: "{{__('main.Number of clicks')}}",
                     data: [
                         @foreach($transitionsForChartAdvertiserLink as $transition)
                             {{$transition->views}},
@@ -311,7 +328,7 @@
             $("#chartQrcode").shieldChart({
                 theme: "dark",
                 primaryHeader: {
-                    text: "Number of clicks on qrcodes"
+                    text: "{{__('main.Number of clicks on qrcodes')}}"
                 },
                 exportOptions: {
                     image: false,
@@ -333,7 +350,7 @@
                 },
                 dataSeries: [{
                     seriesType: 'line',
-                    collectionAlias: "Number of clicks",
+                    collectionAlias: "{{__('main.Number of clicks')}}",
                     data: [
                         @foreach($transitionsForQrcode as $transition)
                             {{$transition->views}},

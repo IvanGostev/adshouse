@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\BalanceController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Moderator\BalanceModeratorController;
 use App\Http\Controllers\Moderator\CityModeratorController;
 use App\Http\Controllers\Moderator\CountryModeratorController;
@@ -34,9 +35,10 @@ Route::middleware(\App\Http\Middleware\WWWMiddleware::class)->group(function () 
     Route::get('/home', function () {
         return redirect()->route('roles');
     })->name('home');
+    Route::post('/language/switch', [LanguageController::class, 'switch'])->name('language.switch');
 
     Route::controller(LoginController::class)->group(function () {
-        Route::get('admin-login', 'showAdminLoginForm');
+        Route::get('admin/login', 'showAdminLoginForm');
     });
 
     Route::controller(ForgotPasswordController::class)->group(function () {

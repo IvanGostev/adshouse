@@ -14,25 +14,25 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Apartments</h3>
+                                <h3 class="card-title">{{__('admin.Apartments')}}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>Preview</th>
-                                        <th>Email user</th>
-                                        <th>Title</th>
-                                        <th>Description</th>
-                                        <th>Country</th>
-                                        <th>City</th>
-                                        <th>District</th>
-                                        <th>Street</th>
-                                        <th>Number</th>
-                                        <th>Room number</th>
-                                        <th style="width: 40px">Approve/Moderation</th>
-                                        <th style="width: 40px">Delete</th>
+                                        <th>{{__('admin.Preview')}} </th>
+                                        <th>{{__('admin.Email user')}}  </th>
+                                        <th>{{__('admin.Title')}} </th>
+                                        <th>{{__('admin.Description')}} </th>
+                                        <th>{{__('admin.Country')}} </th>
+                                        <th>{{__('admin.City')}} </th>
+                                        <th>{{__('admin.District')}} </th>
+                                        <th>{{__('admin.Street')}} </th>
+                                        <th>{{__('admin.Number')}} </th>
+                                        <th>{{__('admin.Room number')}}  </th>
+                                        <th style="width: 40px">{{__('admin.Approve/Moderation')}}</th>
+                                        <th style="width: 40px">{{__('admin.Delete')}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -56,7 +56,7 @@
                                                     @method('patch')
                                                     @csrf
                                                     <button type="submit"
-                                                            class="btn btn-light btn-sm"> {{$house->status == 'approved' ? 'Return to moderation' : 'Approve'}}
+                                                            class="btn btn-light btn-sm"> {{$house->status == 'approved' ? __('admin.Return to moderation') : __('admin.Approve')}}
                                                     </button>
                                                 </form>
                                             </td>
@@ -67,7 +67,7 @@
                                                     @csrf
                                                     <button type="submit" class="btn btn-light btn-sm"><i
                                                             class="fas fa-trash">
-                                                        </i> Delete
+                                                        </i> {{__('admin.Delete')}}
                                                     </button>
                                                 </form>
                                             </td>

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('moderator.layouts.main')
 @section('content')
 
     <div class="content-wrapper" style="min-height: 1302.4px;">

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Country::class)->nullable()->constrained();
             $table->string('title');
+            $table->string('language')->default('en');
             $table->softDeletes();
             $table->timestamps();
         });

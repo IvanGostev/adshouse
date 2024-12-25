@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('moderator.layouts.main')
 @section('content')
     <div class="content-wrapper" style="min-height: 1302.4px;">
         <!-- Content Header (Page header) -->
@@ -14,26 +14,26 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Rooms</h3>
+                                <h3 class="card-title">{{__('admin.Rooms')}}</h3>
                             </div>
                             <div class="card-body ">
                                 <form class="row" action="{{route('moderator.room.search')}}">
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">Status</div>
+                                            <div class="fw-bold fs-6">{{__('admin.Status')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <select
                                                         class="form-select bootstrap-table-filter-control-price "
                                                         style="width: 100%;" dir="ltr" name="status">
-                                                        <option value="all">All</option>
+                                                        <option value="all">{{__('admin.All')}}  </option>
                                                         <option
                                                             {{request()['status'] == 'approved' ? 'selected' : '' }}  value="approved">
-                                                            Approved
+                                                            {{__('admin.Approved')}}
                                                         </option>
                                                         <option
                                                             {{request()['status'] == 'moderation' ? 'selected' : '' }} value="moderation">
-                                                            Moderation
+                                                            {{__('admin.Moderation')}}
                                                         </option>
                                                     </select>
                                                 </div>
@@ -42,13 +42,13 @@
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">City</div>
+                                            <div class="fw-bold fs-6">{{__('admin.City')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <select
                                                         class="form-select bootstrap-table-filter-control-price "
                                                         style="width: 100%;" dir="ltr" name="city_id">
-                                                        <option value="all">All</option>
+                                                        <option value="all">{{__('admin.All')}}  </option>
                                                         @foreach($cities as $city)
                                                             <option
                                                                 {{request()['city_id'] == $city->id ? 'selected' : '' }} value="{{$city->id}}">{{$city->title}}</option>
@@ -60,13 +60,13 @@
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">District</div>
+                                            <div class="fw-bold fs-6">{{__('admin.District')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <select
                                                         class="form-select bootstrap-table-filter-control-price "
                                                         style="width: 100%;" dir="ltr" name="district_id">
-                                                        <option value="all">All</option>
+                                                        <option value="all">{{__('admin.All')}}  </option>
                                                         @foreach($districts as $district)
                                                             <option
                                                                 {{request()['city_id'] == $district->id ? 'selected' : '' }} value="{{$district->id}}">{{$district->title}}</option>
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">Street</div>
+                                            <div class="fw-bold fs-6">{{__('admin.Street')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <input type="text" value="{{request()['street'] ?? ''}}"
@@ -89,7 +89,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">Email owner</div>
+                                            <div class="fw-bold fs-6">{{__('admin.Email owner')}} </div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <input type="text" value="{{request()['email'] ?? ''}}" name="email"
@@ -100,7 +100,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">Display</div>
+                                            <div class="fw-bold fs-6">{{__('admin.Display')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <input type="number" value="{{request()['paginateNumber'] ?? 12}}"
@@ -111,10 +111,10 @@
                                     </div>
                                     <div class="col-sm-12  col-md-2 d-flex gap-2">
                                         <button class="btn btn-light mt-3" tabindex="0"
-                                                aria-controls="example1" type="submit"><span>Search</span></button>
+                                                aria-controls="example1" type="submit"><span>{{__('admin.Search')}}</span></button>
                                         <a href="{{route('moderator.room.index')}}" class="btn btn-secondary mt-3"
                                            tabindex="0"
-                                           aria-controls="example1" type="submit"><span>Refresh</span></a>
+                                           aria-controls="example1" type="submit"><span>{{__('admin.Refresh')}}</span></a>
                                     </div>
                                 </form>
                                 <br>
@@ -124,12 +124,12 @@
                                         <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Qrcode</th>
-                                            <th>Address</th>
-                                            <th>Type</th>
-                                            <th>Description</th>
-                                            <th>Download qrcode</th>
-                                            <th style="width: 40px">Approve/Moderation</th>
+                                            <th>{{__('admin.Qrcode')}}</th>
+                                            <th>{{__('admin.Address')}}</th>
+                                            <th>{{__('admin.Type')}}</th>
+                                            <th>{{__('admin.Description')}}</th>
+                                            <th>{{__('admin.Download qrcode')}}</th>
+                                            <th style="width: 40px">{{__('admin.Approve/Moderation')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -148,7 +148,7 @@
 
                                                         <a class="btn btn-outline-success"
                                                            href="{{trim(explode('public', $room['qrcode_link'])[1])}}"
-                                                           download>Download</a>
+                                                           download>{{__('admin.Download')}}</a>
                                                     @else
                                                         -
                                                     @endif
@@ -160,7 +160,7 @@
                                                         @method('patch')
                                                         @csrf
                                                         <button type="submit"
-                                                                class="btn btn-light btn-sm"> {{$room->status == 'approved' ? 'Return to moderation' : 'Approve'}}
+                                                                class="btn btn-light btn-sm"> {{$room->status == 'approved' ? __('Return to moderation') : __('Approve')}}
                                                         </button>
                                                     </form>
                                                 </td>

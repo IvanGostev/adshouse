@@ -26,9 +26,10 @@ class CountryModeratorController extends Controller
     {
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
+            'language' => ['required', 'string', 'max:3'],
         ]);
 
-        Country::create(['title' => $request->title]);
+        Country::create(['title' => $request->title, 'language' => $request->language]);
         return redirect()->route('moderator.country.index');
     }
 

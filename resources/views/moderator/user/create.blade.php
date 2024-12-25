@@ -21,7 +21,7 @@
                         <!-- general form elements -->
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h3 class="card-title">Adding moderator</h3>
+                                <h3 class="card-title">{{__('admin.Adding')}} {{__('admin.moderator')}}</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -32,22 +32,22 @@
                                         <div class="col-sm-6">
                                             <!-- text input -->
                                             <div class="form-group">
-                                                <label>Email</label>
+                                                <label>{{__('admin.Email')}}</label>
                                                 <input type="email" name="email" class="form-control">
                                             </div>
                                             <div class="form-group">
-                                                <label>Phone</label>
+                                                <label>{{__('admin.Phone')}}</label>
                                                 <input type="tel" name="phone" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <!-- text input -->
                                             <div class="form-group">
-                                                <label>First name</label>
+                                                <label>{{__('admin.First name')}}</label>
                                                 <input type="text" name="name" class="form-control">
                                             </div>
                                             <div class="form-group">
-                                                <label>Last name</label>
+                                                <label>{{__('admin.Last name')}}</label>
                                                 <input type="text" name="last_name" class="form-control">
                                             </div>
                                         </div>
@@ -57,14 +57,11 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-light">Submit</button>
+                                    <button type="submit" class="btn btn-light">{{__('admin.Submit')}}</button>
                                 </div>
                             </form>
                         </div>
                         <!-- /.card -->
-
-
-
                     </div>
                     <!--/.col (left) -->
                     <!-- right column -->

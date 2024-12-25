@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="container">
                     <h1>
-                        Statistics of visitings
+                        {{__('main.Statistics of visitings')}}
                     </h1>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                         <div class="small-box bg-gradient-primary">
                             <div class="inner">
                                 <h3>{{$numberTransitionsToday}}</h3>
-                                <p>Scan today</p>
+                                <p>{{__('main.Scan today')}}</p>
                             </div>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                         <div class="small-box bg-verydark">
                             <div class="inner">
                                 <h3>{{$incomeWeek . ' AED'}}</h3>
-                                <p>Weekly income</p>
+                                <p>{{__('main.Weekly income')}}</p>
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                         <div class="small-box bg-verydark">
                             <div class="inner">
                                 <h3>{{$incomeAll . ' AED'}}</h3>
-                                <p>All income</p>
+                                <p>{{__('main.All income')}}</p>
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                 @for($i = 0; $i < count($apartments); $i++)
                     <div class="row">
                         <section>
-                            <h3 class="title">Apartment {{$i + 1}}</h3>
+                            <h3 class="title">{{__('main.Apartment')}} {{$i + 1}}</h3>
                         </section>
                         <section class="col-lg-7 connectedSortable">
                             <div class="card">
@@ -61,7 +61,7 @@
                                 <div class="small-box bg-verydark">
                                     <div class="inner">
                                         <h3>{{$apartments[$i]['numberTransitionsToday']}}</h3>
-                                        <p>Scans today</p>
+                                        <p>{{__('main.Scans today')}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                 <div class="small-box bg-verydark">
                                     <div class="inner">
                                         <h3>{{$apartments[$i]['numberTransitionsWeek']}}</h3>
-                                        <p>Scans per week</p>
+                                        <p>{{__('main.Scans per week')}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                 <div class="small-box bg-verydark">
                                     <div class="inner">
                                         <h3>{{$apartments[$i]['numberTransitionsMonth']}}</h3>
-                                        <p>Scans per month</p>
+                                        <p>{{__('main.Scans per month')}}</p>
                                     </div>
                                 </div>
 
@@ -94,7 +94,7 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Resources of our advertisers</h3>
+                                <h3 class="card-title">{{__('main.Resources of our advertisers')}}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -102,8 +102,8 @@
                                     <thead>
                                     <tr>
                                         <th style="width: 40px">ID</th>
-                                        <th>URL</th>
-                                        <th>Statistic</th>
+                                        <th>{{__('main.URL')}}</th>
+                                        <th>{{__('main.Statistic')}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -111,7 +111,7 @@
                                         <tr>
                                             <td>{{$link->id}}</td>
                                             <td><a href="{{$link->url}}">{{$link->url}}</a></td>
-                                            <td><a href="{{route('owner.link.statistic', $link->id)}}" class="btn btn-primary">Statistic</a>  </td>
+                                            <td><a href="{{route('owner.link.statistic', $link->id)}}" class="btn btn-primary">{{__('main.Statistic')}}</a>  </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -134,7 +134,7 @@
 
                                 <h3 class="card-title">
                                     <i class="far fa-calendar-alt"></i>
-                                    Calendar
+                                    {{__('main.Calendar')}}
                                 </h3>
                             </div>
                             <!-- /.card-header -->
@@ -168,7 +168,7 @@
             $("#chart-{{$i}}").shieldChart({
                 theme: "dark",
                 primaryHeader: {
-                    text: "Scans"
+                    text: "{{__('main.Scans')}}"
                 },
                 exportOptions: {
                     image: false,
@@ -190,7 +190,7 @@
                 },
                 dataSeries: [{
                     seriesType: 'line',
-                    collectionAlias: "Number of clicks",
+                    collectionAlias: "{{__('main.Number of clicks')}}",
                     data: [
                         @foreach($apartments[$i]['transitionsForChart'] as $transition)
                             {{$transition['views']}},

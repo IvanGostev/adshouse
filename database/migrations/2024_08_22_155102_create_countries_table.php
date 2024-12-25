@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('language')->default('en');
             $table->softDeletes();
             $table->timestamps();
         });

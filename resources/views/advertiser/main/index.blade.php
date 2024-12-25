@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="container">
                     <h1>
-                        Visit statistics
+                        {{__('main.Visit statistics')}}
                     </h1>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                         <div class="small-box bg-gradient-primary">
                             <div class="inner">
                                 <h3>{{$numberTransitionsToday}}</h3>
-                                <p>Unique visitors today</p>
+                                <p>{{__('main.Unique visitors today')}}</p>
                             </div>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                         <div class="small-box bg-verydark">
                             <div class="inner">
                                 <h3>{{$numberTransitionsWeek}}</h3>
-                                <p>Unique visitors per week</p>
+                                <p>{{__('main.Unique visitors per week')}}</p>
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                         <div class="small-box bg-verydark">
                             <div class="inner">
                                 <h3>{{$numberTransitionsMonth}}</h3>
-                                <p>Unique visitors per month</p>
+                                <p>{{__('main.Unique visitors per month')}}</p>
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
 
                                 <h3 class="card-title">
                                     <i class="far fa-calendar-alt"></i>
-                                    Calendar
+                                    {{__('main.Calendar')}}
                                 </h3>
                             </div>
                             <!-- /.card-header -->
@@ -77,7 +77,7 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Browser Usage</h3>
+                                <h3 class="card-title">{{__('main.Browser Usage')}}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -166,7 +166,7 @@
                 $("#chartAdvertiser").shieldChart({
                     theme: "dark",
                     primaryHeader: {
-                        text: "Visits this month"
+                        text: "{{__('main.Visits this month')}}"
                     },
                     exportOptions: {
                         image: false,
@@ -188,7 +188,7 @@
                     },
                     dataSeries: [{
                         seriesType: 'line',
-                        collectionAlias: "Number of clicks",
+                        collectionAlias: "{{__('main.Number of clicks')}}",
                         data: [
                             @foreach($transitionsForChartAdvertiser as $transition)
                                 {{$transition->views}},
@@ -202,7 +202,7 @@
                 $("#chartLastAdvertiser").shieldChart({
                     theme: "dark",
                     primaryHeader: {
-                        text: "Visits last month"
+                        text: "{{__('main.Visits this month')}}"
                     },
                     exportOptions: {
                         image: false,
@@ -224,7 +224,7 @@
                     },
                     dataSeries: [{
                         seriesType: 'line',
-                        collectionAlias: "Number of clicks",
+                        collectionAlias: "{{__('main.Number of clicks')}}",
                         data: [
                             @foreach($transitionsForChartLastAdvertiser as $transition)
                                 {{$transition->views}},

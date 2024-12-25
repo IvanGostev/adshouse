@@ -37,7 +37,8 @@ class RoomOwnerController extends Controller
 
     function create(House $house)
     {
-        $types = RoomType::all();
+        $lan = session()->has('language') ? session()->get('language') : 'en';
+        $types = RoomType::where('language', $lan)->get();
         return view('owner.room.create', compact('house', 'types'));
     }
 
@@ -55,7 +56,8 @@ class RoomOwnerController extends Controller
 
     function edit(Room $room)
     {
-        $types = RoomType::all();
+        $lan = session()->has('language') ? session()->get('language') : 'en';
+        $types = RoomType::where('language', $lan)->get();
         $slug = 'country:' . $room->house()->country()->title . '&city:' . $room->house()->city()->title . '&district:' . $room->house()->district()->title . '&street:' . $room->house()->street . '&numberhouse:' . $room->house()->number . '&apartmentnumber:' . $room->house()->apartment_number;
         $qrcode = QrCode::size(500)->style('round')->generate(route('ads', ['room' => $room->id, 'slug' => $slug]));
         $house = $room->house();

@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->double('price');
             $table->string('type'); // standard or shared
             $table->string('method'); // Rooms or Transitions
-
+            $table->string('language')->default('en');
             // Общие
             $table->bigInteger('number_rooms'); // Видно для Плана по комнатам и скрыт для переходного
 

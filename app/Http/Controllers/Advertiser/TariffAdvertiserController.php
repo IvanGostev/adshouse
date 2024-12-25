@@ -32,11 +32,12 @@ class TariffAdvertiserController extends Controller
 
     public function index(): View
     {
+        $lan = session()->has('language') ? session()->get('language') : 'en';
         $numberFreeRooms = Room::where('status', 'approved')->where('condition', 'free')->count();
-        $tariffs = Tariff::where('number_rooms', '<=', $numberFreeRooms)->paginate(10);
-        $countries = Country::all();
-        $cities = City::all();
-        $districts = District::all();
+        $tariffs = Tariff::where('language', $lan)->where('number_rooms', '<=', $numberFreeRooms)->paginate(10);
+        $countries = Country::where('language', $lan)->get();
+        $cities = City::where('language', $lan)->get();
+        $districts = District::where('language', $lan)->get();
         return view('advertiser.tariff.index', compact('tariffs', 'countries', 'cities', 'districts'));
     }
 

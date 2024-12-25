@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('moderator.layouts.main')
 @section('content')
     <div class="content-wrapper" style="min-height: 1302.4px;">
         <!-- Content Header (Page header) -->
@@ -18,7 +18,7 @@
                                       style="display: flex ;align-items: flex-end">
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">First name</div>
+                                            <div class="fw-bold fs-6">{{__('admin.First name')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <input type="text" value="{{request()['name'] ?? ''}}" name="name"
@@ -29,7 +29,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">Last name</div>
+                                            <div class="fw-bold fs-6">{{__('admin.Last name')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <input type="text" value="{{request()['last_name'] ?? ''}}"
@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">Email</div>
+                                            <div class="fw-bold fs-6">{{__('admin.Email')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <input type="text" value="{{request()['email'] ?? ''}}" name="email"
@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">Phone</div>
+                                            <div class="fw-bold fs-6">{{__('admin.Phone')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <input type="text" value="{{request()['phone'] ?? ''}}" name="phone"
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">Role</div>
+                                            <div class="fw-bold fs-6">{{__('admin.Role')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <select
@@ -70,27 +70,27 @@
                                                         style="width: 100%;" dir="ltr" name="role">
                                                         <option
                                                             {{request()['role'] == 'all' ? 'selected' : '' }} value="all">
-                                                            All
+                                                            {{__('admin.All')}}
                                                         </option>
                                                         <option
                                                             {{request()['role'] == 'owner' ? 'selected' : '' }} value="owner">
-                                                            Owner
+                                                            {{__('admin.Owner')}}
                                                         </option>
                                                         <option
                                                             {{request()['role'] == 'advertiser' ? 'selected' : '' }} value="advertiser">
-                                                            Advertiser
+                                                            {{__('admin.Advertiser')}}
                                                         </option>
                                                         <option
                                                             {{request()['role'] == 'user' ? 'selected' : '' }} value="user">
-                                                            User
+                                                            {{__('admin.User')}}
                                                         </option>
                                                         <option
                                                             {{request()['role'] == 'moderator' ? 'selected' : '' }} value="moderator">
-                                                            Moderator
+                                                            {{__('admin.Moderator')}}
                                                         </option>
                                                         <option
                                                             {{request()['role'] == 'admin' ? 'selected' : '' }} value="admin">
-                                                            Admin
+                                                            {{__('admin.Admin')}}
                                                         </option>
                                                     </select>
                                                 </div>
@@ -99,7 +99,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-2">
                                         <div>
-                                            <div class="fw-bold fs-6">Status</div>
+                                            <div class="fw-bold fs-6">{{__('admin.Status')}}</div>
                                             <div class="fht-cell">
                                                 <div class="filter-control">
                                                     <select
@@ -107,19 +107,19 @@
                                                         style="width: 100%;" dir="ltr" name="status">
                                                         <option
                                                             {{request()['status'] == 'all' ? 'selected' : '' }} value="all">
-                                                            All
+                                                            {{__('admin.All')}}
                                                         </option>
                                                         <option
                                                             {{request()['status'] == 'moderation' ? 'selected' : '' }} value="moderation">
-                                                            Moderation
+                                                            {{__('admin.Moderation')}}
                                                         </option>
                                                         <option
                                                             {{request()['status'] == 'cancelled' ? 'selected' : '' }} value="cancelled">
-                                                            Cancelled
+                                                            {{__('admin.Cancelled')}}
                                                         </option>
                                                         <option
                                                             {{request()['status'] == 'approved' ? 'selected' : '' }} value="approved">
-                                                            Approved
+                                                            {{__('admin.Approved')}}
                                                         </option>
                                                     </select>
                                                 </div>
@@ -128,14 +128,14 @@
                                     </div>
                                     <div class="col-sm-12  col-md-2 d-flex gap-2">
                                         <button class="btn btn-light mt-3" tabindex="0"
-                                                aria-controls="example1" type="submit"><span>Search</span></button>
+                                                aria-controls="example1" type="submit"><span>{{__('admin.Search')}}</span></button>
                                         <a href="{{route('moderator.balance.index')}}" class="btn btn-secondary mt-3"
                                            tabindex="0"
-                                           aria-controls="example1" type="submit"><span>Refresh</span></a>
+                                           aria-controls="example1" type="submit"><span>{{__('admin.Refresh')}}</span></a>
                                     </div>
                                 </form>
                                 <br>
-                                <h3 class="card-title">Applications</h3>
+                                <h3 class="card-title">{{__('admin.Applications')}}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -143,13 +143,13 @@
                                     <table class="table table-hover text-nowrap">
                                         <thead>
                                         <tr>
-                                            <th>Full name</th>
-                                            <th>Type</th>
-                                            <th>Amount</th>
-                                            <th>Method</th>
-                                            <th>Information</th>
-                                            <th>Date</th>
-                                            <th style="width: 100px">Status</th>
+                                            <th>{{__('admin.Full name')}}</th>
+                                            <th>{{__('admin.Type')}}</th>
+                                            <th>{{__('admin.Amount')}}</th>
+                                            <th>{{__('admin.Method')}}</th>
+                                            <th>{{__('admin.Information')}}</th>
+                                            <th>{{__('admin.Date')}}</th>
+                                            <th style="width: 100px">{{__('admin.Status')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -170,7 +170,7 @@
                                                                 @csrf
                                                                 @method('patch')
                                                                 <button name="status" value="approved" type="submit"
-                                                                        class="btn btn-success btn-sm">Approve
+                                                                        class="btn btn-success btn-sm">     {{__('admin.Approve')}}
                                                                 </button>
                                                             </form>
 
@@ -180,14 +180,14 @@
                                                                 @csrf
                                                                 @method('patch')
                                                                 <button name="status" value="cancelled" type="submit"
-                                                                        class="btn btn-danger btn-sm">Reject
+                                                                        class="btn btn-danger btn-sm">{{__('admin.Reject')}}
                                                                 </button>
                                                             </form>
                                                         </div>
                                                     @elseif($item->status == 'approved')
-                                                        <span class="badge bg-success">{{$item->status}}</span>
+                                                        <span class="badge bg-success">{{__('admin.approved')}}</span>
                                                     @elseif($item->status == 'canceled')
-                                                        <span class="badge bg-danger">{{$item->status}}</span>
+                                                        <span class="badge bg-danger">{{__('admin.canceled')}}</span>
                                                     @endif
 
                                                 </td>

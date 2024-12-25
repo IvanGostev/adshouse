@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('moderator.layouts.main')
 @section('content')
 
     <div class="content-wrapper" style="min-height: 1302.4px;">
@@ -16,14 +16,14 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Links</h3>
+                                    <h3 class="card-title">{{__('admin.Links')}}</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Rooms</h3>
+                                    <h3 class="card-title">{{__('admin.Rooms')}}</h3>
                                 </div>
                             </div>
                         </div>
@@ -33,14 +33,14 @@
                             @foreach($links as $key => $item)
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">History date {{$key}}</h3>
+                                        <h3 class="card-title">{{__('admin.History date')}} {{$key}}</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="card-body table-responsive p-0">
                                             <table class="table table-hover text-nowrap">
                                                 <thead>
                                                 <tr>
-                                                    <th style="width: 30px">Address</th>
+                                                    <th style="width: 30px">{{__('admin.Address')}}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -62,14 +62,14 @@
                             @foreach($historyRooms as $key => $historyRoom)
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">History date {{$key}}</h3>
+                                        <h3 class="card-title">{{__('admin.History date')}} {{$key}}</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="card-body table-responsive p-0">
                                             <table class="table table-hover text-nowrap">
                                                 <thead>
                                                 <tr>
-                                                    <th style="width: 30px">Address</th>
+                                                    <th style="width: 30px">{{__('admin.Address')}}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>

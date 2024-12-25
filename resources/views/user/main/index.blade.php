@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="container">
                     <h1>
-                        Scans statistics
+                        {{__('main.Scans statistics')}}
                     </h1>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                         <div class="small-box bg-gradient-primary">
                             <div class="inner">
                                 <h3>{{$incomeToday . ' AED'}}</h3>
-                                <p>Income today</p>
+                                <p>{{__('main.Income today')}}</p>
                             </div>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                         <div class="small-box bg-verydark">
                             <div class="inner">
                                 <h3>{{$incomeAll . ' AED'}}</h3>
-                                <p>Income all</p>
+                                <p>{{__('main.Income all')}}</p>
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                         <div class="small-box bg-verydark">
                             <div class="inner">
                                 <h3>{{$numberTransitionsToday}}</h3>
-                                <p>Scans today</p>
+                                <p>{{__('main.Scans today')}}</p>
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                         <div class="small-box bg-verydark">
                             <div class="inner">
                                 <h3>{{$numberTransitionsWeek}}</h3>
-                                <p>Scans per week</p>
+                                <p>{{__('main.Scans per week')}}</p>
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                         <div class="small-box bg-verydark">
                             <div class="inner">
                                 <h3>{{$numberTransitionsMonth}}</h3>
-                                <p>Scans per month</p>
+                                <p>{{__('main.Scans per month')}}</p>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
 
                                 <h3 class="card-title">
                                     <i class="far fa-calendar-alt"></i>
-                                    Calendar
+                                    {{__('main.Calendar')}}
                                 </h3>
                             </div>
                             <!-- /.card-header -->
@@ -110,7 +110,7 @@
                 $("#chartAdvertiser").shieldChart({
                     theme: "dark",
                     primaryHeader: {
-                        text: "Monthly scan statistics"
+                        text: "{{__('main.Monthly scan statistics')}}"
                     },
                     exportOptions: {
                         image: false,
@@ -132,7 +132,7 @@
                     },
                     dataSeries: [{
                         seriesType: 'line',
-                        collectionAlias: "Number of scans",
+                        collectionAlias: "{{__('main.Number of scans')}}",
                         data: [
                             @foreach($transitionsForChartAdvertiser as $transition)
                                 {{$transition->views}},

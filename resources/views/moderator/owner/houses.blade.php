@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('moderator.layouts.main')
 @section('content')
     <div class="content-wrapper" style="min-height: 1302.4px;">
         <!-- Content Header (Page header) -->
@@ -14,7 +14,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Apartments</h3>
+                                <h3 class="card-title">{{__('admin.Apartments')}}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body table-responsive">
@@ -22,16 +22,16 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Date of creation</th>
-                                        <th>Email user</th>
-                                        <th>Description</th>
-                                        <th>Country</th>
-                                        <th>City</th>
-                                        <th>District</th>
-                                        <th>Street</th>
-                                        <th>Building/Community name</th>
-                                        <th>Number/Name apartment</th>
-                                        <th>Room number</th>
+                                        <th>{{__('admin.Date of creation')}} </th>
+                                        <th>{{__('admin.Email user')}}</th>
+                                        <th>{{__('admin.Description')}}</th>
+                                        <th>{{__('admin.Country')}}</th>
+                                        <th>{{__('admin.City')}}</th>
+                                        <th>{{__('admin.District')}}</th>
+                                        <th>{{__('admin.Street')}}</th>
+                                        <th>{{__('admin.Building/Community name')}}</th>
+                                        <th>{{__('admin.Number/Name apartment')}}</th>
+                                        <th>{{__('admin.Room number')}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>

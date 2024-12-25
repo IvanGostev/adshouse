@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('moderator.layouts.main')
 @section('content')
     <div class="content-wrapper" style="min-height: 1302.4px;">
         <!-- Content Header (Page header) -->
@@ -14,7 +14,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Advertised links</h3>
+                                <h3 class="card-title">{{__('admin.Advertised links')}}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -23,11 +23,11 @@
                                         <thead>
                                         <tr>
                                             <th style="width: 50px">ID</th>
-                                            <th>Preview</th>
-                                            <th>URL</th>
-                                            <th style="width: 40px">Approve</th>
-                                            <th style="width: 150px">Refund the funds</th>
-                                            <th style="width: 150px">Statistic</th>
+                                            <th>{{__('admin.Preview')}}</th>
+                                            <th>{{__('admin.URL')}}</th>
+                                            <th style="width: 40px">{{__('admin.Approve')}}</th>
+                                            <th style="width: 150px">{{__('admin.Refund the funds')}}</th>
+                                            <th style="width: 150px">{{__('admin.Statistic')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -44,7 +44,7 @@
                                                               method="post">
                                                             @method('patch')
                                                             @csrf
-                                                            <button type="submit" class="btn btn-light btn-sm"> Approve
+                                                            <button type="submit" class="btn btn-light btn-sm">{{__('admin.Approve')}}
                                                             </button>
                                                         </form>
                                                     @endif
@@ -56,7 +56,7 @@
                                                               method="post">
                                                             @method('patch')
                                                             @csrf
-                                                            <button type="submit" class="btn btn-light btn-sm"> Refund
+                                                            <button type="submit" class="btn btn-light btn-sm"> {{__('admin.Refund')}}
                                                             </button>
                                                         </form>
                                                     @else
@@ -64,14 +64,14 @@
                                                               method="post">
                                                             @method('patch')
                                                             @csrf
-                                                            <button type="submit" class="btn btn-light btn-sm"> Refund
+                                                            <button type="submit" class="btn btn-light btn-sm"> {{__('admin.Refund')}}
                                                             </button>
                                                         </form>
                                                     @endif
                                                 </td>
                                                 <td>
                                                     <a href="{{route('moderator.link.statistic', $link->id)}}"
-                                                       class="btn btn-primary">Statistic</a>
+                                                       class="btn btn-primary">{{__('admin.Statistic')}}</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -96,7 +96,7 @@
     @if($errors->any())
         <div id="toastsContainerTopRight" class="toasts-top-right fixed">
             <div class="toast bg-danger fade show" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header"><strong class="mr-auto">Error</strong>
+                <div class="toast-header"><strong class="mr-auto">{{__('admin.Error')}}</strong>
                 </div>
                 <div class="toast-body">{{$errors->first()}}</div>
             </div>

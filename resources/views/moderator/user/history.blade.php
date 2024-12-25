@@ -19,7 +19,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Operation history</h3>
+                                    <h3 class="card-title"{{__('admin.Operation history')}}></h3>
                                 </div>
 
                                 <div class="card-body table-responsive p-0">
@@ -27,10 +27,10 @@
                                         <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Type</th>
-                                            <th>Amount</th>
-                                            <th>Status</th>
-                                            <th>Date</th>
+                                            <th>{{__('admin.Type')}}</th>
+                                            <th>{{__('admin.Amount')}}</th>
+                                            <th>{{__('admin.Status')}}</th>
+                                            <th>{{__('admin.Date')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>

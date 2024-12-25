@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('moderator.layouts.main')
 @section('content')
     <div class="content-wrapper" style="min-height: 1302.4px;">
         <!-- Content Header (Page header) -->
@@ -15,9 +15,9 @@
                         <div class="card">
                             <div class="card-header">
                                 <a href="{{ route('moderator.room-type.create') }}"
-                                   class="btn btn-block btn-outline-light">Add</a>
+                                   class="btn btn-block btn-outline-light">{{__('admin.Add')}}</a>
                                 <br>
-                                <h3 class="card-title">Types rooms</h3>
+                                <h3 class="card-title">{{__('admin.Types rooms')}}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -25,9 +25,9 @@
                                     <table class="table table-hover text-nowrap">
                                         <thead>
                                         <tr>
-                                            <th>Title</th>
-                                            <th style="width: 40px">Edit</th>
-                                            <th style="width: 40px">Delete</th>
+                                            <th>{{__('admin.Title')}}</th>
+                                            <th style="width: 40px">{{__('admin.Edit')}}</th>
+                                            <th style="width: 40px">{{__('admin.Delete')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -39,7 +39,7 @@
                                                        href="{{route('moderator.room-type.edit', $type->id)}}">
                                                         <i class="fas fa-pencil-alt">
                                                         </i>
-                                                        Edit
+                                                        {{__('admin.Edit')}}
                                                     </a>
                                                 </td>
 
@@ -48,9 +48,9 @@
                                                           method="post">
                                                         @method('delete')
                                                         @csrf
-                                                        <button type="mit" class="btn btn-light btn-sm"><i
+                                                        <button type="submit" class="btn btn-light btn-sm"><i
                                                                 class="fas fa-trash">
-                                                            </i> Delete
+                                                            </i> {{__('admin.Delete')}}
                                                         </button>
                                                     </form>
                                                 </td>

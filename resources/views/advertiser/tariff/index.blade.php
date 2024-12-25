@@ -24,9 +24,9 @@
                                       method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="align-items-center text-center">
-                                        <strong>Days: {{$tariff->days}}</strong>
+                                        <strong>{{__('main.Days')}}: {{$tariff->days}}</strong>
                                         <br>
-                                        <strong>Price: {{$tariff->price}} AED</strong>
+                                        <strong>{{__('main.Price')}}: {{$tariff->price}} AED</strong>
                                     </div>
                                     <br>
                                     <p class="text-muted">
@@ -36,51 +36,48 @@
                                     @if($tariff->type == 'shared')
                                         <div class="form-group">
                                             <label>
-                                                Preview
-                                                Recommended size: 1080 x 1080 pixels
-                                                Aspect Ratio: 1:1
-                                            </label>
+                                                {{__('main.Preview Recommended size: 1080 x 1080 pixels Aspect Ratio: 1:1')}}</label>
                                             <input type="file" class="form-control my-colorpicker1 colorpicker-element"
                                                    name="img" data-colorpicker-id="1" data-original-title="" title="">
                                         </div>
                                     @endif
                                     <div class="form-group">
-                                        <label>Advertised link</label>
+                                        <label>{{__('main.Advertised link')}}</label>
                                         <input type="url" name="url"
                                                class="form-control my-colorpicker1 colorpicker-element"
                                                data-colorpicker-id="1" data-original-title="" title="">
                                     </div>
                                     <div class="form-group country">
-                                        <label>Country</label>
+                                        <label>{{__('main.Country')}}</label>
                                         <select name="country_id"
                                                 class="country_id form-control my-colorpicker1 colorpicker-element">
-                                            <option value="all">All</option>
+                                            <option value="all">{{__('main.All')}}</option>
                                             @foreach($countries as $country)
                                                 <option value="{{$country->id}}">{{$country->title}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group city" style="display: none">
-                                        <label>City</label>
+                                        <label>{{__('main.City')}}</label>
                                         <select name="city_id" class="city_id form-control my-colorpicker1 colorpicker-element">
-                                            <option value="all">All</option>
+                                            <option value="all">{{__('main.All')}}</option>
                                             @foreach($cities as $city)
                                                 <option value="{{$city->id}}">{{$city->title}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group district" style="display: none">
-                                        <label>Area</label>
+                                        <label>{{__('main.Area')}}</label>
                                         <select name="district_id"
                                                 class="district_id form-control my-colorpicker1 colorpicker-element">
-                                            <option value="all">All</option>
+                                            <option value="all">{{__('main.All')}}</option>
                                             @foreach($districts as $district)
                                                 <option value="{{$district->id}}">{{$district->title}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <button class="btn btn btn-light btn-block" type="submit">Pay</button>
+                                        <button class="btn btn btn-light btn-block" type="submit">{{__('main.Pay')}}</button>
                                     </div>
                                 </form>
                             </div>

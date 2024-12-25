@@ -19,7 +19,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Plans</h3>
+                                    <h3 class="card-title">{{__('admin.Plans')}}</h3>
                                 </div>
 
                                 <div class="card-body table-responsive p-0">
@@ -27,11 +27,11 @@
                                         <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Link</th>
-                                            <th>Title</th>
-                                            <th>Price</th>
-                                            <th>Status</th>
-                                            <th>Date of purchase</th>
+                                            <th>{{__('admin.Link')}}</th>
+                                            <th>{{__('admin.Title')}}</th>
+                                            <th>{{__('admin.Price')}}</th>
+                                            <th>{{__('admin.Status')}}</th>
+                                            <th>{{__('admin.Date of purchase')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -40,7 +40,7 @@
                                                 <td>{{$item->id}}</td>
                                                 <td>{{$item->link}}</td>
                                                 <td>{{$item->tarrif()->title}}</td>
-                                                <td>{{$item->tarrif()->price . ' RUB'}}</td>
+                                                <td>{{$item->tarrif()->price . ' АЕD'}}</td>
                                                 <td>{{$item->status}}</td>
                                                 <td>{{$item->created_at}}</td>
                                             </tr>

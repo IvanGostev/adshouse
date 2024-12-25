@@ -14,7 +14,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Resources of our advertisers</h3>
+                                <h3 class="card-title">{{__('main.Resources of our advertisers')}}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -22,8 +22,8 @@
                                     <thead>
                                     <tr>
                                         <th style="width: 40px">ID</th>
-                                        <th>URL</th>
-                                        <th>Statistic</th>
+                                        <th>{{__('main.URL')}}</th>
+                                        <th>{{__('main.Statistic')}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -31,7 +31,7 @@
                                         <tr>
                                             <td>{{$link->id}}</td>
                                             <td><a href="{{$link->url}}">{{$link->url}}</a></td>
-                                            <td><a href="{{route('owner.link.statistic', $link->id)}}" class="btn btn-primary">Statistic</a>  </td>
+                                            <td><a href="{{route('owner.link.statistic', $link->id)}}" class="btn btn-primary">{{__('main.Statistic')}}</a>  </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

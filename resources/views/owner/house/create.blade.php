@@ -22,7 +22,7 @@
                         <!-- general form elements -->
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h3 class="card-title">Adding apartment</h3>
+                                <h3 class="card-title">{{__('main.Adding')}} {{__('main.apartment')}}</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -33,7 +33,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Country</label>
+                                                <label>{{__('main.Country')}}</label>
                                                 <select name="country_id" class="form-control">
                                                     @foreach($countries as $country)
                                                         <option value="{{$country->id}}">{{$country->title}}</option>
@@ -41,7 +41,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>City</label>
+                                                <label>{{__('main.City')}}</label>
                                                 <select name="city_id" class="form-control">
                                                     @foreach($cities as $city)
                                                         <option value="{{$city->id}}">{{$city->title}}</option>
@@ -49,7 +49,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>Area</label>
+                                                <label>{{__('main.Area')}}</label>
                                                 <select name="district_id" class="form-control">
                                                     @foreach($districts as $district)
                                                         <option value="{{$district->id}}">{{$district->title}}</option>
@@ -57,24 +57,24 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>Street</label>
+                                                <label>{{__('main.Street')}}</label>
                                                 <input type="text" name="street" class="form-control"
-                                                       placeholder="Enter ...">
+                                                       placeholder="{{__('main.Enter')}} ...">
                                             </div>
                                             <div class="form-group">
-                                                <label>Building/Community name</label>
+                                                <label>{{__('main.Building/Community name')}}</label>
                                                 <input type="text" name="number" class="form-control"
-                                                       placeholder="Enter ..." required>
+                                                       placeholder="{{__('main.Enter')}} ..." required>
                                             </div>
                                             <div class="form-group">
-                                                <label>Number/Name apartment (not necessary if you have a private house)</label>
+                                                <label>{{__('main.Number/Name apartment (not necessary if you have a private house)')}}</label>
                                                 <input type="text" name="apartment_number" class="form-control"
-                                                       placeholder="Enter ...">
+                                                       placeholder="{{__('main.Enter')}} ...">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Rooms</label>
+                                                <label>{{__('main.Rooms')}}</label>
                                                 <select class="select2"  multiple name="types[]" data-placeholder="Select rooms" style="width: 100%;">
                                                     @foreach($types as $type)
                                                         <option value="{{$type->id}}">{{$type->title}}</option>
@@ -82,14 +82,14 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>Description</label>
+                                                <label>{{__('main.Description')}}</label>
                                                 <textarea  class="form-control" rows="7"
-                                                           name="about" placeholder="Enter..." ></textarea>
+                                                           name="about" placeholder="{{__('main.Enter')}}..." ></textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-light">Submit for moderation</button>
+                                        <button type="submit" class="btn btn-light">{{__('main.Submit for moderation')}}</button>
                                     </div>
                                 </div>
                             </form>

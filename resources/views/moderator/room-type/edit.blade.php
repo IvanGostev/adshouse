@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('moderator.layouts.main')
 @section('content')
     <div class="content-wrapper" style="min-height: 1345.6px;">
         <!-- Content Header (Page header) -->
@@ -21,7 +21,7 @@
                         <!-- general form elements -->
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h3 class="card-title">Editing type</h3>
+                                <h3 class="card-title">{{__('admin.Editing')}} {{__('admin.type')}}</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -32,7 +32,7 @@
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
-                                            <label>Title</label>
+                                            <label>{{__('admin.Title')}}</label>
                                             <input type="text" value="{{$type->title}}" name="title" class="form-control" placeholder="Enter ...">
                                         </div>
                                     </div>
@@ -41,7 +41,7 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-light">Submit</button>
+                                    <button type="submit" class="btn btn-light">{{__('admin.Submit')}}</button>
                                 </div>
                             </form>
                         </div>

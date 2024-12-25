@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('moderator.layouts.main')
 @section('content')
     <div class="content-wrapper" style="min-height: 1345.6px;">
         <!-- Content Header (Page header) -->
@@ -21,7 +21,7 @@
                         <!-- general form elements -->
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h3 class="card-title">Adding area</h3>
+                                <h3 class="card-title">{{__('admin.Adding')}} {{__('admin.area')}}</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -30,7 +30,14 @@
                                 <div class="card-body">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label>City</label>
+                                            <label>{{__('admin.Language')}}</label>
+                                            <select name="language" class="form-control">
+                                                <option value="en">English</option>
+                                                <option value="ru">Русский</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>{{__('admin.City')}}</label>
                                             <select name="city_id" class="form-control">
                                                 @foreach($cities as $city)
                                                     <option value="{{$city->id}}">{{$city->title}}</option>
@@ -38,7 +45,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>Title</label>
+                                            <label>{{__('admin.Title')}}</label>
                                             <input type="text" name="title" class="form-control">
                                         </div>
                                     </div>
@@ -47,7 +54,7 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-light">Submit</button>
+                                    <button type="submit" class="btn btn-light">{{__('admin.Submit')}}</button>
                                 </div>
                             </form>
                         </div>

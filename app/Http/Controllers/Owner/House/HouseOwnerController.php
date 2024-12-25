@@ -40,10 +40,12 @@ class HouseOwnerController extends Controller
     function create()
     {
         $houses = House::where('user_id', auth()->user()->id)->paginate(12);
-        $countries = Country::all();
-        $cities = City::all();
-        $districts = District::all();
-        $types = RoomType::all();
+
+        $lan = session()->has('language') ? session()->get('language') : 'en';
+        $countries = Country::where('language', $lan)->get();
+        $cities = City::where('language', $lan)->get();
+        $districts = District::where('language', $lan)->get();
+        $types = RoomType::where('language', $lan)->get();
         return view('owner.house.create', compact('houses', 'countries', 'cities', 'districts', 'types'));
     }
 
@@ -79,9 +81,10 @@ class HouseOwnerController extends Controller
 
     function edit(House $house)
     {
-        $countries = Country::all();
-        $cities = City::all();
-        $districts = District::all();
+        $lan = session()->has('language') ? session()->get('language') : 'en';
+        $countries = Country::where('language', $lan)->get();
+        $cities = City::where('language', $lan)->get();
+        $districts = District::where('language', $lan)->get();
         return view('owner.house.edit', compact('house', 'cities', 'countries', 'districts'));
     }
 

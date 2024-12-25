@@ -41,13 +41,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('auth.Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registration') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('auth.Registration') }}</a>
                                 </li>
                             @endif
                         @else
@@ -60,7 +60,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('auth.Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -69,6 +69,22 @@
                                 </div>
                             </li>
                         @endguest
+                        <li class="nav-item">
+                            <form action="{{route('language.switch')}}" method="post">
+                                @csrf
+                                <select onchange="this.form.submit()" name="language"
+                                        class="form-select bootstrap-table-filter-control-price "
+                                        style="width: 100%;" dir="ltr">
+                                    <option
+                                        {{((session()->get('language') !== null ) and (session()->get('language') == 'en')) ? 'selected' : ''}} value="en">
+                                        English
+                                    </option>
+                                    <option {{((session()->get('language') !== null ) and (session()->get('language') == 'ru')) ? 'selected' : ''}} value="ru">
+                                        Русский
+                                    </option>
+                                </select>
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </div>
