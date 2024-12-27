@@ -12,7 +12,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
+    'Logout' => 'Выход',
 
     'Login' => 'Вход',
     'Email' => 'Email',

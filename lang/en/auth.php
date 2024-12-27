@@ -13,6 +13,7 @@ return [
     |
     */
     'Login' => 'Login',
+    'Logout' => 'Logout',
     'Email' => 'Email',
     'Advertiser' => 'Advertiser',
     'Owner' => 'Owner',
