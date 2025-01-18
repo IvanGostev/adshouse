@@ -11,6 +11,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Moderator\BalanceModeratorController;
 use App\Http\Controllers\Moderator\CityModeratorController;
 use App\Http\Controllers\Moderator\CountryModeratorController;
+use App\Http\Controllers\Moderator\CurrencyModeratorController;
 use App\Http\Controllers\Moderator\DistrictModeratorController;
 use App\Http\Controllers\Moderator\HouseModeratorController;
 use App\Http\Controllers\Moderator\LinkModeratorController;
@@ -140,6 +141,18 @@ Route::middleware(\App\Http\Middleware\WWWMiddleware::class)->group(function () 
                         Route::patch('/{country}', 'update')->name('update');
                         Route::delete('/{country}', 'destroy')->name('destroy');
                     });
+                Route::controller(CurrencyModeratorController::class)
+                    ->prefix('currencies')
+                    ->name('currency.')
+                    ->group(function () {
+                        Route::get('/', 'index')->name('index');
+                        Route::get('/create', 'create')->name('create');
+                        Route::post('/', 'store')->name('store');
+                        Route::get('/edit/{currency}', 'edit')->name('edit');
+                        Route::patch('/{currency}', 'update')->name('update');
+                        Route::delete('/{currency}', 'destroy')->name('destroy');
+                    });
+
                 Route::controller(CityModeratorController::class)
                     ->prefix('cities')
                     ->name('city.')

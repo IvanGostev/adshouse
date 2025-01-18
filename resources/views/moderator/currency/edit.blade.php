@@ -21,33 +21,23 @@
                         <!-- general form elements -->
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h3 class="card-title">{{__('admin.Adding')}} {{__('admin.country')}}</h3>
+                                <h3 class="card-title">{{__('admin.Editing')}} {{__('admin.currency')}}</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{ route('moderator.country.store') }}" method="post">
+                            <form action="{{ route('moderator.currency.update', $currency->id) }}" method="post">
                                 @csrf
+                                @method('patch')
                                 <div class="card-body">
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
-                                            <label>{{__('admin.Language')}}</label>
-                                            <select name="language" class="form-control">
-                                                <option value="en">English</option>
-                                                <option value="ru">Русский</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>{{__('admin.Currency')}}</label>
-                                            <select name="currency_id" class="form-control">
-                                                @foreach($currencies as $currency)
-                                                    <option value="{{$currency->id}}">{{$currency->title}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
                                             <label>{{__('admin.Title')}}</label>
-                                            <input type="text" name="title" class="form-control">
+                                            <input type="text" value="{{$currency->title}}" name="title" class="form-control" placeholder="Enter ...">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>{{__('admin.Value')}}</label>
+                                            <input type="number" step="0.01" value="{{$currency->value}}" name="value" class="form-control">
                                         </div>
                                     </div>
 
@@ -60,6 +50,7 @@
                             </form>
                         </div>
                         <!-- /.card -->
+
 
 
                     </div>

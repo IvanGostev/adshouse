@@ -35,6 +35,7 @@ class BalanceController extends Controller
             'method' => ['required', Rule::in(['account'])],
             'information' => ['string', 'required']
         ]);
+        $data['amount'] = $data['amount'] / activeCountry()->currency()->value;
         if ($data['type'] == 'withdraw') {
             $user = auth()->user();
             if ($user->balance >= $data['amount']) {
@@ -48,6 +49,7 @@ class BalanceController extends Controller
             DB::beginTransaction();
             BalanceApplication::create([
                 'amount' => $data['amount'],
+                'currency_id' => activeCountry()->currency()->id,
                 'type' => $data['type'],
                 'method' => $data['method'],
                 'information' => $data['information'],

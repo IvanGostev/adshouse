@@ -27,7 +27,7 @@
                                             @endif
                                             <strong>{{__('main.Days')}}: {{$tariff->days}}</strong>
                                             <br>
-                                            <strong>{{__('main.Price')}}: {{$tariff->price}} AED</strong>
+                                            <strong>{{__('main.Price')}}: {{$tariff->price * activeCountry()->currency()->value}} {{activeCountry()->currency()->title}}</strong>
                                         </div>
                                     @else
 
@@ -37,7 +37,7 @@
                                             @endif
                                             <strong>{{__('main.Transitions')}}: {{$tariff->fulfilled_transitions . '/' . $tariff->transitions}}</strong>
                                             <br>
-                                            <strong>{{__('main.Price')}}: {{$tariff->price}} AED</strong>
+                                            <strong>{{__('main.Price')}}: {{$tariff->price * activeCountry()->currency()->value}} {{activeCountry()->currency()->title}}</strong>
                                         </div>
                                     @endif
                                     <br>

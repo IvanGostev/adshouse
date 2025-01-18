@@ -26,11 +26,11 @@
                                     <div class="align-items-center text-center">
                                         <strong>{{__('main.Days')}}: {{$tariff->days}}</strong>
                                         <br>
-                                        <strong>{{__('main.Price')}}: {{$tariff->price}} AED</strong>
+                                        <strong>{{__('main.Price')}}: {{$tariff->price * activeCountry()->currency()->value}} {{activeCountry()->currency()->title}}</strong>
                                     </div>
                                     <br>
                                     <p class="text-muted">
-                                        {{$tariff->about}}
+                                        {!! $tariff->about !!}
                                     </p>
 
                                     @if($tariff->type == 'shared')

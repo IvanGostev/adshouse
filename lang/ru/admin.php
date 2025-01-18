@@ -64,7 +64,7 @@ return [
     'Admin' => 'Админ',
     'Moderator' => 'Модератор',
     'Advertiser' => 'Рекламодатель',
-    'Owner' => 'Владелиц',
+    'Owner' => 'Cобственник',
     'Moderation' => 'Модерация',
     'Cancelled' => 'Отмененные',
     'Approved' => 'Одобренные',
@@ -138,4 +138,9 @@ return [
     'Language' => 'Язык',
     'Number of clicks' => 'Количество кликов',
     'The number of clicks on the advertised link' => 'Количество переходов по рекламируемой ссылке',
+    'currency' => 'валюта',
+    'Currencies' => 'Валюты',
+    'Currency' => 'Валюта',
+    'Value' => 'Значение',
+    'All currencies should be indicated with a multiplier for the AED' => 'Все валюты должны быть указаны с множителем для дирхамов ОАЭ',
 ];

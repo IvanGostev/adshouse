@@ -18,7 +18,7 @@
 
                             <div class="small-box bg-verydark">
                                 <div class="inner">
-                                    <h3>{{auth()->user()->balance . ' AED'}}</h3>
+                                    <h3>{{auth()->user()->balance * activeCountry()->currency()->value . ' ' . activeCountry()->currency()->title}}</h3>
                                     <p>{{__('main.Balance')}}</p>
                                 </div>
                             </div>
@@ -37,11 +37,11 @@
                                         <div class="col-md-12">
                                             <label for="exampleInputEmail1">{{__('main.Amount')}}</label>
                                             <div class="input-group">
-                                                <input type="number" step="0.1" class="form-control"  {{auth()->user()->role != 'advertiser' ? 'value=' . auth()->user()->balance : ''}}
+                                                <input type="number" step="0.1" class="form-control"  {{auth()->user()->role != 'advertiser' ? 'value=' . auth()->user()->balance * activeCountry()->currency()->value : ''}}
                                                        id="exampleInputEmail1"
                                                        name="amount" >
                                                 <div class="input-group-append">
-                                                    <span class="input-group-text">AED</span>
+                                                    <span class="input-group-text">{{activeCountry()->currency()->title}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -92,7 +92,7 @@
                                                 <td>{{$transaction->id}}</td>
                                                 <td>{{__('main.'. $transaction->type)}}</td>
                                                 <td>{{__('main.'. $transaction->method)}}</td>
-                                                <td>{{$transaction->amount . ' AED'}}</td>
+                                                <td>{{$transaction->amount * $transition->currency()->value . $transition->currency()->title}}</td>
                                                 <td>{{__('main.'. $transaction->status)}}</td>
                                                 <td>{{$transaction->created_at}}</td>
                                             </tr>

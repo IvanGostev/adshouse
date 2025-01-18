@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Currency;
 use App\Models\Room;
 use App\Models\User;
 use App\Models\UserTariff;

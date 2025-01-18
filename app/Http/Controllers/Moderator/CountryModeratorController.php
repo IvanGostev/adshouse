@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Moderator;
 
 use App\Http\Controllers\Controller;
 use App\Models\Country;
+use App\Models\Currency;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -19,7 +20,8 @@ class CountryModeratorController extends Controller
     }
 
     public function create() : View {
-        return view('moderator.country.create');
+        $currencies = Currency::all();
+        return view('moderator.country.create', compact('currencies'));
     }
 
     public function store(Request $request) : RedirectResponse
@@ -27,9 +29,16 @@ class CountryModeratorController extends Controller
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'language' => ['required', 'string', 'max:3'],
+            'currency_id' => ['required'],
         ]);
+        $data = $request->all();
+        if ($data['language'] == 'en') {
+            $data['language_full'] = 'English';
+        } else {
+            $data['language_full'] = 'Русский';
+        }
 
-        Country::create(['title' => $request->title, 'language' => $request->language]);
+        Country::create($data);
         return redirect()->route('moderator.country.index');
     }
 

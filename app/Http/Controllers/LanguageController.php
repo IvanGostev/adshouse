@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\Message;
 use App\Models\Post;
 use App\Models\Review;
@@ -12,7 +13,8 @@ class LanguageController extends Controller
 {
     public function switch(Request $request)
     {
-        session()->put('language', $request->input('language'));
+        session()->put('language', Country::where('id', $request->input('country_id'))->first()->language);
+        session()->put('country_id', $request->input('country_id'));
         return redirect()->back();
     }
 }

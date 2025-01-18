@@ -28,7 +28,7 @@
 
                         <div class="small-box bg-verydark">
                             <div class="inner">
-                                <h3>{{$incomeWeek . ' AED'}}</h3>
+                                <h3>{{$incomeWeek * activeCountry()->currency()->value . ' ' . activeCountry()->currency()->title}}</h3>
                                 <p>{{__('main.Weekly income')}}</p>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
 
                         <div class="small-box bg-verydark">
                             <div class="inner">
-                                <h3>{{$incomeAll . ' AED'}}</h3>
+                                <h3>{{$incomeAll * activeCountry()->currency()->value . ' ' . activeCountry()->currency()->title}}</h3>
                                 <p>{{__('main.All income')}}</p>
                             </div>
                         </div>

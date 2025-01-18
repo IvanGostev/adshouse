@@ -72,16 +72,15 @@
                         <li class="nav-item">
                             <form action="{{route('language.switch')}}" method="post">
                                 @csrf
-                                <select onchange="this.form.submit()" name="language"
+                                <select onchange="this.form.submit()" name="country_id"
                                         class="form-select bootstrap-table-filter-control-price "
                                         style="width: 100%;" dir="ltr">
-                                    <option
-                                        {{((session()->get('language') !== null ) and (session()->get('language') == 'en')) ? 'selected' : ''}} value="en">
-                                        English
-                                    </option>
-                                    <option {{((session()->get('language') !== null ) and (session()->get('language') == 'ru')) ? 'selected' : ''}} value="ru">
-                                        Русский
-                                    </option>
+                                    @foreach(getCountries() as $country)
+                                        <option
+                                            {{((session()->get('language') !== null ) and (session()->get('language') == $country->language)) ? 'selected' : ''}} value="{{$country->id}}">
+                                            {{$country->title}}
+                                        </option>
+                                    @endforeach()
                                 </select>
                             </form>
                         </li>

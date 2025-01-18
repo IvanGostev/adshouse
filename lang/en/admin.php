@@ -138,7 +138,9 @@ return [
     'Language' => 'Language',
     'Number of clicks' => 'Number of clicks',
     'The number of clicks on the advertised link' => 'The number of clicks on the advertised link',
-
-
-
+    'currency' => 'currency',
+    'Currencies' => 'Currencies',
+    'Currency' => 'Currency',
+    'Value' => 'Value',
+    'All currencies should be indicated with a multiplier for the AED' => '',
 ];

@@ -14,10 +14,12 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <a href="{{ route('moderator.country.create') }}"
+                                <a href="{{ route('moderator.currency.create') }}"
                                    class="btn btn-block btn-outline-light">{{__('admin.Add')}}</a>
                                 <br>
-                                <h3 class="card-title">{{__('admin.Countries')}}</h3>
+                                <h3 class="card-title">{{__('admin.Currencies')}}</h3>
+                                <br>
+                                <p>All currencies should be indicated with a multiplier for the AED</p>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -26,21 +28,19 @@
                                         <thead>
                                         <tr>
                                             <th>{{__('admin.Title')}}</th>
-                                            <th>{{__('admin.Language')}}</th>
-                                            <th>{{__('admin.Currency')}}</th>
+                                            <th>{{__('admin.Value')}}</th>
                                             <th style="width: 40px">{{__('admin.Edit')}}</th>
                                             <th style="width: 40px">{{__('admin.Delete')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($countries as $country)
+                                        @foreach($currencies as $currency)
                                             <tr>
-                                                <td>{{$country->title}}</td>
-                                                <td>{{$country->language_full}}</td>
-                                                <td>{{$country->currency()->title}}</td>
+                                                <td>{{$currency->title}}</td>
+                                                <td>{{$currency->value}}</td>
                                                 <td>
                                                     <a class="btn btn-light btn-sm"
-                                                       href="{{route('moderator.country.edit', $country->id)}}">
+                                                       href="{{route('moderator.currency.edit', $currency->id)}}">
                                                         <i class="fas fa-pencil-alt">
                                                         </i>
                                                         {{__('admin.Edit')}}
@@ -49,7 +49,7 @@
 
                                                 <td>
                                                     <form
-                                                        action="{{ route('moderator.country.destroy', $country->id) }}"
+                                                        action="{{ route('moderator.currency.destroy', $currency->id) }}"
                                                         method="post">
                                                         @method('delete')
                                                         @csrf
@@ -68,7 +68,7 @@
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">
                                 <ul class="pagination pagination-sm m-0 float-right">
-                                    {{ $countries->links() }}
+                                    {{ $currencies->links() }}
                                 </ul>
                             </div>
                         </div>

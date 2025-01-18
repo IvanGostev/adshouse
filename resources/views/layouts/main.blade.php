@@ -180,23 +180,22 @@
             <ul class="navbar-nav" style="display: flex; min-width: 210px!important; flex-direction: row; gap: 10px" >
                 @if(!in_array(auth()->user()->role, ['moderator', 'admin']))
                     <li class="nav-item">
-                        <a href="{{route('balance.show')}}" class="nav-link">{{__('main.Balance')}}: <span class="fw-bold">{{auth()->user()->balance}} AED</span>
+                        <a href="{{route('balance.show')}}" class="nav-link">{{__('main.Balance')}}: <span class="fw-bold">{{auth()->user()->balance * activeCountry()->currency()->value}} {{activeCountry()->currency()->title}}</span>
                         </a>
                     </li>
                 @endif
                     <li class="nav-item">
                         <form action="{{route('language.switch')}}" method="post">
                             @csrf
-                            <select onchange="this.form.submit()" name="language"
+                            <select onchange="this.form.submit()" name="country_id"
                                     class="form-select bootstrap-table-filter-control-price "
                                     style="width: 100%;" dir="ltr">
+                                @foreach(getCountries() as $country)
                                 <option
-                                    {{((session()->get('language') !== null ) and (session()->get('language') == 'en')) ? 'selected' : ''}} value="en">
-                                    English
+                                    {{((session()->get('language') !== null ) and (session()->get('language') == $country->language)) ? 'selected' : ''}} value="{{$country->id}}">
+                                    {{$country->title}}
                                 </option>
-                                <option {{((session()->get('language') !== null ) and (session()->get('language') == 'ru')) ? 'selected' : ''}} value="ru">
-                                    Русский
-                                </option>
+                                @endforeach()
                             </select>
                         </form>
                     </li>

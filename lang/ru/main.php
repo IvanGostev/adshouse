@@ -4,7 +4,7 @@ return [
     'Logout' => 'Выйти',
     'Balance' => 'Баланс',
     'Dashboard' => 'Главная',
-    'Plans' => 'Тарифа',
+    'Plans' => 'Тарифы',
     'Current plan' => 'Мои тарифы',
     'Visit statistics' => 'Статистика посещения',
     'Unique visitors today' => 'Уникальные посещения сегодня',

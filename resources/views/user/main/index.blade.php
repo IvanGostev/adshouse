@@ -19,7 +19,7 @@
 
                         <div class="small-box bg-gradient-primary">
                             <div class="inner">
-                                <h3>{{$incomeToday . ' AED'}}</h3>
+                                <h3>{{$incomeToday * activeCountry()->currency()->value . ' ' . activeCountry()->currency()->title}}</h3>
                                 <p>{{__('main.Income today')}}</p>
                             </div>
                         </div>
@@ -28,7 +28,7 @@
 
                         <div class="small-box bg-verydark">
                             <div class="inner">
-                                <h3>{{$incomeAll . ' AED'}}</h3>
+                                <h3>{{$incomeAll * activeCountry()->currency()->value . ' ' . activeCountry()->currency()->title}}</h3>
                                 <p>{{__('main.Income all')}}</p>
                             </div>
                         </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Country;
 use App\Models\House;
 use App\Models\Notification;
 use App\Models\UserTariff;
@@ -19,4 +20,12 @@ function deleteNotification(string $type): void
 {
     $notification = Notification::where('type', $type)->first();
     $notification->delete();
+}
+
+
+function getCountries() {
+    return Country::all();
+}
+function activeCountry() {
+    return Country::where('id', session()->get('country_id') ?? 1)->first();
 }

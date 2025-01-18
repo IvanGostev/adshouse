@@ -82,6 +82,7 @@ class TariffAdvertiserController extends Controller
 
             BalanceApplication::create([
                 'amount' => $tariff->price,
+                'currency_id' => 1,
                 'type' => 'purchase',
                 'information' => 'Purchase of a tariff, ' . $tariff->title,
                 'status' => 'approved',
