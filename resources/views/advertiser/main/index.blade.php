@@ -152,13 +152,7 @@
             data: pieData,
             options: pieOptions
         })
-
-
         // - END PIE CHART -
-
-
-
-
     </script>
 
     <script>

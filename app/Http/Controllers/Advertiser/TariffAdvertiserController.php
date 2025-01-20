@@ -71,53 +71,57 @@ class TariffAdvertiserController extends Controller
     public function bye(Request $request, Tariff $tariff): RedirectResponse
     {
         $user = auth()->user();
-        try {
-            DB::beginTransaction();
+        $count = $request->count ?? 1;
+        while($count > 0) {
+            try {
+                DB::beginTransaction();
 
-            if (!($tariff->price <= $user->balance)) {
-                throw new Exception();
-            }
-            $user->balance = $user->balance - $tariff->price;
-            $user->update();
+                if (!($tariff->price <= $user->balance)) {
+                    throw new Exception();
+                }
+                $user->balance = $user->balance - $tariff->price;
+                $user->update();
 
-            BalanceApplication::create([
-                'amount' => $tariff->price,
-                'currency_id' => 1,
-                'type' => 'purchase',
-                'information' => 'Purchase of a tariff, ' . $tariff->title,
-                'status' => 'approved',
-                'user_id' => $user->id,
-                'method' => 'Internal purchase'
-            ]);
-            $data['user_id'] = $user->id;
-            $data['tariff_id'] = $tariff->id;
-            $data['url'] = $request->url;
-            if ($request['country_id'] != 'all') {
-                $data['country_id'] = $request->country_id;
+                BalanceApplication::create([
+                    'amount' => $tariff->price,
+                    'currency_id' => 1,
+                    'type' => 'purchase',
+                    'information' => 'Purchase of a tariff, ' . $tariff->title,
+                    'status' => 'approved',
+                    'user_id' => $user->id,
+                    'method' => 'Internal purchase'
+                ]);
+                $data['user_id'] = $user->id;
+                $data['tariff_id'] = $tariff->id;
+                $data['url'] = $request->url;
+                if ($request['country_id'] != 'all') {
+                    $data['country_id'] = $request->country_id;
+                }
+                if ($request['city_id'] != 'all') {
+                    $data['city_id'] = $request->city_id;
+                }
+                if ($request['district_id'] != 'all') {
+                    $data['district_id'] = $request->district_id;
+                }
+                if (isset($request['img'])) {
+                    $data['img'] = 'storage/' . Storage::disk('public')->put('/images', $request['img']);
+                }
+                UserTariff::create($data);
+                $message = "The tariff has been purchased, check the advertiser's link";
+                $users = User::where('role', 'moderator')->get();
+                foreach ($users as $user) {
+                    Mail::to($user->email)->send(new NotificationMail($message));
+                }
+                Notification::create(['type' => 'link']);
+                DB::commit();
+            } catch (Exception $exception) {
+                DB::rollBack();
+                dd($exception->getMessage());
+                return redirect()->route('balance.show');
             }
-            if ($request['city_id'] != 'all') {
-                $data['city_id'] = $request->city_id;
-            }
-            if ($request['district_id'] != 'all') {
-                $data['district_id'] = $request->district_id;
-            }
-            if (isset($request['img'])) {
-                $data['img'] = 'storage/' . Storage::disk('public')->put('/images', $request['img']);
-            }
-            UserTariff::create($data);
-            $message = "The tariff has been purchased, check the advertiser's link";
-            $users = User::where('role', 'moderator')->get();
-            foreach ($users as $user) {
-                Mail::to($user->email)->send(new NotificationMail($message));
-            }
-            Notification::create(['type' => 'link']);
-
-            DB::commit();
-            return redirect()->route('advertiser.tariff.my');
-        } catch (Exception $exception) {
-            DB::rollBack();
-            return redirect()->route('balance.show');
+            $count--;
         }
+        return redirect()->route('advertiser.tariff.my');
     }
 
 

@@ -26,7 +26,8 @@
                                     <div class="align-items-center text-center">
                                         <strong>{{__('main.Days')}}: {{$tariff->days}}</strong>
                                         <br>
-                                        <strong>{{__('main.Price')}}: {{$tariff->price * activeCountry()->currency()->value}} {{activeCountry()->currency()->title}}</strong>
+                                        <strong>{{__('main.Price')}}
+                                            : {{$tariff->price * activeCountry()->currency()->value}} {{activeCountry()->currency()->title}}</strong>
                                     </div>
                                     <br>
                                     <p class="text-muted">
@@ -59,7 +60,8 @@
                                     </div>
                                     <div class="form-group city" style="display: none">
                                         <label>{{__('main.City')}}</label>
-                                        <select name="city_id" class="city_id form-control my-colorpicker1 colorpicker-element">
+                                        <select name="city_id"
+                                                class="city_id form-control my-colorpicker1 colorpicker-element">
                                             <option value="all">{{__('main.All')}}</option>
                                             @foreach($cities as $city)
                                                 <option value="{{$city->id}}">{{$city->title}}</option>
@@ -76,9 +78,13 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <button class="btn btn btn-light btn-block" type="submit">{{__('main.Pay')}}</button>
+                                    <div class="form-group row g-3">
+                                        <div class="input-group">
+                                            <input class="form-control" name="count" value="1" type="number" step="1" min="1" max="100" style="width: 10px!important">
+                                            <button class="btn btn-light w-75" type="submit" >{{__('main.Pay')}}</button>
+                                        </div>
                                     </div>
+
                                 </form>
                             </div>
                         </div>

@@ -10,7 +10,12 @@ class Country extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = false;
-    function currency() {
-        return Currency::where('id', $this->currency_id)->first();
+
+    public function currency() {
+        $currency =  Currency::where('id', $this->currency_id)->first();
+        if (!$currency) {
+            $currency = Currency::onlyTrashed()->where('id', $this->currency_id)->first();
+        }
+        return $currency;
     }
 }

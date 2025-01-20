@@ -16,8 +16,13 @@ class House extends Model
     public function user() {
         return User::where('id', $this->user_id)->first();
     }
+
     public function country() {
-        return Country::where('id', $this->country_id)->first();
+        $country =  Country::where('id', $this->country_id)->first();
+        if (!$country) {
+            $country = Country::onlyTrashed()->where('id', $this->country_id)->first();
+        }
+        return $country;
     }
     public function city() {
         return City::where('id', $this->city_id)->first();

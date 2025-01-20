@@ -32,11 +32,11 @@ class CountryModeratorController extends Controller
             'currency_id' => ['required'],
         ]);
         $data = $request->all();
-        if ($data['language'] == 'en') {
-            $data['language_full'] = 'English';
-        } else {
-            $data['language_full'] = 'Русский';
-        }
+//        if ($data['language'] == 'en') {
+//            $data['language_full'] = 'English';
+//        } else {
+//            $data['language_full'] = 'Русский';
+//        }
 
         Country::create($data);
         return redirect()->route('moderator.country.index');

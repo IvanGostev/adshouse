@@ -36,7 +36,7 @@
                                         @foreach($countries as $country)
                                             <tr>
                                                 <td>{{$country->title}}</td>
-                                                <td>{{$country->language_full}}</td>
+                                                <td>{{$country->language}}</td>
                                                 <td>{{$country->currency()->title}}</td>
                                                 <td>
                                                     <a class="btn btn-light btn-sm"
