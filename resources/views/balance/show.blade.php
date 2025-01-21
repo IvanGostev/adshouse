@@ -92,7 +92,7 @@
                                                 <td>{{$transaction->id}}</td>
                                                 <td>{{__('main.'. $transaction->type)}}</td>
                                                 <td>{{__('main.'. $transaction->method)}}</td>
-                                                <td>{{$transaction->amount * $transition->currency()->value . $transition->currency()->title}}</td>
+                                                <td>{{$transaction->amount * $transaction->currency()->value . $transaction->currency()->title}}</td>
                                                 <td>{{__('main.'. $transaction->status)}}</td>
                                                 <td>{{$transaction->created_at}}</td>
                                             </tr>

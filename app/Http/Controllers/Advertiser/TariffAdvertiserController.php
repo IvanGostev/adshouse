@@ -116,7 +116,7 @@ class TariffAdvertiserController extends Controller
                 DB::commit();
             } catch (Exception $exception) {
                 DB::rollBack();
-                dd($exception->getMessage());
+//                dd($exception->getMessage());
                 return redirect()->route('balance.show');
             }
             $count--;
