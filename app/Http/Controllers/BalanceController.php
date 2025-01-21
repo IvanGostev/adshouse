@@ -32,12 +32,12 @@ class BalanceController extends Controller
         $data = $request->validate([
             'type' => ['string', Rule::in(['replenish', 'withdraw'])],
             'amount' => ['required'],
-            'method' => ['required', Rule::in(['account'])],
+            'method' => ['required', Rule::in(['account', 'online'])],
             'information' => ['string', 'required']
         ]);
         $data['amount'] = $data['amount'] / activeCountry()->currency()->value;
+        $user = auth()->user();
         if ($data['type'] == 'withdraw') {
-            $user = auth()->user();
             if ($user->balance >= $data['amount']) {
                 $user->balance = $user->balance - $data['amount'];
                 $user->update();
@@ -47,27 +47,55 @@ class BalanceController extends Controller
         }
         try {
             DB::beginTransaction();
-            BalanceApplication::create([
+            $store = [
                 'amount' => $data['amount'],
                 'currency_id' => activeCountry()->currency()->id,
                 'type' => $data['type'],
                 'method' => $data['method'],
                 'information' => $data['information'],
-                'status' => 'moderation',
                 'user_id' => auth()->user()->id
-            ]);
-            DB::commit();
+            ];
+            if ($data['method'] == 'account') {
+                $store['status'] = 'moderation';
+            } else {
+                $store['status'] = 'awaiting a response';
+            }
+            $ba = BalanceApplication::create($store);
 
+            if ($data['method'] == 'online') {
+                $payment = new PaymentController();
+                $data = [
+                    'id' => $ba->id,
+                    'user_id' => $user->id,
+                    'amount' => $store['amount'],
+                    'currency' => activeCountry()->currency()->title,
+                    'description' => 'Adding funds to your account',
+                    'first_name' => $user['name'],
+                    'last_name' => $user['last_name'],
+                    'email' => $user['email'],
+                    'phone' => $user['phone'],
+                    'language' => activeCountry()->lanaguage
+                ];
+                $res =  $payment->createPaymentLink($data);
+            } else {
+                $res = 'back';
+            }
             $message = "Confirm the payment transaction";
             $users = User::where('role', 'moderator')->get();
-            foreach($users as $user) {
-                Mail::to($user->email)->send(new NotificationMail($message));
+            foreach ($users as $userBD) {
+                Mail::to($userBD->email)->send(new NotificationMail($message));
             }
             Notification::create(['type' => 'balance']);
+            DB::commit();
         } catch (Exception $exception) {
             dd($exception->getMessage());
             DB::rollback();
         }
-        return back();
+        if ($res == 'back') {
+            return back();
+        } else {
+            return redirect($res);
+        }
+
     }
 }

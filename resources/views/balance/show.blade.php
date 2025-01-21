@@ -32,16 +32,19 @@
 
                                 <form action="{{route('balance.handler')}}" method="post">
                                     @csrf
-                                    <input name="type" hidden value="{{auth()->user()->role == 'advertiser' ? 'replenish' : 'withdraw'}}">
+                                    <input name="type" hidden
+                                           value="{{auth()->user()->role == 'advertiser' ? 'replenish' : 'withdraw'}}">
                                     <div class="card-body">
                                         <div class="col-md-12">
                                             <label for="exampleInputEmail1">{{__('main.Amount')}}</label>
                                             <div class="input-group">
-                                                <input type="number" step="0.1" class="form-control"  {{auth()->user()->role != 'advertiser' ? 'value=' . auth()->user()->balance * activeCountry()->currency()->value : ''}}
+                                                <input type="number" step="0.1" class="form-control"
+                                                       {{auth()->user()->role != 'advertiser' ? 'value=' . auth()->user()->balance * activeCountry()->currency()->value : ''}}
                                                        id="exampleInputEmail1"
-                                                       name="amount" >
+                                                       name="amount">
                                                 <div class="input-group-append">
-                                                    <span class="input-group-text">{{activeCountry()->currency()->title}}</span>
+                                                    <span
+                                                        class="input-group-text">{{activeCountry()->currency()->title}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -51,6 +54,9 @@
                                                 <label for="exampleInputEmail1">{{__('main.Method')}}</label>
                                                 <select class="form-select" required name="method">
                                                     <option value="account">{{__('main.Account')}}</option>
+                                                    @if(auth()->user()->role == 'advertiser')
+                                                        <option value="online">{{__('main.Online payment by card')}}</option>
+                                                    @endif
                                                 </select>
                                             </div>
                                         </div>

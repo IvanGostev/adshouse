@@ -89,6 +89,7 @@ return [
     'transition link' => 'transition link',
     'Withdrawal of the balance' => 'Withdrawal of the balance',
     'Copyright &copy; 2024' => 'Copyright © 2024 ',
-    'All rights reserved' => 'All rights reserved',
     '<b>Version</b> 1.0.0' => '<b>Version</b> 1.0.0',
+    'Online payment by card' => 'Online payment by card',
+    'awaiting a response' => 'awaiting a response'
     ];

@@ -91,4 +91,6 @@ return [
     'Copyright &copy; 2024' => 'Авторское право © 2024 ',
     'All rights reserved' => 'Все права защищены',
     '<b>Version</b> 1.0.0' => '<b>Версия</b> 1.0.0',
+    'Online payment by card' => 'Онлайн-оплата картой',
+    'awaiting a response' => 'в ожидании ответа'
 ];
