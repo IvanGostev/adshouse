@@ -14,7 +14,7 @@ return [
     'Visits last month' => 'Посещения в прошлом месяце',
     'Browser Usage' => 'Браузеры используют',
     'Number of click' => 'Число кликов',
-    'Days' => 'Дни',
+    'Days' => 'Дней',
     'Price' => 'Цена',
     'Banner' => 'Баннер',
     'Advertised link' => 'Ссылка рекламодателей',

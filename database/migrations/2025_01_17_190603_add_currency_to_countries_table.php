@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('countries', function (Blueprint $table) {
-            $table->default(1)->foreignIdFor(Currency::class)->constrained();
+            $table->foreignIdFor(Currency::class)->constrained();
             $table->string('language_full')->default('English');
         });
     }

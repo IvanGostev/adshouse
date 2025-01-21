@@ -27,6 +27,7 @@ class TariffModeratorController extends Controller
     public function store(Request $request) : RedirectResponse
     {
         $data = $request->all();
+        unset($data['files']);
         Tariff::create($data);
         return redirect()->route('moderator.tariff.index');
     }
@@ -37,7 +38,9 @@ class TariffModeratorController extends Controller
     }
     public function update(Tariff $tariff, Request $request) : RedirectResponse
     {
+
         $data = $request->all();
+        unset($data['files']);
         $tariff->update($data);
         return redirect()->route('moderator.tariff.index');
     }

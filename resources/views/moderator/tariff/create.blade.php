@@ -120,7 +120,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>{{__('admin.Description')}}</label>
-                                                <textarea required id="summernote" class="form-control" rows="5"
+                                                <textarea required id="summernote" class="form-control" rows="10"
                                                           placeholder="Enter ..." name="about"></textarea>
                                             </div>
                                         </div>
@@ -164,14 +164,5 @@
         })
     </script>
     <!-- include summernote css/js -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#summernote').summernote({
-                lang: 'en-US'
-            });
-        });
 
-    </script>
 @endsection

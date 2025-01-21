@@ -199,6 +199,23 @@
 <script src="{{asset('admin/js/app.js')}}"></script>
 <script src="{{ asset('plugins/chart.js/Chart.min.js')}}"></script>
 
+<script>
+
+    $('#summernote').summernote({
+        height: 250,
+        toolbar: [
+            // [groupName, [list of button]]
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']]
+        ]
+    });
+
+
+</script>
 <form hidden="hidden" id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
     @csrf
 </form>

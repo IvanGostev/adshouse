@@ -119,7 +119,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>{{__('admin.Description')}}</label>
-                                                <textarea required="" class="form-control" rows="5" placeholder="Enter ..." name="about">{{$tariff->about}}</textarea>
+                                                <textarea required="" id="summernote" class="form-control" rows="15" placeholder="Enter ..." name="about">{{$tariff->about}}</textarea>
                                             </div>
                                         </div>
                                     </div>
