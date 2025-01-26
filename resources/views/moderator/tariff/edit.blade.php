@@ -33,6 +33,14 @@
                                         <div class="col-sm-6">
                                             <!-- text input -->
                                             <div class="form-group">
+                                                <label>{{__('admin.Country')}}</label>
+                                                <select name="country_id" class="form-control">
+                                                    @foreach($countries as $country)
+                                                        <option {{ $country->id == $tariff->country_id ? 'selected' : '' }} value="{{$country->id}}">{{$country->title}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
                                                 <label>{{__('admin.Title')}}</label>
                                                 <input type="text" name="title" class="form-control"
                                                        placeholder="Enter ..." required value="{{$tariff->title}}">

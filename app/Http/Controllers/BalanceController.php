@@ -85,7 +85,9 @@ class BalanceController extends Controller
             foreach ($users as $userBD) {
                 Mail::to($userBD->email)->send(new NotificationMail($message));
             }
-            Notification::create(['type' => 'balance']);
+            if ($data['method'] != 'online') {
+                Notification::create(['type' => 'balance']);
+            }
             DB::commit();
         } catch (Exception $exception) {
             dd($exception->getMessage());

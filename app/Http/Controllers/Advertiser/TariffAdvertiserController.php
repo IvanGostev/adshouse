@@ -34,7 +34,7 @@ class TariffAdvertiserController extends Controller
     {
         $lan = session()->has('language') ? session()->get('language') : 'en';
         $numberFreeRooms = Room::where('status', 'approved')->where('condition', 'free')->count();
-        $tariffs = Tariff::where('language', $lan)->where('number_rooms', '<=', $numberFreeRooms)->paginate(10);
+        $tariffs = Tariff::where('country_id', activeCountry()->id)->where('number_rooms', '<=', $numberFreeRooms)->paginate(10);
         $countries = Country::where('language', $lan)->get();
         $cities = City::where('language', $lan)->get();
         $districts = District::where('language', $lan)->get();

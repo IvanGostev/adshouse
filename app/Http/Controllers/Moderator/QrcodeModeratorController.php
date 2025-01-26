@@ -56,7 +56,7 @@ class QrcodeModeratorController extends Controller
 
             $qrcodes->whereNull('room_id');
         }
-        $qrcodes = $qrcodes->select('qrcodes.*')->latest()->paginate($data['paginateNumber'] ?? 12);
+        $qrcodes = $qrcodes->select('qrcodes.*')->orderBy('id', 'desc')->latest()->paginate($data['paginateNumber'] ?? 12);
 
         foreach ($qrcodes as &$qrcode) {
             if (file_exists('qrcodes/qrcode_' . $qrcode->id . '.svg')) {

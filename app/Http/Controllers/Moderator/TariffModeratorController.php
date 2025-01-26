@@ -21,7 +21,8 @@ class TariffModeratorController extends Controller
     }
 
     public function create() : View {
-        return view('moderator.tariff.create');
+        $countries = Country::all();
+        return view('moderator.tariff.create', compact('countries'));
     }
 
     public function store(Request $request) : RedirectResponse
@@ -33,8 +34,8 @@ class TariffModeratorController extends Controller
     }
 
     public function edit(Tariff $tariff) : View {
-
-        return view('moderator.tariff.edit', compact('tariff'));
+        $countries = Country::all();
+        return view('moderator.tariff.edit', compact('tariff', 'countries'));
     }
     public function update(Tariff $tariff, Request $request) : RedirectResponse
     {

@@ -32,10 +32,11 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>{{__('admin.Language')}}</label>
-                                                <select name="language" class="form-control">
-                                                    <option value="en">English</option>
-                                                    <option value="ru">Русский</option>
+                                                <label>{{__('admin.Country')}}</label>
+                                                <select name="country_id" class="form-control">
+                                                    @foreach($countries as $country)
+                                                        <option value="{{$country->id}}">{{$country->title}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -63,7 +64,7 @@
                                             <div class="form-group">
                                                 <label>{{__('admin.Number of transitions')}}</label>
                                                 <input type="number" name="transitions" class="form-control"
-                                                       placeholder="Enter ..." min="1" value="20" >
+                                                       placeholder="Enter ..." min="1" value="20">
                                             </div>
                                             <div class="form-group">
                                                 <label>{{__('admin.Percentage of the room owner')}}</label>
@@ -104,8 +105,8 @@
                                             <div class="form-group">
                                                 <label>{{__('admin.Price')}}</label>
                                                 <input type="number" name="price" class="form-control"
-                                                      value="100" step="0.1" placeholder="Enter ...">
-{{--                                                placeholder="if the transitions method is the price per transition"--}}
+                                                       value="100" step="0.1" placeholder="Enter ...">
+                                                {{--                                                placeholder="if the transitions method is the price per transition"--}}
                                             </div>
                                         </div>
                                         <div class="col-sm-6">

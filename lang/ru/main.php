@@ -24,7 +24,7 @@ return [
     'Preview Recommended size: 1080 x 1080 pixels Aspect Ratio: 1:1' => 'Рекомендуемый размер предварительного просмотра: 1080 x 1080 пикселей Соотношение сторон: 1:1',
     'Country' => 'Страна',
     'City' => 'Город',
-    'Area' => 'Регион',
+    'Area' => 'Район',
     'Amount' => 'Сумма',
     'Method' => 'Метод',
     'Replenishment of the balance' => 'Пополнение баланса',
