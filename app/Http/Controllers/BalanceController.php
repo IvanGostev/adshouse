@@ -29,12 +29,14 @@ class BalanceController extends Controller
 
     function handler(Request $request)
     {
+
         $data = $request->validate([
             'type' => ['string', Rule::in(['replenish', 'withdraw'])],
             'amount' => ['required'],
             'method' => ['required', Rule::in(['account', 'online'])],
-            'information' => ['string', 'required']
+            'information' => ['string', 'nullable']
         ]);
+
         $data['amount'] = $data['amount'] / activeCountry()->currency()->value;
         $user = auth()->user();
         if ($data['type'] == 'withdraw') {
@@ -64,7 +66,7 @@ class BalanceController extends Controller
 
             if ($data['method'] == 'online') {
                 $payment = new PaymentController();
-                $data = [
+                $transaction = [
                     'id' => $ba->id,
                     'user_id' => $user->id,
                     'amount' => $store['amount'],
@@ -76,7 +78,7 @@ class BalanceController extends Controller
                     'phone' => $user['phone'],
                     'language' => activeCountry()->lanaguage
                 ];
-                $res =  $payment->createPaymentLink($data);
+                $res = $payment->createPaymentLink($transaction);
             } else {
                 $res = 'back';
             }
@@ -96,7 +98,8 @@ class BalanceController extends Controller
         if ($res == 'back') {
             return back();
         } else {
-            return redirect($res);
+            $arr = explode('/', $res);
+            return redirect()->to('https://pay.paymennt.com/hosted/pay?checkoutKey=' . $arr[4]);
         }
 
     }

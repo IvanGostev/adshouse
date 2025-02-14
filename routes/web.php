@@ -24,6 +24,7 @@ use App\Http\Controllers\Owner\House\HouseOwnerController;
 use App\Http\Controllers\Owner\House\RoomOwnerController;
 use App\Http\Controllers\Owner\LinkOwnerController;
 use App\Http\Controllers\Owner\MainOwnerController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\User\MainUserController;
 use App\Http\Middleware\AdvertiserMiddleware;
 use App\Http\Middleware\ClientMiddleware;
@@ -237,6 +238,10 @@ Route::middleware(\App\Http\Middleware\WWWMiddleware::class)->group(function () 
     Route::controller(AdsController::class)->prefix('ads')->group(function () {
         Route::get('/{room}/{slug}/room', 'ads')->name('ads');
         Route::get('/{qrcode}/qrcode', 'qrcode')->name('qrcode');
+    });
+    Route::controller(PaymentController::class)->prefix('payment')->group(function () {
+       Route::get('/notification', 'notification')->name('notification');
+       Route::post('/notification', 'notification')->name('notification');
     });
 });
 

@@ -82,6 +82,8 @@ return [
     'Scans statistics' => 'Scans statistics',
     'apartment' => 'apartment',
     'withdraw' => 'withdraw',
+    'online' => 'online',
+    'paid' => 'paid',
     'cashback' => 'cashback',
     'Scan today' => 'Scan today',
     'Number of scans' => 'Number of scans',
@@ -91,5 +93,5 @@ return [
     'Copyright &copy; 2024' => 'Copyright © 2024 ',
     '<b>Version</b> 1.0.0' => '<b>Version</b> 1.0.0',
     'Online payment by card' => 'Online payment by card',
-    'awaiting a response' => 'awaiting a response'
+    'awaiting a response' => 'awaiting a response',
     ];

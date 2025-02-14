@@ -142,5 +142,7 @@ return [
     'Currencies' => 'Currencies',
     'Currency' => 'Currency',
     'Value' => 'Value',
-    'All currencies should be indicated with a multiplier for the AED' => '',
+    'Number of clicks on qrcodes' => 'Number on clicks of qrcodes',
+    'History date' => 'History date',
+    'All currencies should be indicated with a multiplier for the USD' => '',
 ];

@@ -90,6 +90,7 @@ class AdsController extends Controller
 
                 BalanceApplication::create([
                     'transition_id' => $transition->id,
+                    'currency_id' => 1,
                     'amount' => $addSum,
                     'type' => 'transition link',
                     'method' => 'transition link',

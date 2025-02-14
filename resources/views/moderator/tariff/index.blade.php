@@ -38,7 +38,7 @@
                                                 <td>{{$tariff->title}}</td>
                                                 <td>{{$tariff->method}}</td>
                                                 <td>{{$tariff->type}}</td>
-                                                <td>{{$tariff->price . ' AED'}}</td>
+                                                <td>{{$tariff->price . ' USD'}}</td>
                                                 <td>
                                                     <a class="btn btn-light btn-sm"
                                                        href="{{route('moderator.tariff.edit', $tariff->id)}}">

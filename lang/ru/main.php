@@ -82,6 +82,8 @@ return [
     'Scans statistics' => 'Статистика сканирований',
     'apartment' => 'квартира',
     'withdraw' => 'вывести',
+    'online' => 'онлайн',
+    'paid' => 'оплачено',
     'cashback' => 'кэшбэк',
     'Scan today' => 'Сканирования сегодня',
     'Number of scans' => 'Число сканирований',

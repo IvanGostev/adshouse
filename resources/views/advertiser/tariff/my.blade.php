@@ -42,7 +42,7 @@
                                     @endif
                                     <br>
                                     <p class="text-muted">
-                                        {{$tariff->about}}
+                                        {!! $tariff->about !!}
                                     </p>
                                     @if($tariff->type == 'shared')
                                         <div class="form-group">

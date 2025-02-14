@@ -142,5 +142,7 @@ return [
     'Currencies' => 'Валюты',
     'Currency' => 'Валюта',
     'Value' => 'Значение',
-    'All currencies should be indicated with a multiplier for the AED' => 'Все валюты должны быть указаны с множителем для дирхамов ОАЭ',
+    'Number of clicks on qrcodes' => 'Количество кликов по qr-кодам',
+    'History date' => 'История по дате',
+    'All currencies should be indicated with a multiplier for the AED' => 'Все валюты должны быть указаны с множителем для USD',
 ];

@@ -15,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web([
             \App\Http\Middleware\LanguageMiddleware::class,
         ]);
+        $middleware->validateCsrfTokens(except: [
+            'payment/*',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

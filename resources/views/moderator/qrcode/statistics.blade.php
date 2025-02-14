@@ -29,7 +29,7 @@
                                                 @foreach($historyRoom as $room)
                                                     <tr>
                                                         <td>
-                                                            {{$room->room()->house()->country()->title . ' ' . $room->room()->house()->city()->title . ' ' .   $room->room()->house()->district()->title . ' ' . $room->room()->house()->street . ' ' . $room->room()->type()->title}}
+                                                            {{$room->room()->house()->country()->title . ' ' . $room->room()->house()->city()->title . ' ' .   $room->room()->house()->district()->title . ' ' . $room->room()->house()->street . ' ' . $room->room()->house()->number . ' ' . $room->room()->house()->apartment_number . ' ' . $room->room()->type()->title}}
                                                         </td>
                                                     </tr>
                                                 @endforeach

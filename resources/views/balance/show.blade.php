@@ -39,6 +39,7 @@
                                             <label for="exampleInputEmail1">{{__('main.Amount')}}</label>
                                             <div class="input-group">
                                                 <input type="number" step="0.1" class="form-control"
+                                                       min="1" required
                                                        {{auth()->user()->role != 'advertiser' ? 'value=' . auth()->user()->balance * activeCountry()->currency()->value : ''}}
                                                        id="exampleInputEmail1"
                                                        name="amount">
@@ -60,7 +61,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 account">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">{{__('main.Account/Card Information')}}</label>
                                                 <input name="information" class="form-control" required placeholder="0000 0000 0000 0000">
@@ -115,4 +116,19 @@
         </section>
     </div>
     </div>
+    <script>
+        let $method = document.querySelector('[name="method"]');
+        $method.addEventListener("change", function() {
+            let $group = document.querySelector('.account');
+            let $input = document.querySelector('[name="information"]');
+            if ($method.value === 'online') {
+                $group.hidden = true;
+                $input.required = false;
+            } else {
+                $group.hidden = false;
+                $input.required = true;
+            }
+        });
+
+    </script>
 @endsection
